@@ -1,0 +1,26 @@
+I also recommend adding these features in the next revision
+
+Since the goal is to build a professional-grade options platform, I'd expand the specification with:
+
+- Wheel Strategy (CSP → CC automation)
+- Portfolio Margin & Reg-T calculations
+- Early assignment risk estimation
+- Ex-dividend detection (important for Covered Calls)
+- Earnings calendar integration
+- Volatility regime detection (High IV / Low IV)
+- Automatic strategy selection based on market conditions
+- Position adjustment engine (rolls, defensive adjustments)
+- Historical performance database
+- Strategy backtesting framework
+- Monte Carlo simulations
+- Portfolio optimization
+- IBKR order management (preview first, execution later)
+- AI-based trade ranking and explanations
+
+One additional idea that I think would make this project stand out is to build it as an 
+Options Research Platform, not just a scanner. That means every strategy 
+(Iron Condor, CSP, CC, PMCC, Double Diagonal, etc.) would share the same analytics engine, 
+optimizer, and reporting system. New strategies would then be simple plugins rather than 
+requiring changes throughout the application.
+
+That architecture will scale much better as the project grows.
