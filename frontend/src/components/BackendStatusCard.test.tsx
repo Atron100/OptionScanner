@@ -18,7 +18,7 @@ vi.stubGlobal(
           app_name: "OptionScanner API",
           environment: "development",
           database_url: "sqlite:///./data/optionscanner.db",
-          database_exists: "true",
+          database_exists: true,
         }),
         { status: 200 },
       ),
@@ -37,4 +37,3 @@ describe("BackendStatusCard", () => {
     });
   });
 });
-

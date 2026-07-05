@@ -10,7 +10,7 @@ type SystemInfoResponse = {
   app_name: string;
   environment: string;
   database_url: string;
-  database_exists: string;
+  database_exists: boolean;
 };
 
 export function BackendStatusCard() {
@@ -70,7 +70,7 @@ export function BackendStatusCard() {
           </div>
           <div>
             <dt>Database</dt>
-            <dd>{systemInfo.database_exists === "true" ? "ready" : "missing"}</dd>
+            <dd>{systemInfo.database_exists ? "ready" : "missing"}</dd>
           </div>
         </dl>
       ) : null}
@@ -78,4 +78,3 @@ export function BackendStatusCard() {
     </section>
   );
 }
-

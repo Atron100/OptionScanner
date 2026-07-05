@@ -13,4 +13,4 @@ def test_system_info_endpoint() -> None:
     assert payload["app_name"] == "OptionScanner API"
     assert payload["environment"] == "development"
     assert payload["database_url"].startswith("sqlite:///")
-
+    assert isinstance(payload["database_exists"], bool)
