@@ -1,0 +1,93 @@
+:root {
+  font-family: "Segoe UI", sans-serif;
+  color: #e9eef5;
+  background:
+    radial-gradient(circle at top, rgba(53, 111, 196, 0.35), transparent 40%),
+    linear-gradient(180deg, #0e1726 0%, #09111d 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: transparent;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.page-shell {
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0 64px;
+}
+
+.hero-panel,
+.status-card {
+  border: 1px solid rgba(146, 171, 203, 0.18);
+  border-radius: 20px;
+  background: rgba(7, 16, 31, 0.72);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(10px);
+}
+
+.hero-panel {
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.status-card {
+  padding: 24px 32px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #8db7ff;
+  font-size: 0.8rem;
+}
+
+h1,
+h2,
+p,
+dt,
+dd {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.hero-copy {
+  max-width: 56ch;
+  color: #c0cfde;
+  line-height: 1.6;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+dt {
+  color: #8db7ff;
+  margin-bottom: 6px;
+}
+
+dd {
+  color: #f6fbff;
+}
+
+.error-text {
+  color: #ff9e9e;
+}
+

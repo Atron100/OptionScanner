@@ -1,0 +1,26 @@
+[project]
+name = "optionscanner-backend"
+version = "0.1.0"
+description = "FastAPI backend for OptionScanner"
+requires-python = ">=3.13"
+dependencies = [
+  "alembic>=1.16.0",
+  "fastapi>=0.116.0",
+  "pydantic-settings>=2.10.0",
+  "sqlalchemy>=2.0.41",
+  "uvicorn[standard]>=0.35.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.28.0",
+  "pytest>=8.3.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
