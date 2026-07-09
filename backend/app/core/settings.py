@@ -20,6 +20,11 @@ class Settings(BaseSettings):
     api_cors_origins: str = Field(default="http://localhost:5173")
     database_url: str = "sqlite:///./data/optionscanner.db"
     log_level: str = "INFO"
+    market_data_provider: str = "mock"
+    ibkr_host: str = "127.0.0.1"
+    ibkr_port: int = 7497
+    ibkr_client_id: int = 1
+    ibkr_read_only: bool = True
 
     @property
     def api_cors_origins_list(self) -> list[str]:
