@@ -8,34 +8,61 @@ PS C:\Users\Alexey> Invoke-RestMethod `
 >>   -Uri "http://localhost:8000/api/v1/brokers/market-data/status"
 
 
-provider                    : mock
+provider                    : ibkr
 configured                  : True
 connected                   : True
-message                     : Mock market data provider ready for local development.
-host                        :
-port                        :
-read_only                   :
+message                     : IBKR TCP endpoint is reachable. Live bounded option chain discovery is enabled; quote
+                              enrichment is still pending.
+host                        : 127.0.0.1
+port                        : 7497
+read_only                   : True
 supports_live_data          : False
 supports_option_chain_fetch : True
 
 
 
 PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"AAPL"}'
+Invoke-RestMethod : {"detail":"Unable to open an IBKR API session to 127.0.0.1:7497."}
+At line:1 char:1
++ Invoke-RestMethod `
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"AAPL"}'
+Invoke-RestMethod : {"detail":"Unable to open an IBKR API session to 127.0.0.1:7497."}
+At line:1 char:1
++ Invoke-RestMethod `
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+PS C:\Users\Alexey> Invoke-RestMethod `
 >>   -Method Get `
->>   -Uri "http://localhost:8000/api/v1/brokers/ibkr/status"
+>>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
 
 
-provider                    : ibkr
-configured                  : True
-connected                   : False
-message                     : IBKR configuration is present, but the TCP endpoint is not reachable. Unable to connect
-                              to 127.0.0.1:7497. Make sure TWS or IB Gateway is running locally and API connections
-                              are enabled. Socket error: timed out
-host                        : 127.0.0.1
-port                        : 7497
-read_only                   : True
-supports_live_data          : False
-supports_option_chain_fetch : False
+symbol      : AAPL
+provider    : mock
+as_of       : 2026-07-09T18:22:57
+quote_count : 4
+contracts   : {@{expiration_date=2026-08-21; right=C; strike=215.0; bid=4.75; ask=5.05; last=4.92; mark=4.9;
+              implied_volatility=0.27; delta=0.44; gamma=0.03; theta=-0.07; vega=0.11; open_interest=1240;
+              volume=580}, @{expiration_date=2026-08-21; right=P; strike=205.0; bid=3.95; ask=4.2; last=4.1;
+              mark=4.08; implied_volatility=0.29; delta=-0.39; gamma=0.02; theta=-0.06; vega=0.1; open_interest=980;
+              volume=420}, @{expiration_date=2026-09-18; right=C; strike=220.0; bid=5.85; ask=6.2; last=6.0;
+              mark=6.03; implied_volatility=0.26; delta=0.42; gamma=0.02; theta=-0.06; vega=0.13; open_interest=860;
+              volume=310}, @{expiration_date=2026-09-18; right=P; strike=200.0; bid=4.6; ask=4.95; last=4.8;
+              mark=4.77; implied_volatility=0.3; delta=-0.36; gamma=0.02; theta=-0.05; vega=0.12; open_interest=730;
+              volume=275}}
 
 
 
@@ -47,154 +74,42 @@ PS C:\Users\Alexey> Invoke-RestMethod `
 
 
 symbol         : AAPL
-provider       : mock
+provider       : ibkr
 snapshot_id    : 1
-contract_count : 4
-quote_count    : 4
-expirations    : {2026-08-21, 2026-09-18}
-as_of          : 2026-07-09T17:32:41Z
+contract_count : 1
+quote_count    : 1
+expirations    : {2026-07-10}
+as_of          : 2026-07-10T10:20:26Z
 
 
 
 PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Get `
 >>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
 
 
 symbol      : AAPL
-provider    : mock
-as_of       : 2026-07-09T17:32:41
-quote_count : 4
-contracts   : {@{expiration_date=2026-08-21; right=C; strike=215.0; bid=4.75; ask=5.05; last=4.92; mark=4.9;
-              implied_volatility=0.27; delta=0.44; gamma=0.03; theta=-0.07; vega=0.11; open_interest=1240;
-              volume=580}, @{expiration_date=2026-08-21; right=P; strike=205.0; bid=3.95; ask=4.2; last=4.1;
-              mark=4.08; implied_volatility=0.29; delta=-0.39; gamma=0.02; theta=-0.06; vega=0.1; open_interest=980;
-              volume=420}, @{expiration_date=2026-09-18; right=C; strike=220.0; bid=5.85; ask=6.2; last=6.0;
-              mark=6.03; implied_volatility=0.26; delta=0.42; gamma=0.02; theta=-0.06; vega=0.13; open_interest=860;
-              volume=310}, @{expiration_date=2026-09-18; right=P; strike=200.0; bid=4.6; ask=4.95; last=4.8;
-              mark=4.77; implied_volatility=0.3; delta=-0.36; gamma=0.02; theta=-0.05; vega=0.12; open_interest=730;
-              volume=275}}
+provider    : ibkr
+as_of       : 2026-07-10T10:20:26
+quote_count : 1
+contracts   : {@{expiration_date=2026-07-10; right=C; strike=280.0; bid=; ask=; last=; mark=; implied_volatility=;
+              delta=; gamma=; theta=; vega=; open_interest=; volume=}}
 
 
 
 PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Get `
->>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"AAPL"}'
 
 
-symbol      : AAPL
-provider    : mock
-as_of       : 2026-07-09T17:32:41
-quote_count : 4
-contracts   : {@{expiration_date=2026-08-21; right=C; strike=215.0; bid=4.75; ask=5.05; last=4.92; mark=4.9;
-              implied_volatility=0.27; delta=0.44; gamma=0.03; theta=-0.07; vega=0.11; open_interest=1240;
-              volume=580}, @{expiration_date=2026-08-21; right=P; strike=205.0; bid=3.95; ask=4.2; last=4.1;
-              mark=4.08; implied_volatility=0.29; delta=-0.39; gamma=0.02; theta=-0.06; vega=0.1; open_interest=980;
-              volume=420}, @{expiration_date=2026-09-18; right=C; strike=220.0; bid=5.85; ask=6.2; last=6.0;
-              mark=6.03; implied_volatility=0.26; delta=0.42; gamma=0.02; theta=-0.06; vega=0.13; open_interest=860;
-              volume=310}, @{expiration_date=2026-09-18; right=P; strike=200.0; bid=4.6; ask=4.95; last=4.8;
-              mark=4.77; implied_volatility=0.3; delta=-0.36; gamma=0.02; theta=-0.05; vega=0.12; open_interest=730;
-              volume=275}}
-
-
-
-PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Get `
->>   -Uri "http://localhost:8000/api/v1/brokers/ibkr/status"
-
-
-provider                    : ibkr
-configured                  : True
-connected                   : True
-message                     : IBKR TCP endpoint is reachable. Live option chain fetching is the next step; the current
-                              Phase 2 scaffold only verifies connectivity.
-host                        : 127.0.0.1
-port                        : 7497
-read_only                   : True
-supports_live_data          : False
-supports_option_chain_fetch : False
-
-
-
-PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Get `
->>   -Uri "http://localhost:8000/api/v1/brokers/market-data/status"
-
-
-provider                    : mock
-configured                  : True
-connected                   : True
-message                     : Mock market data provider ready for local development.
-host                        :
-port                        :
-read_only                   :
-supports_live_data          : False
-supports_option_chain_fetch : True
-
-
-
-PS C:\Users\Alexey> 1..5 | ForEach-Object {
->>   Invoke-RestMethod `
->>     -Method Get `
->>     -Uri "http://localhost:8000/api/v1/brokers/ibkr/status"
->>   Start-Sleep -Seconds 1
->> }
-
-
-provider                    : ibkr
-configured                  : True
-connected                   : True
-message                     : IBKR TCP endpoint is reachable. Live option chain fetching is the next step; the current
-                              Phase 2 scaffold only verifies connectivity.
-host                        : 127.0.0.1
-port                        : 7497
-read_only                   : True
-supports_live_data          : False
-supports_option_chain_fetch : False
-
-provider                    : ibkr
-configured                  : True
-connected                   : True
-message                     : IBKR TCP endpoint is reachable. Live option chain fetching is the next step; the current
-                              Phase 2 scaffold only verifies connectivity.
-host                        : 127.0.0.1
-port                        : 7497
-read_only                   : True
-supports_live_data          : False
-supports_option_chain_fetch : False
-
-provider                    : ibkr
-configured                  : True
-connected                   : True
-message                     : IBKR TCP endpoint is reachable. Live option chain fetching is the next step; the current
-                              Phase 2 scaffold only verifies connectivity.
-host                        : 127.0.0.1
-port                        : 7497
-read_only                   : True
-supports_live_data          : False
-supports_option_chain_fetch : False
-
-provider                    : ibkr
-configured                  : True
-connected                   : True
-message                     : IBKR TCP endpoint is reachable. Live option chain fetching is the next step; the current
-                              Phase 2 scaffold only verifies connectivity.
-host                        : 127.0.0.1
-port                        : 7497
-read_only                   : True
-supports_live_data          : False
-supports_option_chain_fetch : False
-
-provider                    : ibkr
-configured                  : True
-connected                   : True
-message                     : IBKR TCP endpoint is reachable. Live option chain fetching is the next step; the current
-                              Phase 2 scaffold only verifies connectivity.
-host                        : 127.0.0.1
-port                        : 7497
-read_only                   : True
-supports_live_data          : False
-supports_option_chain_fetch : False
+symbol         : AAPL
+provider       : ibkr
+snapshot_id    : 1
+contract_count : 16
+quote_count    : 16
+expirations    : {2026-07-10, 2026-07-13}
+as_of          : 2026-07-10T10:25:12Z
 
 
 

@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     ibkr_port: int = 7497
     ibkr_client_id: int = 1
     ibkr_read_only: bool = True
+    ibkr_exchange: str = "SMART"
+    ibkr_currency: str = "USD"
+    ibkr_max_expirations: int = 2
+    ibkr_strikes_per_side: int = 2
 
     @property
     def api_cors_origins_list(self) -> list[str]:

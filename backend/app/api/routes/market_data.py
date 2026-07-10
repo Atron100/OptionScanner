@@ -2,7 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.api.dependencies import get_market_data_broker
-from app.brokers.base import MarketDataBroker
+from app.brokers.base import (
+    MarketDataBroker,
+    MarketDataBrokerError,
+    MarketDataConfigurationError,
+    MarketDataUnavailableError,
+)
 from app.db.session import get_db
 from app.schemas.market_data import (
     ChainSnapshotResponse,
@@ -21,7 +26,14 @@ def ingest_chain(
     broker: MarketDataBroker = Depends(get_market_data_broker),
 ) -> IngestChainResponse:
     service = MarketDataIngestionService(db, broker)
-    result = service.ingest_symbol(payload.symbol)
+    try:
+        result = service.ingest_symbol(payload.symbol)
+    except MarketDataConfigurationError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except MarketDataUnavailableError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except MarketDataBrokerError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
     return IngestChainResponse.model_validate(result)
 
 

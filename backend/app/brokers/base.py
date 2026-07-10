@@ -55,3 +55,15 @@ class MarketDataBroker(ABC):
     @abstractmethod
     def fetch_option_chain(self, symbol: str) -> OptionChainData:
         raise NotImplementedError
+
+
+class MarketDataBrokerError(RuntimeError):
+    pass
+
+
+class MarketDataConfigurationError(MarketDataBrokerError):
+    pass
+
+
+class MarketDataUnavailableError(MarketDataBrokerError):
+    pass

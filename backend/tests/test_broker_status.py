@@ -1,10 +1,27 @@
+import threading
+
 from fastapi.testclient import TestClient
 
-from app.brokers.ibkr import IBKRConnectionManager
+from app.brokers.ibkr import IBKRConnectionManager, _IBKRDiscoverySession
 from app.main import app
 
 
 client = TestClient(app)
+
+
+def test_ibkr_contract_batch_waits_for_all_request_completion_callbacks() -> None:
+    session = object.__new__(_IBKRDiscoverySession)
+    session._request_mode = "options"
+    session._pending_contract_request_ids = {2000, 2001}
+    session._response_event = threading.Event()
+
+    session.contractDetailsEnd(2000)
+    assert session._pending_contract_request_ids == {2001}
+    assert not session._response_event.is_set()
+
+    session.contractDetailsEnd(2001)
+    assert session._pending_contract_request_ids == set()
+    assert session._response_event.is_set()
 
 
 def test_broker_status_endpoint_uses_mock_provider() -> None:

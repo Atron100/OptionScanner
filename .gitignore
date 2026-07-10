@@ -12,6 +12,15 @@ coverage/
 # Environment
 .env
 
+# Local dependency-install workspace
+.pip-cache/
+.pip-tmp/
+
+# Local diagnostic captures
+log_out.txt
+server_out.txt
+status.json
+
 # Local data
 data/*.db
 data/*.sqlite
