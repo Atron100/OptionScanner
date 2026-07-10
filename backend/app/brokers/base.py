@@ -45,6 +45,7 @@ class OptionChainData:
     currency: str
     as_of: datetime
     quotes: list[OptionQuoteData]
+    warnings: list[str] | None = None
 
 
 class MarketDataBroker(ABC):

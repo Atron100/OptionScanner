@@ -52,6 +52,9 @@ class _IBKRDiscoverySession(EWrapper):
         self._chain_params: dict[str, Any] | None = None
         self._contract_details: list[Any] = []
         self._pending_contract_request_ids: set[int] = set()
+        self._option_quotes: dict[int, OptionQuoteData] = {}
+        self._pending_quote_request_ids: set[int] = set()
+        self._quote_warnings: list[str] = []
         self._request_mode: str | None = None
 
     def connect_and_start(self) -> None:
@@ -91,6 +94,15 @@ class _IBKRDiscoverySession(EWrapper):
     def error(self, reqId: int, errorCode: int, errorString: str, advancedOrderRejectJson: str = "") -> None:  # noqa: N802
         benign_codes = {2104, 2106, 2158}
         if errorCode in benign_codes:
+            return
+        if self._request_mode == "quotes" and reqId in self._pending_quote_request_ids:
+            # A missing live-data subscription must not discard otherwise valid
+            # contract definitions. The affected quote remains empty.
+            warning = f"IBKR error {errorCode}: {errorString}"
+            if warning not in self._quote_warnings:
+                self._quote_warnings.append(warning)
+            self._pending_quote_request_ids.discard(reqId)
+            self._complete_quote_batch_if_ready()
             return
         self._error_message = f"IBKR error {errorCode}: {errorString}"
         self._response_event.set()
@@ -139,6 +151,65 @@ class _IBKRDiscoverySession(EWrapper):
     def securityDefinitionOptionParameterEnd(self, reqId: int) -> None:  # noqa: N802
         self._response_event.set()
 
+    def tickPrice(self, reqId: int, tickType: int, price: float, attrib: Any) -> None:  # noqa: N802
+        quote = self._option_quotes.get(reqId)
+        if quote is None:
+            return
+        value = self._normalise_non_negative_number(price)
+        if tickType == 1:
+            quote.bid = value
+        elif tickType == 2:
+            quote.ask = value
+        elif tickType == 4:
+            quote.last = value
+        elif tickType == 37:
+            quote.mark = value
+
+    def tickSize(self, reqId: int, tickType: int, size: float) -> None:  # noqa: N802
+        quote = self._option_quotes.get(reqId)
+        if quote is None:
+            return
+        value = self._normalise_non_negative_integer(size)
+        if tickType in {8, 29, 30}:
+            quote.volume = value
+        elif tickType in {22, 27, 28}:
+            quote.open_interest = value
+
+    def tickGeneric(self, reqId: int, tickType: int, value: float) -> None:  # noqa: N802
+        quote = self._option_quotes.get(reqId)
+        if quote is not None and tickType == 24:
+            quote.implied_volatility = self._normalise_non_negative_number(value)
+
+    def tickOptionComputation(  # noqa: N802
+        self,
+        reqId: int,
+        tickType: int,
+        tickAttrib: int,
+        impliedVol: float,
+        delta: float,
+        optPrice: float,
+        pvDividend: float,
+        gamma: float,
+        vega: float,
+        theta: float,
+        undPrice: float,
+    ) -> None:
+        quote = self._option_quotes.get(reqId)
+        if quote is None or tickType not in {10, 11, 12, 13}:
+            return
+        quote.implied_volatility = self._normalise_non_negative_number(impliedVol)
+        quote.delta = self._normalise_number(delta)
+        quote.gamma = self._normalise_number(gamma)
+        quote.theta = self._normalise_number(theta)
+        quote.vega = self._normalise_number(vega)
+        option_price = self._normalise_number(optPrice)
+        if quote.mark is None and option_price is not None:
+            quote.mark = option_price
+
+    def tickSnapshotEnd(self, reqId: int) -> None:  # noqa: N802
+        self._pending_quote_request_ids.discard(reqId)
+        self._complete_quote_batch_if_ready()
+
     def discover_option_chain(self, symbol: str) -> OptionChainData:
         underlying = self._resolve_underlying(symbol)
         chain_params = self._resolve_chain_parameters(symbol, underlying)
@@ -149,27 +220,7 @@ class _IBKRDiscoverySession(EWrapper):
                 f"IBKR returned no option contracts for {symbol.upper()} using the current bounded discovery settings."
             )
 
-        quotes = [
-            OptionQuoteData(
-                expiration_date=datetime.strptime(details.contract.lastTradeDateOrContractMonth, "%Y%m%d").date(),
-                right=details.contract.right,
-                strike=float(details.contract.strike),
-                bid=None,
-                ask=None,
-                last=None,
-                mark=None,
-                implied_volatility=None,
-                delta=None,
-                gamma=None,
-                theta=None,
-                vega=None,
-                open_interest=None,
-                volume=None,
-                multiplier=int(details.contract.multiplier or chain_params["multiplier"] or 100),
-                ib_contract_id=details.contract.conId,
-            )
-            for details in option_contracts
-        ]
+        quotes = self._fetch_option_quotes(option_contracts, chain_params)
 
         return OptionChainData(
             provider="ibkr",
@@ -179,6 +230,7 @@ class _IBKRDiscoverySession(EWrapper):
             currency=underlying.currency,
             as_of=datetime.now(timezone.utc).replace(microsecond=0),
             quotes=quotes,
+            warnings=self._quote_warnings,
         )
 
     def _resolve_underlying(self, symbol: str) -> _UnderlyingContract:
@@ -262,6 +314,71 @@ class _IBKRDiscoverySession(EWrapper):
             deduped[details.contract.conId] = details
         return list(deduped.values())
 
+    def _fetch_option_quotes(self, option_contracts: list[Any], chain_params: dict[str, Any]) -> list[OptionQuoteData]:
+        self._request_mode = "quotes"
+        self._error_message = None
+        self._response_event.clear()
+        self._option_quotes = {}
+        self._quote_warnings = []
+
+        requests: list[tuple[int, Any]] = []
+        for offset, details in enumerate(option_contracts):
+            request_id = 3000 + offset
+            contract = details.contract
+            self._option_quotes[request_id] = OptionQuoteData(
+                expiration_date=datetime.strptime(contract.lastTradeDateOrContractMonth, "%Y%m%d").date(),
+                right=contract.right,
+                strike=float(contract.strike),
+                bid=None,
+                ask=None,
+                last=None,
+                mark=None,
+                implied_volatility=None,
+                delta=None,
+                gamma=None,
+                theta=None,
+                vega=None,
+                open_interest=None,
+                volume=None,
+                multiplier=int(contract.multiplier or chain_params["multiplier"] or 100),
+                ib_contract_id=contract.conId,
+            )
+            requests.append((request_id, contract))
+
+        self._pending_quote_request_ids = {request_id for request_id, _ in requests}
+        for request_id, contract in requests:
+            # IBKR does not permit generic ticks on snapshot requests. Default
+            # option ticks include bid/ask/last and option computations.
+            self.client.reqMktData(request_id, contract, "", True, False, [])
+
+        self._wait_for_response("option quote snapshots", timeout=15)
+        for quote in self._option_quotes.values():
+            if quote.mark is None and quote.bid is not None and quote.ask is not None:
+                quote.mark = round((quote.bid + quote.ask) / 2, 6)
+        return list(self._option_quotes.values())
+
+    def _complete_quote_batch_if_ready(self) -> None:
+        if not self._pending_quote_request_ids:
+            self._response_event.set()
+
+    @staticmethod
+    def _normalise_number(value: float) -> float | None:
+        if value is None or abs(value) > 1e100:
+            return None
+        return float(value)
+
+    @classmethod
+    def _normalise_non_negative_number(cls, value: float) -> float | None:
+        normalised = cls._normalise_number(value)
+        if normalised is None or normalised < 0:
+            return None
+        return normalised
+
+    @classmethod
+    def _normalise_non_negative_integer(cls, value: float) -> int | None:
+        normalised = cls._normalise_non_negative_number(value)
+        return int(normalised) if normalised is not None else None
+
     def _wait_for_response(self, operation: str, timeout: int = 8) -> None:
         if not self._response_event.wait(timeout=timeout):
             raise MarketDataUnavailableError(f"Timed out waiting for IBKR {operation}.")
@@ -293,13 +410,12 @@ class IBKRConnectionManager(MarketDataBroker):
                 configured=True,
                 connected=True,
                 message=(
-                    "IBKR TCP endpoint is reachable. Live bounded option chain discovery is enabled; "
-                    "quote enrichment is still pending."
+                    "IBKR TCP endpoint is reachable. Live bounded option chain and quote snapshot fetching are enabled."
                 ),
                 host=self._settings.ibkr_host,
                 port=self._settings.ibkr_port,
                 read_only=self._settings.ibkr_read_only,
-                supports_live_data=False,
+                supports_live_data=True,
                 supports_option_chain_fetch=True,
             )
 

@@ -4,103 +4,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
 
 PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Get `
->>   -Uri "http://localhost:8000/api/v1/brokers/market-data/status"
-
-
-provider                    : ibkr
-configured                  : True
-connected                   : True
-message                     : IBKR TCP endpoint is reachable. Live bounded option chain discovery is enabled; quote
-                              enrichment is still pending.
-host                        : 127.0.0.1
-port                        : 7497
-read_only                   : True
-supports_live_data          : False
-supports_option_chain_fetch : True
-
-
-
-PS C:\Users\Alexey> Invoke-RestMethod `
 >>   -Method Post `
 >>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
 >>   -ContentType "application/json" `
->>   -Body '{"symbol":"AAPL"}'
-Invoke-RestMethod : {"detail":"Unable to open an IBKR API session to 127.0.0.1:7497."}
-At line:1 char:1
-+ Invoke-RestMethod `
-+ ~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
-   eption
-    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
-PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Post `
->>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
->>   -ContentType "application/json" `
->>   -Body '{"symbol":"AAPL"}'
-Invoke-RestMethod : {"detail":"Unable to open an IBKR API session to 127.0.0.1:7497."}
-At line:1 char:1
-+ Invoke-RestMethod `
-+ ~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
-   eption
-    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
-PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Get `
->>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
-
-
-symbol      : AAPL
-provider    : mock
-as_of       : 2026-07-09T18:22:57
-quote_count : 4
-contracts   : {@{expiration_date=2026-08-21; right=C; strike=215.0; bid=4.75; ask=5.05; last=4.92; mark=4.9;
-              implied_volatility=0.27; delta=0.44; gamma=0.03; theta=-0.07; vega=0.11; open_interest=1240;
-              volume=580}, @{expiration_date=2026-08-21; right=P; strike=205.0; bid=3.95; ask=4.2; last=4.1;
-              mark=4.08; implied_volatility=0.29; delta=-0.39; gamma=0.02; theta=-0.06; vega=0.1; open_interest=980;
-              volume=420}, @{expiration_date=2026-09-18; right=C; strike=220.0; bid=5.85; ask=6.2; last=6.0;
-              mark=6.03; implied_volatility=0.26; delta=0.42; gamma=0.02; theta=-0.06; vega=0.13; open_interest=860;
-              volume=310}, @{expiration_date=2026-09-18; right=P; strike=200.0; bid=4.6; ask=4.95; last=4.8;
-              mark=4.77; implied_volatility=0.3; delta=-0.36; gamma=0.02; theta=-0.05; vega=0.12; open_interest=730;
-              volume=275}}
-
-
-
-PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Post `
->>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
->>   -ContentType "application/json" `
->>   -Body '{"symbol":"AAPL"}'
-
-
-symbol         : AAPL
-provider       : ibkr
-snapshot_id    : 1
-contract_count : 1
-quote_count    : 1
-expirations    : {2026-07-10}
-as_of          : 2026-07-10T10:20:26Z
-
-
-
-PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
-
-
-symbol      : AAPL
-provider    : ibkr
-as_of       : 2026-07-10T10:20:26
-quote_count : 1
-contracts   : {@{expiration_date=2026-07-10; right=C; strike=280.0; bid=; ask=; last=; mark=; implied_volatility=;
-              delta=; gamma=; theta=; vega=; open_interest=; volume=}}
-
-
-
-PS C:\Users\Alexey> Invoke-RestMethod `
->>   -Method Post `
->>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
->>   -ContentType "application/json" `
->>   -Body '{"symbol":"AAPL"}'
+>>   -Body '{"symbol":"AAPL"}' | Format-List
 
 
 symbol         : AAPL
@@ -109,8 +16,84 @@ snapshot_id    : 1
 contract_count : 16
 quote_count    : 16
 expirations    : {2026-07-10, 2026-07-13}
-as_of          : 2026-07-10T10:25:12Z
+as_of          : 2026-07-10T12:15:59Z
+warnings       : {IBKR error 321: Error validating request.-'bL' : cause - Snapshot market data subscription is not
+                 applicable to generic ticks}
 
+
+
+PS C:\Users\Alexey> $chain = Invoke-RestMethod `
+>>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
+PS C:\Users\Alexey>
+PS C:\Users\Alexey> $chain.contracts | Format-Table `
+>>   expiration_date, right, strike, bid, ask, last, mark, `
+>>   implied_volatility, delta, gamma, theta, vega, open_interest, volume `
+>>   -AutoSize
+
+expiration_date right strike bid ask last mark implied_volatility delta gamma theta vega open_interest volume
+--------------- ----- ------ --- --- ---- ---- ------------------ ----- ----- ----- ---- ------------- ------
+2026-07-10      C      277.5
+2026-07-10      C      280.0
+2026-07-10      C      282.5
+2026-07-10      C      285.0
+2026-07-10      P      277.5
+2026-07-10      P      280.0
+2026-07-10      P      282.5
+2026-07-10      P      285.0
+2026-07-13      C      277.5
+2026-07-13      C      280.0
+2026-07-13      C      282.5
+2026-07-13      C      285.0
+2026-07-13      P      277.5
+2026-07-13      P      280.0
+2026-07-13      P      282.5
+2026-07-13      P      285.0
+
+
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"AAPL"}' | Format-List
+
+
+symbol         : AAPL
+provider       : ibkr
+snapshot_id    : 1
+contract_count : 16
+quote_count    : 16
+expirations    : {2026-07-10, 2026-07-13}
+as_of          : 2026-07-10T12:32:10Z
+warnings       : {}
+
+
+
+PS C:\Users\Alexey> $chain = Invoke-RestMethod `
+>>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
+PS C:\Users\Alexey>
+PS C:\Users\Alexey> $chain.contracts | Format-Table `
+>>   expiration_date, right, strike, bid, ask, last, mark, `
+>>   implied_volatility, delta, gamma, theta, vega, open_interest, volume `
+>>   -AutoSize
+
+expiration_date right strike bid ask last mark implied_volatility delta gamma theta vega open_interest volume
+--------------- ----- ------ --- --- ---- ---- ------------------ ----- ----- ----- ---- ------------- ------
+2026-07-10      C      277.5                                                                                0
+2026-07-10      C      280.0                                                                                0
+2026-07-10      C      282.5                                                                                0
+2026-07-10      C      285.0
+2026-07-10      P      277.5                                                                                0
+2026-07-10      P      280.0
+2026-07-10      P      282.5
+2026-07-10      P      285.0
+2026-07-13      C      277.5                                                                                0
+2026-07-13      C      280.0                                                                                0
+2026-07-13      C      282.5                                                                                0
+2026-07-13      C      285.0                                                                                0
+2026-07-13      P      277.5                                                                                0
+2026-07-13      P      280.0                                                                                0
+2026-07-13      P      282.5                                                                                0
+2026-07-13      P      285.0                                                                                0
 
 
 PS C:\Users\Alexey>

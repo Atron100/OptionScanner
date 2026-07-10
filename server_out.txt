@@ -1,26 +1,122 @@
-Windows PowerShell 5.1
-Copyright (C) Microsoft Corporation. All rights reserved.
 
-Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+C:\Users\Alexey\Desktop>echo "START BACKED SERVER"
+"START BACKED SERVER"
 
-PS C:\Users\Alexey> cd D:\Work\OptionScanner
-PS D:\Work\OptionScanner> .\.venv\Scripts\Activate.ps1
-(.venv) PS D:\Work\OptionScanner> uvicorn app.main:app --reload --app-dir backend
+C:\Users\Alexey\Desktop>cd /d D:\Work\OptionScanner
+
+D:\Work\OptionScanner>powershell -NoExit -ExecutionPolicy Bypass -Command "& .\.venv\Scripts\Activate.ps1; uvicorn app.main:app --reload --app-dir backend"
 INFO:     Will watch for changes in these directories: ['D:\\Work\\OptionScanner']
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [19448] using WatchFiles
-INFO:     Started server process [23512]
+INFO:     Started reloader process [33816] using WatchFiles
+INFO:     Started server process [3036]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:62516 - "GET /api/v1/brokers/market-data/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63706 - "GET /api/v1/brokers/ibkr/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53302 - "POST /api/v1/market-data/ingest HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53303 - "GET /api/v1/market-data/underlyings/AAPL/latest-chain HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57102 - "GET /api/v1/brokers/ibkr/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57104 - "GET /favicon.ico HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:61945 - "GET /api/v1/brokers/ibkr/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61947 - "GET /favicon.ico HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:61948 - "GET /api/v1/brokers/ibkr/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61950 - "GET /favicon.ico HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:61951 - "GET /api/v1/brokers/ibkr/status HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61958 - "GET /api/v1/market-data/underlyings/AAPL/latest-chain HTTP/1.1" 200 OK
+2026-07-10 15:31:55,691 INFO ibapi.client sent startApi
+2026-07-10 15:31:55,691 INFO ibapi.client REQUEST startApi {}
+2026-07-10 15:31:55,691 INFO ibapi.client SENDING startApi b'\x00\x00\x00\x0871\x002\x001\x00\x00'
+2026-07-10 15:31:55,692 INFO ibapi.wrapper ANSWER connectAck {}
+2026-07-10 15:31:55,695 INFO ibapi.wrapper ANSWER managedAccounts {'accountsList': 'U11950029'}
+2026-07-10 15:31:55,695 INFO ibapi.client REQUEST reqContractDetails {'reqId': 1001, 'contract': 2429553007248: 0,AAPL,STK,,0.0,,,SMART,,USD,,,False,,combo:}
+2026-07-10 15:31:55,696 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00,9\x008\x001001\x000\x00AAPL\x00STK\x00\x000.0\x00\x00\x00SMART\x00\x00USD\x00\x00\x000\x00\x00\x00'
+2026-07-10 15:31:56,014 INFO ibapi.client REQUEST reqSecDefOptParams {'reqId': 1002, 'underlyingSymbol': 'AAPL', 'futFopExchange': '', 'underlyingSecType': 'STK', 'underlyingConId': 265598}
+2026-07-10 15:31:56,014 INFO ibapi.client SENDING reqSecDefOptParams b'\x00\x00\x00\x1978\x001002\x00AAPL\x00\x00STK\x00265598\x00'
+2026-07-10 15:31:56,178 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2000, 'contract': 2429553017232: 0,AAPL,OPT,20260710,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,178 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002000\x000\x00AAPL\x00OPT\x0020260710\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,178 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2001, 'contract': 2429552956240: 0,AAPL,OPT,20260710,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,179 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002001\x000\x00AAPL\x00OPT\x0020260710\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,179 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2002, 'contract': 2429552956848: 0,AAPL,OPT,20260710,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,179 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002002\x000\x00AAPL\x00OPT\x0020260710\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,179 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2003, 'contract': 2429552619120: 0,AAPL,OPT,20260710,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,179 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002003\x000\x00AAPL\x00OPT\x0020260710\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,180 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2004, 'contract': 2429552925408: 0,AAPL,OPT,20260710,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,180 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002004\x000\x00AAPL\x00OPT\x0020260710\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,180 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2005, 'contract': 2429552923776: 0,AAPL,OPT,20260710,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,180 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002005\x000\x00AAPL\x00OPT\x0020260710\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,180 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2006, 'contract': 2429553050192: 0,AAPL,OPT,20260710,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,180 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002006\x000\x00AAPL\x00OPT\x0020260710\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,181 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2007, 'contract': 2429553049936: 0,AAPL,OPT,20260710,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,181 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002007\x000\x00AAPL\x00OPT\x0020260710\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,181 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2008, 'contract': 2429553117856: 0,AAPL,OPT,20260713,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,181 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002008\x000\x00AAPL\x00OPT\x0020260713\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,181 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2009, 'contract': 2429553119776: 0,AAPL,OPT,20260713,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,181 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002009\x000\x00AAPL\x00OPT\x0020260713\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,182 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2010, 'contract': 2429553120016: 0,AAPL,OPT,20260713,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,182 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002010\x000\x00AAPL\x00OPT\x0020260713\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,182 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2011, 'contract': 2429553120256: 0,AAPL,OPT,20260713,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,182 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002011\x000\x00AAPL\x00OPT\x0020260713\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,182 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2012, 'contract': 2429553120496: 0,AAPL,OPT,20260713,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,182 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002012\x000\x00AAPL\x00OPT\x0020260713\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,182 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2013, 'contract': 2429553120736: 0,AAPL,OPT,20260713,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,182 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002013\x000\x00AAPL\x00OPT\x0020260713\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,183 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2014, 'contract': 2429553120976: 0,AAPL,OPT,20260713,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,183 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002014\x000\x00AAPL\x00OPT\x0020260713\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:56,183 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2015, 'contract': 2429553121216: 0,AAPL,OPT,20260713,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
+2026-07-10 15:31:56,183 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002015\x000\x00AAPL\x00OPT\x0020260713\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
+2026-07-10 15:31:57,509 INFO ibapi.client REQUEST reqMktData {'reqId': 3000, 'contract': 2429553121456: 894355010,AAPL,OPT,20260710,277.5,C,100,SMART,,USD,AAPL  260710C00277500,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,510 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003000\x00894355010\x00AAPL\x00OPT\x0020260710\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260710C00277500\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,510 INFO ibapi.client REQUEST reqMktData {'reqId': 3001, 'contract': 2429553121696: 894355067,AAPL,OPT,20260710,282.5,C,100,SMART,,USD,AAPL  260710C00282500,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,510 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003001\x00894355067\x00AAPL\x00OPT\x0020260710\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260710C00282500\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,510 INFO ibapi.client REQUEST reqMktData {'reqId': 3002, 'contract': 2429553121936: 887307163,AAPL,OPT,20260710,280.0,C,100,SMART,,USD,AAPL  260710C00280000,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,510 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003002\x00887307163\x00AAPL\x00OPT\x0020260710\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260710C00280000\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,511 INFO ibapi.client REQUEST reqMktData {'reqId': 3003, 'contract': 2429553122176: 887307201,AAPL,OPT,20260710,285.0,C,100,SMART,,USD,AAPL  260710C00285000,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,511 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003003\x00887307201\x00AAPL\x00OPT\x0020260710\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260710C00285000\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,511 INFO ibapi.client REQUEST reqMktData {'reqId': 3004, 'contract': 2429553122416: 887308765,AAPL,OPT,20260710,280.0,P,100,SMART,,USD,AAPL  260710P00280000,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,511 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003004\x00887308765\x00AAPL\x00OPT\x0020260710\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260710P00280000\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,512 INFO ibapi.client REQUEST reqMktData {'reqId': 3005, 'contract': 2429553122656: 894355578,AAPL,OPT,20260710,277.5,P,100,SMART,,USD,AAPL  260710P00277500,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,512 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003005\x00894355578\x00AAPL\x00OPT\x0020260710\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260710P00277500\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,512 INFO ibapi.client REQUEST reqMktData {'reqId': 3006, 'contract': 2429553122896: 894355641,AAPL,OPT,20260710,282.5,P,100,SMART,,USD,AAPL  260710P00282500,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,512 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003006\x00894355641\x00AAPL\x00OPT\x0020260710\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260710P00282500\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,512 INFO ibapi.client REQUEST reqMktData {'reqId': 3007, 'contract': 2429553123136: 887308836,AAPL,OPT,20260710,285.0,P,100,SMART,,USD,AAPL  260710P00285000,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,512 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003007\x00887308836\x00AAPL\x00OPT\x0020260710\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260710P00285000\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,513 INFO ibapi.client REQUEST reqMktData {'reqId': 3008, 'contract': 2429553123376: 897179771,AAPL,OPT,20260713,277.5,C,100,SMART,,USD,AAPL  260713C00277500,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,513 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003008\x00897179771\x00AAPL\x00OPT\x0020260713\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260713C00277500\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,513 INFO ibapi.client REQUEST reqMktData {'reqId': 3009, 'contract': 2429553123616: 896783884,AAPL,OPT,20260713,280.0,C,100,SMART,,USD,AAPL  260713C00280000,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,513 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003009\x00896783884\x00AAPL\x00OPT\x0020260713\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260713C00280000\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,513 INFO ibapi.client REQUEST reqMktData {'reqId': 3010, 'contract': 2429553123856: 897179826,AAPL,OPT,20260713,282.5,C,100,SMART,,USD,AAPL  260713C00282500,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,513 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003010\x00897179826\x00AAPL\x00OPT\x0020260713\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260713C00282500\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,513 INFO ibapi.client REQUEST reqMktData {'reqId': 3011, 'contract': 2429553124096: 896783915,AAPL,OPT,20260713,285.0,C,100,SMART,,USD,AAPL  260713C00285000,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,514 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003011\x00896783915\x00AAPL\x00OPT\x0020260713\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260713C00285000\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,514 INFO ibapi.client REQUEST reqMktData {'reqId': 3012, 'contract': 2429553124336: 897180679,AAPL,OPT,20260713,277.5,P,100,SMART,,USD,AAPL  260713P00277500,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,514 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003012\x00897180679\x00AAPL\x00OPT\x0020260713\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260713P00277500\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,514 INFO ibapi.client REQUEST reqMktData {'reqId': 3013, 'contract': 2429553124576: 896784751,AAPL,OPT,20260713,280.0,P,100,SMART,,USD,AAPL  260713P00280000,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,514 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003013\x00896784751\x00AAPL\x00OPT\x0020260713\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260713P00280000\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,515 INFO ibapi.client REQUEST reqMktData {'reqId': 3014, 'contract': 2429553124816: 897180721,AAPL,OPT,20260713,282.5,P,100,SMART,,USD,AAPL  260713P00282500,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,515 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003014\x00897180721\x00AAPL\x00OPT\x0020260713\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260713P00282500\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,515 INFO ibapi.client REQUEST reqMktData {'reqId': 3015, 'contract': 2429553125056: 896784784,AAPL,OPT,20260713,285.0,P,100,SMART,,USD,AAPL  260713P00285000,AAPL,False,,combo:, 'genericTickList': '', 'snapshot': True, 'regulatorySnapshot': False, 'mktDataOptions': []}
+2026-07-10 15:31:57,515 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00`1\x0011\x003015\x00896784784\x00AAPL\x00OPT\x0020260713\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260713P00285000\x00AAPL\x000\x00\x001\x000\x00\x00'
+2026-07-10 15:31:57,687 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3000, 'marketDataType': 1}
+2026-07-10 15:31:57,691 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3000, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:57,987 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3001, 'marketDataType': 1}
+2026-07-10 15:31:57,987 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3001, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:58,135 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3002, 'marketDataType': 1}
+2026-07-10 15:31:58,135 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3002, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:58,283 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3004, 'minTick': 0.0, 'bboExchange': 'c70003', 'snapshotPermissions': 0}
+2026-07-10 15:31:58,283 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3003, 'minTick': 0.0, 'bboExchange': 'c70003', 'snapshotPermissions': 0}
+2026-07-10 15:31:58,428 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3005, 'marketDataType': 1}
+2026-07-10 15:31:58,428 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3005, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:58,428 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3004, 'marketDataType': 1}
+2026-07-10 15:31:58,429 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3003, 'marketDataType': 1}
+2026-07-10 15:31:58,432 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3006, 'minTick': 0.0, 'bboExchange': 'c70003', 'snapshotPermissions': 0}
+2026-07-10 15:31:58,571 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3007, 'minTick': 0.0, 'bboExchange': 'c70003', 'snapshotPermissions': 0}
+2026-07-10 15:31:58,717 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3008, 'marketDataType': 1}
+2026-07-10 15:31:58,717 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3008, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:58,717 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3006, 'marketDataType': 1}
+2026-07-10 15:31:58,717 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3007, 'marketDataType': 1}
+2026-07-10 15:31:58,719 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3009, 'marketDataType': 1}
+2026-07-10 15:31:58,719 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3009, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:58,870 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3012, 'marketDataType': 1}
+2026-07-10 15:31:58,870 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3012, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:58,870 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3010, 'marketDataType': 1}
+2026-07-10 15:31:58,871 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3010, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:58,871 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3011, 'marketDataType': 1}
+2026-07-10 15:31:58,871 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3011, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:59,546 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3013, 'marketDataType': 1}
+2026-07-10 15:31:59,547 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3013, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:59,547 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3015, 'marketDataType': 1}
+2026-07-10 15:31:59,547 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3015, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:31:59,547 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3014, 'marketDataType': 1}
+2026-07-10 15:31:59,547 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3014, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
+2026-07-10 15:32:10,614 INFO ibapi.client disconnecting
+2026-07-10 15:32:10,615 INFO ibapi.wrapper ANSWER connectionClosed {}
+INFO:     127.0.0.1:54013 - "POST /api/v1/market-data/ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54016 - "GET /api/v1/market-data/underlyings/AAPL/latest-chain HTTP/1.1" 200 OK

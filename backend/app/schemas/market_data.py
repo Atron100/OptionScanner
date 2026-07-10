@@ -15,6 +15,7 @@ class IngestChainResponse(BaseModel):
     quote_count: int
     expirations: list[date]
     as_of: datetime
+    warnings: list[str] = Field(default_factory=list)
 
 
 class ContractQuoteResponse(BaseModel):

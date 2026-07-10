@@ -19,6 +19,7 @@ def test_ingest_chain_persists_and_returns_latest_snapshot() -> None:
     assert ingest_payload["quote_count"] == 4
     assert ingest_payload["contract_count"] == 4
     assert ingest_payload["expirations"] == ["2026-08-21", "2026-09-18"]
+    assert ingest_payload["warnings"] == []
 
     latest_response = client.get("/api/v1/market-data/underlyings/AAPL/latest-chain")
     assert latest_response.status_code == 200

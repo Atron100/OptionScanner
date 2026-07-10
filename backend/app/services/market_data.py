@@ -64,6 +64,7 @@ class MarketDataIngestionService:
             quote_count=len(chain.quotes),
             expirations=sorted(expiration_dates),
             as_of=chain.as_of,
+            warnings=chain.warnings or [],
         )
 
 
