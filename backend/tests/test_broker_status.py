@@ -26,7 +26,37 @@ def test_ibkr_contract_batch_waits_for_all_request_completion_callbacks() -> Non
     assert session._response_event.is_set()
 
 
-def test_ibkr_quote_callbacks_collect_values_and_wait_for_all_snapshots() -> None:
+def test_ibkr_selects_all_expirations_within_configured_horizon() -> None:
+    session = object.__new__(_IBKRDiscoverySession)
+    session._settings = type(
+        "SettingsStub",
+        (),
+        {"ibkr_expiration_horizon_days": 21, "ibkr_max_expirations": 0},
+    )()
+
+    selected = session._select_expirations(
+        {"20260710", "20260713", "20260717", "20260724", "20260731", "20260807"},
+        today=date(2026, 7, 10),
+    )
+
+    assert selected == ["20260710", "20260713", "20260717", "20260724", "20260731"]
+
+
+def test_ibkr_contract_lookup_error_keeps_other_batch_requests_running() -> None:
+    session = object.__new__(_IBKRDiscoverySession)
+    session._request_mode = "options"
+    session._pending_contract_request_ids = {2000, 2001}
+    session._discovery_warnings = []
+    session._response_event = threading.Event()
+
+    session.error(2000, 200, "No security definition has been found for the request")
+
+    assert session._pending_contract_request_ids == {2001}
+    assert session._discovery_warnings == ["IBKR error 200: No security definition has been found for the request"]
+    assert not session._response_event.is_set()
+
+
+def test_ibkr_quote_callbacks_collect_values_and_wait_for_all_requests() -> None:
     session = object.__new__(_IBKRDiscoverySession)
     session._request_mode = "quotes"
     session._response_event = threading.Event()

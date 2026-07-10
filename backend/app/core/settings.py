@@ -27,8 +27,11 @@ class Settings(BaseSettings):
     ibkr_read_only: bool = True
     ibkr_exchange: str = "SMART"
     ibkr_currency: str = "USD"
-    ibkr_max_expirations: int = 2
+    ibkr_max_expirations: int = 0
+    ibkr_expiration_horizon_days: int = 21
     ibkr_strikes_per_side: int = 2
+    ibkr_quote_collection_seconds: float = 4.0
+    ibkr_max_requests_per_second: int = 30
 
     @property
     def api_cors_origins_list(self) -> list[str]:

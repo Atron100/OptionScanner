@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import threading
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Any
 
 from app.brokers.base import (
@@ -55,6 +55,7 @@ class _IBKRDiscoverySession(EWrapper):
         self._option_quotes: dict[int, OptionQuoteData] = {}
         self._pending_quote_request_ids: set[int] = set()
         self._quote_warnings: list[str] = []
+        self._discovery_warnings: list[str] = []
         self._request_mode: str | None = None
 
     def connect_and_start(self) -> None:
@@ -94,6 +95,16 @@ class _IBKRDiscoverySession(EWrapper):
     def error(self, reqId: int, errorCode: int, errorString: str, advancedOrderRejectJson: str = "") -> None:  # noqa: N802
         benign_codes = {2104, 2106, 2158}
         if errorCode in benign_codes:
+            return
+        if self._request_mode == "options" and reqId in self._pending_contract_request_ids:
+            # Chain parameters may list strikes that do not resolve for every
+            # expiration. Keep the remaining valid contract definitions.
+            warning = f"IBKR error {errorCode}: {errorString}"
+            if warning not in self._discovery_warnings:
+                self._discovery_warnings.append(warning)
+            self._pending_contract_request_ids.discard(reqId)
+            if not self._pending_contract_request_ids:
+                self._response_event.set()
             return
         if self._request_mode == "quotes" and reqId in self._pending_quote_request_ids:
             # A missing live-data subscription must not discard otherwise valid
@@ -230,7 +241,7 @@ class _IBKRDiscoverySession(EWrapper):
             currency=underlying.currency,
             as_of=datetime.now(timezone.utc).replace(microsecond=0),
             quotes=quotes,
-            warnings=self._quote_warnings,
+            warnings=self._discovery_warnings + self._quote_warnings,
         )
 
     def _resolve_underlying(self, symbol: str) -> _UnderlyingContract:
@@ -267,7 +278,7 @@ class _IBKRDiscoverySession(EWrapper):
         return self._chain_params
 
     def _resolve_option_contracts(self, symbol: str, chain_params: dict[str, Any]) -> list[Any]:
-        expirations = sorted(chain_params["expirations"])[: self._settings.ibkr_max_expirations]
+        expirations = self._select_expirations(chain_params["expirations"])
         if not expirations:
             raise MarketDataUnavailableError(f"IBKR returned no expirations for symbol '{symbol.upper()}'.")
 
@@ -281,6 +292,7 @@ class _IBKRDiscoverySession(EWrapper):
 
         self._request_mode = "options"
         self._contract_details = []
+        self._discovery_warnings = []
         self._error_message = None
         self._response_event.clear()
 
@@ -305,10 +317,9 @@ class _IBKRDiscoverySession(EWrapper):
         # IBKR sends one contractDetailsEnd callback per request. Register the
         # entire batch first so an early callback cannot end discovery early.
         self._pending_contract_request_ids = {request_id for request_id, _ in requests}
-        for request_id, contract in requests:
-            self.client.reqContractDetails(request_id, contract)
+        self._send_paced_requests(requests, self.client.reqContractDetails)
 
-        self._wait_for_response("option contract details", timeout=12)
+        self._wait_for_response("option contract details", timeout=self._batch_timeout(len(requests)))
         deduped: dict[int, Any] = {}
         for details in self._contract_details:
             deduped[details.contract.conId] = details
@@ -346,12 +357,16 @@ class _IBKRDiscoverySession(EWrapper):
             requests.append((request_id, contract))
 
         self._pending_quote_request_ids = {request_id for request_id, _ in requests}
-        for request_id, contract in requests:
-            # IBKR does not permit generic ticks on snapshot requests. Default
-            # option ticks include bid/ask/last and option computations.
-            self.client.reqMktData(request_id, contract, "", True, False, [])
+        self._send_paced_requests(
+            requests,
+            lambda request_id, contract: self.client.reqMktData(request_id, contract, "100,101", False, False, []),
+        )
 
-        self._wait_for_response("option quote snapshots", timeout=15)
+        # Collect a bounded burst of updates, then immediately release all
+        # streaming subscriptions to stay within IBKR market-data limits.
+        threading.Event().wait(timeout=self._settings.ibkr_quote_collection_seconds)
+        for request_id, _ in requests:
+            self.client.cancelMktData(request_id)
         for quote in self._option_quotes.values():
             if quote.mark is None and quote.bid is not None and quote.ask is not None:
                 quote.mark = round((quote.bid + quote.ask) / 2, 6)
@@ -360,6 +375,29 @@ class _IBKRDiscoverySession(EWrapper):
     def _complete_quote_batch_if_ready(self) -> None:
         if not self._pending_quote_request_ids:
             self._response_event.set()
+
+    def _select_expirations(self, available_expirations: set[str], today: date | None = None) -> list[str]:
+        today = today or datetime.now(timezone.utc).date()
+        latest_date = today + timedelta(days=self._settings.ibkr_expiration_horizon_days)
+        selected = [
+            expiration
+            for expiration in sorted(available_expirations)
+            if today <= datetime.strptime(expiration, "%Y%m%d").date() <= latest_date
+        ]
+        if self._settings.ibkr_max_expirations > 0:
+            return selected[: self._settings.ibkr_max_expirations]
+        return selected
+
+    def _send_paced_requests(self, requests: list[tuple[int, Any]], sender: Any) -> None:
+        interval = 1 / max(self._settings.ibkr_max_requests_per_second, 1)
+        for index, (request_id, contract) in enumerate(requests):
+            sender(request_id, contract)
+            if index < len(requests) - 1:
+                threading.Event().wait(timeout=interval)
+
+    def _batch_timeout(self, request_count: int) -> float:
+        request_duration = request_count / max(self._settings.ibkr_max_requests_per_second, 1)
+        return max(12.0, request_duration + 10.0)
 
     @staticmethod
     def _normalise_number(value: float) -> float | None:
@@ -379,7 +417,7 @@ class _IBKRDiscoverySession(EWrapper):
         normalised = cls._normalise_non_negative_number(value)
         return int(normalised) if normalised is not None else None
 
-    def _wait_for_response(self, operation: str, timeout: int = 8) -> None:
+    def _wait_for_response(self, operation: str, timeout: float = 8) -> None:
         if not self._response_event.wait(timeout=timeout):
             raise MarketDataUnavailableError(f"Timed out waiting for IBKR {operation}.")
         if self._error_message:
@@ -410,7 +448,7 @@ class IBKRConnectionManager(MarketDataBroker):
                 configured=True,
                 connected=True,
                 message=(
-                    "IBKR TCP endpoint is reachable. Live bounded option chain and quote snapshot fetching are enabled."
+                    "IBKR TCP endpoint is reachable. Live bounded option chain and quote fetching are enabled."
                 ),
                 host=self._settings.ibkr_host,
                 port=self._settings.ibkr_port,
