@@ -7,6 +7,7 @@ from app.db.models import (
     OptionChainSnapshot,
     OptionContract,
     OptionExpiration,
+    OptionHistoricalBar,
     OptionQuoteSnapshot,
     Underlying,
 )
@@ -144,3 +145,45 @@ class MarketDataRepository:
             .order_by(OptionChainSnapshot.as_of.desc(), OptionChainSnapshot.id.desc())
         )
         return self.db.execute(statement).scalars().first()
+
+    def get_contract(self, symbol: str, expiration_date: date, right: str, strike: float) -> OptionContract | None:
+        statement = (
+            select(OptionContract)
+            .join(OptionContract.underlying)
+            .join(OptionContract.expiration)
+            .where(
+                Underlying.symbol == symbol.upper(),
+                OptionExpiration.expiration_date == expiration_date,
+                OptionContract.right == right.upper(),
+                OptionContract.strike == strike,
+            )
+            .options(selectinload(OptionContract.underlying), selectinload(OptionContract.expiration))
+        )
+        return self.db.execute(statement).unique().scalar_one_or_none()
+
+    def upsert_historical_bar(self, contract_id: int, provider: str, bar) -> OptionHistoricalBar:
+        statement = select(OptionHistoricalBar).where(
+            OptionHistoricalBar.contract_id == contract_id,
+            OptionHistoricalBar.provider == provider,
+            OptionHistoricalBar.bar_date == bar.bar_date,
+        )
+        historical_bar = self.db.execute(statement).scalar_one_or_none()
+        if historical_bar is None:
+            historical_bar = OptionHistoricalBar(contract_id=contract_id, provider=provider, bar_date=bar.bar_date)
+            self.db.add(historical_bar)
+
+        historical_bar.open = bar.open
+        historical_bar.high = bar.high
+        historical_bar.low = bar.low
+        historical_bar.close = bar.close
+        historical_bar.volume = bar.volume
+        self.db.flush()
+        return historical_bar
+
+    def get_historical_bars(self, contract_id: int) -> list[OptionHistoricalBar]:
+        statement = (
+            select(OptionHistoricalBar)
+            .where(OptionHistoricalBar.contract_id == contract_id)
+            .order_by(OptionHistoricalBar.bar_date)
+        )
+        return list(self.db.execute(statement).scalars())

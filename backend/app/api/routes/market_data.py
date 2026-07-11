@@ -13,8 +13,10 @@ from app.schemas.market_data import (
     ChainSnapshotResponse,
     IngestChainRequest,
     IngestChainResponse,
+    HistoricalBarsResponse,
+    IngestHistoricalBarsRequest,
 )
-from app.services.market_data import MarketDataIngestionService, MarketDataQueryService
+from app.services.market_data import HistoricalOptionDataService, MarketDataIngestionService, MarketDataQueryService
 
 router = APIRouter(prefix="/market-data")
 
@@ -27,7 +29,7 @@ def ingest_chain(
 ) -> IngestChainResponse:
     service = MarketDataIngestionService(db, broker)
     try:
-        result = service.ingest_symbol(payload.symbol)
+        result = service.ingest_symbol(payload.symbol, payload.strike, payload.expiration_count)
     except MarketDataConfigurationError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except MarketDataUnavailableError as exc:
@@ -44,3 +46,27 @@ def latest_chain(symbol: str, db: Session = Depends(get_db)) -> ChainSnapshotRes
     if result is None:
         raise HTTPException(status_code=404, detail=f"No chain snapshot found for symbol '{symbol.upper()}'")
     return ChainSnapshotResponse.model_validate(result)
+
+
+@router.post("/historical/ingest", response_model=HistoricalBarsResponse)
+def ingest_historical_bars(
+    payload: IngestHistoricalBarsRequest,
+    db: Session = Depends(get_db),
+    broker: MarketDataBroker = Depends(get_market_data_broker),
+) -> HistoricalBarsResponse:
+    service = HistoricalOptionDataService(db, broker)
+    try:
+        result = service.ingest_history(
+            payload.symbol,
+            payload.expiration_date,
+            payload.right,
+            payload.strike,
+            payload.duration_months,
+        )
+    except MarketDataConfigurationError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except MarketDataUnavailableError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except MarketDataBrokerError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    return HistoricalBarsResponse.model_validate(result)

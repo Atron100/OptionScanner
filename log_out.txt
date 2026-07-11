@@ -1,42 +1,19 @@
-PS C:\Users\Alexey> $response = Invoke-RestMethod `
+Windows PowerShell 5.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Alexey> Invoke-RestMethod `
 >>   -Method Post `
->>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
+>>   -Uri "http://localhost:8000/api/v1/market-data/historical/ingest" `
 >>   -ContentType "application/json" `
->>   -Body '{"symbol":"AAPL"}'
-PS C:\Users\Alexey> $response | Format-List
-
-
-symbol         : AAPL
-provider       : ibkr
-snapshot_id    : 1
-contract_count : 58
-quote_count    : 58
-expirations    : {2026-07-10, 2026-07-13, 2026-07-15, 2026-07-17...}
-as_of          : 2026-07-10T17:32:54Z
-warnings       : {IBKR error 200: No security definition has been found for the request}
-
-
-
-PS C:\Users\Alexey>
-PS C:\Users\Alexey> $chain = Invoke-RestMethod `
->>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
-PS C:\Users\Alexey> $chain = Invoke-RestMethod `
->>   -Uri "http://localhost:8000/api/v1/market-data/underlyings/AAPL/latest-chain"
-PS C:\Users\Alexey> $chain.contracts |
->>   Group-Object expiration_date |
->>   Select-Object Name, Count |
->>   Format-Table -AutoSize
-
-Name       Count
-----       -----
-2026-07-10     8
-2026-07-13     8
-2026-07-15     8
-2026-07-17     8
-2026-07-20     8
-2026-07-22     6
-2026-07-24     8
-2026-07-31     4
-
-
+>>   -Body '{"symbol":"AAPL","expiration_date":"2026-07-10","right":"C","strike":315,"duration_months":1}' |
+>>   ConvertTo-Json -Depth 5
+Invoke-RestMethod : Internal Server Error
+At line:1 char:1
++ Invoke-RestMethod `
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
 PS C:\Users\Alexey>

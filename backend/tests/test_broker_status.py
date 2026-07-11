@@ -3,7 +3,7 @@ from datetime import date
 
 from fastapi.testclient import TestClient
 
-from app.brokers.base import OptionQuoteData
+from app.brokers.base import OptionContractReference, OptionQuoteData
 from app.brokers.ibkr import IBKRConnectionManager, _IBKRDiscoverySession
 from app.main import app
 
@@ -54,6 +54,19 @@ def test_ibkr_contract_lookup_error_keeps_other_batch_requests_running() -> None
     assert session._pending_contract_request_ids == {2001}
     assert session._discovery_warnings == ["IBKR error 200: No security definition has been found for the request"]
     assert not session._response_event.is_set()
+
+
+def test_ibkr_builds_occ_local_symbol_for_historical_option_request() -> None:
+    contract = OptionContractReference(
+        symbol="AAPL",
+        expiration_date=date(2026, 7, 20),
+        right="C",
+        strike=315,
+        multiplier=100,
+        ib_contract_id=898626100,
+    )
+
+    assert _IBKRDiscoverySession._occ_local_symbol(contract) == "AAPL  260720C00315000"
 
 
 def test_ibkr_quote_callbacks_collect_values_and_wait_for_all_requests() -> None:

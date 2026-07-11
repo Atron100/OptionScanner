@@ -7,10 +7,13 @@ from typing import Any
 
 from app.brokers.base import (
     BrokerStatus,
+    HistoricalBarData,
     MarketDataBroker,
     MarketDataConfigurationError,
     MarketDataUnavailableError,
     OptionChainData,
+    OptionContractReference,
+    OptionHistoryData,
     OptionQuoteData,
 )
 from app.core.settings import Settings
@@ -56,6 +59,7 @@ class _IBKRDiscoverySession(EWrapper):
         self._pending_quote_request_ids: set[int] = set()
         self._quote_warnings: list[str] = []
         self._discovery_warnings: list[str] = []
+        self._historical_bars: list[HistoricalBarData] = []
         self._request_mode: str | None = None
 
     def connect_and_start(self) -> None:
@@ -221,10 +225,43 @@ class _IBKRDiscoverySession(EWrapper):
         self._pending_quote_request_ids.discard(reqId)
         self._complete_quote_batch_if_ready()
 
-    def discover_option_chain(self, symbol: str) -> OptionChainData:
+    def historicalData(self, reqId: int, bar: Any) -> None:  # noqa: N802
+        if self._request_mode != "history":
+            return
+        bar_date = datetime.strptime(str(bar.date)[:8], "%Y%m%d").date()
+        volume = int(float(bar.volume)) if bar.volume is not None else None
+        if self._historical_bars and self._historical_bars[-1].bar_date == bar_date:
+            daily_bar = self._historical_bars[-1]
+            daily_bar.high = max(daily_bar.high, float(bar.high))
+            daily_bar.low = min(daily_bar.low, float(bar.low))
+            daily_bar.close = float(bar.close)
+            if volume is not None:
+                daily_bar.volume = (daily_bar.volume or 0) + volume
+            return
+        self._historical_bars.append(
+            HistoricalBarData(
+                bar_date=bar_date,
+                open=float(bar.open),
+                high=float(bar.high),
+                low=float(bar.low),
+                close=float(bar.close),
+                volume=volume,
+            )
+        )
+
+    def historicalDataEnd(self, reqId: int, start: str, end: str) -> None:  # noqa: N802
+        if self._request_mode == "history":
+            self._response_event.set()
+
+    def discover_option_chain(
+        self,
+        symbol: str,
+        strike: float | None = None,
+        expiration_count: int | None = None,
+    ) -> OptionChainData:
         underlying = self._resolve_underlying(symbol)
         chain_params = self._resolve_chain_parameters(symbol, underlying)
-        option_contracts = self._resolve_option_contracts(symbol, chain_params)
+        option_contracts = self._resolve_option_contracts(symbol, chain_params, strike, expiration_count)
 
         if not option_contracts:
             raise MarketDataUnavailableError(
@@ -262,6 +299,46 @@ class _IBKRDiscoverySession(EWrapper):
             raise MarketDataUnavailableError(f"IBKR returned no stock contract details for symbol '{symbol.upper()}'.")
         return self._underlying
 
+    def fetch_option_history(self, contract_reference: OptionContractReference, duration_months: int) -> OptionHistoryData:
+        self._request_mode = "history"
+        self._historical_bars = []
+        self._error_message = None
+        self._response_event.clear()
+
+        contract = Contract()
+        contract.conId = contract_reference.ib_contract_id or 0
+        contract.symbol = contract_reference.symbol
+        contract.secType = "OPT"
+        contract.exchange = contract_reference.exchange
+        contract.currency = contract_reference.currency
+        contract.lastTradeDateOrContractMonth = contract_reference.expiration_date.strftime("%Y%m%d")
+        contract.strike = contract_reference.strike
+        contract.right = contract_reference.right
+        contract.multiplier = str(contract_reference.multiplier)
+        contract.tradingClass = contract_reference.symbol
+        contract.localSymbol = self._occ_local_symbol(contract_reference)
+
+        self.client.reqHistoricalData(
+            4000,
+            contract,
+            "",
+            f"{duration_months} M",
+            "1 hour",
+            "TRADES",
+            1,
+            1,
+            False,
+            [],
+        )
+        self._wait_for_response("historical option bars", timeout=20)
+        return OptionHistoryData(provider="ibkr", bars=self._historical_bars)
+
+    @staticmethod
+    def _occ_local_symbol(contract: OptionContractReference) -> str:
+        expiration = contract.expiration_date.strftime("%y%m%d")
+        strike = int(round(contract.strike * 1000))
+        return f"{contract.symbol:<6}{expiration}{contract.right}{strike:08d}"
+
     def _resolve_chain_parameters(self, symbol: str, underlying: _UnderlyingContract) -> dict[str, Any]:
         self._request_mode = "chain-params"
         self._chain_params = None
@@ -277,8 +354,14 @@ class _IBKRDiscoverySession(EWrapper):
             )
         return self._chain_params
 
-    def _resolve_option_contracts(self, symbol: str, chain_params: dict[str, Any]) -> list[Any]:
-        expirations = self._select_expirations(chain_params["expirations"])
+    def _resolve_option_contracts(
+        self,
+        symbol: str,
+        chain_params: dict[str, Any],
+        strike: float | None = None,
+        expiration_count: int | None = None,
+    ) -> list[Any]:
+        expirations = self._select_expirations(chain_params["expirations"], expiration_count)
         if not expirations:
             raise MarketDataUnavailableError(f"IBKR returned no expirations for symbol '{symbol.upper()}'.")
 
@@ -286,9 +369,16 @@ class _IBKRDiscoverySession(EWrapper):
         if not strikes:
             raise MarketDataUnavailableError(f"IBKR returned no strikes for symbol '{symbol.upper()}'.")
 
-        middle_index = len(strikes) // 2
-        width = max(self._settings.ibkr_strikes_per_side, 1)
-        selected_strikes = strikes[max(0, middle_index - width) : middle_index + width]
+        if strike is not None:
+            if strike not in strikes:
+                raise MarketDataUnavailableError(
+                    f"IBKR returned no option contracts for strike {strike:g} on symbol '{symbol.upper()}'."
+                )
+            selected_strikes = [strike]
+        else:
+            middle_index = len(strikes) // 2
+            width = max(self._settings.ibkr_strikes_per_side, 1)
+            selected_strikes = strikes[max(0, middle_index - width) : middle_index + width]
 
         self._request_mode = "options"
         self._contract_details = []
@@ -376,7 +466,12 @@ class _IBKRDiscoverySession(EWrapper):
         if not self._pending_quote_request_ids:
             self._response_event.set()
 
-    def _select_expirations(self, available_expirations: set[str], today: date | None = None) -> list[str]:
+    def _select_expirations(
+        self,
+        available_expirations: set[str],
+        expiration_count: int | None = None,
+        today: date | None = None,
+    ) -> list[str]:
         today = today or datetime.now(timezone.utc).date()
         latest_date = today + timedelta(days=self._settings.ibkr_expiration_horizon_days)
         selected = [
@@ -384,8 +479,9 @@ class _IBKRDiscoverySession(EWrapper):
             for expiration in sorted(available_expirations)
             if today <= datetime.strptime(expiration, "%Y%m%d").date() <= latest_date
         ]
-        if self._settings.ibkr_max_expirations > 0:
-            return selected[: self._settings.ibkr_max_expirations]
+        limit = expiration_count if expiration_count is not None else self._settings.ibkr_max_expirations
+        if limit > 0:
+            return selected[:limit]
         return selected
 
     def _send_paced_requests(self, requests: list[tuple[int, Any]], sender: Any) -> None:
@@ -470,11 +566,24 @@ class IBKRConnectionManager(MarketDataBroker):
             read_only=self._settings.ibkr_read_only,
         )
 
-    def fetch_option_chain(self, symbol: str) -> OptionChainData:
+    def fetch_option_chain(
+        self,
+        symbol: str,
+        strike: float | None = None,
+        expiration_count: int | None = None,
+    ) -> OptionChainData:
         session = _IBKRDiscoverySession(self._settings)
         session.connect_and_start()
         try:
-            return session.discover_option_chain(symbol)
+            return session.discover_option_chain(symbol, strike, expiration_count)
+        finally:
+            session.shutdown()
+
+    def fetch_option_history(self, contract: OptionContractReference, duration_months: int) -> OptionHistoryData:
+        session = _IBKRDiscoverySession(self._settings)
+        session.connect_and_start()
+        try:
+            return session.fetch_option_history(contract, duration_months)
         finally:
             session.shutdown()
 

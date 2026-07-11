@@ -1,6 +1,13 @@
-from app.brokers.base import MarketDataBroker
+from app.brokers.base import MarketDataBroker, OptionContractReference
+from app.brokers.base import MarketDataUnavailableError
 from app.repositories.market_data import MarketDataRepository
-from app.schemas.market_data import ChainSnapshotResponse, ContractQuoteResponse, IngestChainResponse
+from app.schemas.market_data import (
+    ChainSnapshotResponse,
+    ContractQuoteResponse,
+    HistoricalBarResponse,
+    HistoricalBarsResponse,
+    IngestChainResponse,
+)
 
 
 class MarketDataIngestionService:
@@ -9,8 +16,13 @@ class MarketDataIngestionService:
         self.broker = broker
         self.repository = MarketDataRepository(db)
 
-    def ingest_symbol(self, symbol: str) -> IngestChainResponse:
-        chain = self.broker.fetch_option_chain(symbol)
+    def ingest_symbol(
+        self,
+        symbol: str,
+        strike: float | None = None,
+        expiration_count: int | None = None,
+    ) -> IngestChainResponse:
+        chain = self.broker.fetch_option_chain(symbol, strike, expiration_count)
         underlying = self.repository.get_or_create_underlying(
             symbol=chain.symbol,
             name=chain.name,
@@ -110,4 +122,63 @@ class MarketDataQueryService:
             as_of=snapshot.as_of,
             quote_count=len(contracts),
             contracts=contracts,
+        )
+
+
+class HistoricalOptionDataService:
+    def __init__(self, db, broker: MarketDataBroker) -> None:
+        self.db = db
+        self.broker = broker
+        self.repository = MarketDataRepository(db)
+
+    def ingest_history(
+        self,
+        symbol: str,
+        expiration_date,
+        right: str,
+        strike: float,
+        duration_months: int,
+    ) -> HistoricalBarsResponse:
+        contract = self.repository.get_contract(symbol, expiration_date, right, strike)
+        if contract is None:
+            raise MarketDataUnavailableError(
+                "Option contract was not found locally. Ingest its live chain before requesting historical bars."
+            )
+
+        history = self.broker.fetch_option_history(
+            OptionContractReference(
+                symbol=contract.underlying.symbol,
+                expiration_date=contract.expiration.expiration_date,
+                right=contract.right,
+                strike=contract.strike,
+                multiplier=contract.multiplier,
+                ib_contract_id=contract.ib_contract_id,
+                exchange=contract.underlying.exchange or "SMART",
+                currency=contract.underlying.currency,
+            ),
+            duration_months,
+        )
+        for bar in history.bars:
+            self.repository.upsert_historical_bar(contract.id, history.provider, bar)
+        self.db.commit()
+
+        bars = self.repository.get_historical_bars(contract.id)
+        return HistoricalBarsResponse(
+            symbol=contract.underlying.symbol,
+            expiration_date=contract.expiration.expiration_date,
+            right=contract.right,
+            strike=contract.strike,
+            provider=history.provider,
+            bar_count=len(bars),
+            bars=[
+                HistoricalBarResponse(
+                    bar_date=bar.bar_date,
+                    open=bar.open,
+                    high=bar.high,
+                    low=bar.low,
+                    close=bar.close,
+                    volume=bar.volume,
+                )
+                for bar in bars
+            ],
         )

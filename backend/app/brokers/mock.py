@@ -1,6 +1,14 @@
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
-from app.brokers.base import BrokerStatus, MarketDataBroker, OptionChainData, OptionQuoteData
+from app.brokers.base import (
+    BrokerStatus,
+    HistoricalBarData,
+    MarketDataBroker,
+    OptionChainData,
+    OptionContractReference,
+    OptionHistoryData,
+    OptionQuoteData,
+)
 
 
 class MockMarketDataBroker(MarketDataBroker):
@@ -14,7 +22,12 @@ class MockMarketDataBroker(MarketDataBroker):
             supports_option_chain_fetch=True,
         )
 
-    def fetch_option_chain(self, symbol: str) -> OptionChainData:
+    def fetch_option_chain(
+        self,
+        symbol: str,
+        strike: float | None = None,
+        expiration_count: int | None = None,
+    ) -> OptionChainData:
         normalized_symbol = symbol.upper()
         as_of = datetime.now(timezone.utc).replace(microsecond=0)
 
@@ -23,6 +36,11 @@ class MockMarketDataBroker(MarketDataBroker):
             "SPY": self._build_spy_chain(),
         }
         quotes = chain_templates.get(normalized_symbol, self._build_generic_chain(normalized_symbol))
+        if strike is not None:
+            quotes = [quote for quote in quotes if quote.strike == strike]
+        if expiration_count is not None:
+            selected_expirations = sorted({quote.expiration_date for quote in quotes})[:expiration_count]
+            quotes = [quote for quote in quotes if quote.expiration_date in selected_expirations]
 
         return OptionChainData(
             provider="mock",
@@ -33,6 +51,21 @@ class MockMarketDataBroker(MarketDataBroker):
             as_of=as_of,
             quotes=quotes,
         )
+
+    def fetch_option_history(self, contract: OptionContractReference, duration_months: int) -> OptionHistoryData:
+        start = date(2026, 7, 1) - timedelta(days=(duration_months - 1) * 30)
+        bars = [
+            HistoricalBarData(
+                bar_date=start + timedelta(days=index),
+                open=2.0 + index * 0.1,
+                high=2.2 + index * 0.1,
+                low=1.9 + index * 0.1,
+                close=2.1 + index * 0.1,
+                volume=100 + index * 10,
+            )
+            for index in range(3)
+        ]
+        return OptionHistoryData(provider="mock", bars=bars)
 
     def _build_aapl_chain(self) -> list[OptionQuoteData]:
         return [

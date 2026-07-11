@@ -2,13 +2,13 @@
 
 Local-first options research platform built with FastAPI and React.
 
-## Phase 1 Scope
+## Current Capabilities
 
-- FastAPI backend skeleton
-- React frontend skeleton
-- SQLite configuration
-- Docker-based local runtime
-- Backend and frontend test harness
+- FastAPI and React local-development foundation
+- SQLite storage for option contracts, quote snapshots, and historical daily bars
+- IBKR read-only integration for bounded live option chains, bid/ask/last, Greeks, volume, and open interest
+- Targeted live ingestion by exact strike and expiration count
+- Historical option-bars endpoint with mocked coverage; live IBKR availability is contract- and data-feed-dependent
 
 ## Project Layout
 
@@ -35,7 +35,20 @@ Local-first options research platform built with FastAPI and React.
 
 Run `docker compose up --build`.
 
-## Current Environment Note
+## IBKR Market Data
 
-This repository now contains the Phase 1 scaffold. If local dependencies are not installed yet, startup and test commands will need package installation before they can run successfully.
+Set `OPTIONSCANNER_MARKET_DATA_PROVIDER=ibkr` and configure the local TWS or IB Gateway endpoint in `.env`. The application is read-only and cancels its temporary market-data subscriptions after collection.
 
+Example targeted live ingestion:
+
+```powershell
+Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/v1/market-data/ingest" -ContentType "application/json" -Body '{"symbol":"AAPL","strike":315,"expiration_count":5}'
+```
+
+Historical bars require that the option contract was previously ingested:
+
+```powershell
+Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/v1/market-data/historical/ingest" -ContentType "application/json" -Body '{"symbol":"AAPL","expiration_date":"2026-07-10","right":"C","strike":315,"duration_months":1}'
+```
+
+IBKR does not provide end-of-day historical data for options. The endpoint requests intraday bars and aggregates them locally by day, but IBKR may still decline a specific option contract when its historical data is unavailable. Confirm the same option has a chart in TWS before relying on an API history request.

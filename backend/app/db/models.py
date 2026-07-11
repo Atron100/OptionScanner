@@ -62,6 +62,7 @@ class OptionContract(Base):
     underlying: Mapped[Underlying] = relationship(back_populates="contracts")
     expiration: Mapped[OptionExpiration] = relationship(back_populates="contracts")
     quote_snapshots: Mapped[list["OptionQuoteSnapshot"]] = relationship(back_populates="contract")
+    historical_bars: Mapped[list["OptionHistoricalBar"]] = relationship(back_populates="contract")
 
 
 class OptionChainSnapshot(Base):
@@ -98,3 +99,20 @@ class OptionQuoteSnapshot(Base):
 
     contract: Mapped[OptionContract] = relationship(back_populates="quote_snapshots")
     chain_snapshot: Mapped[OptionChainSnapshot] = relationship(back_populates="quote_snapshots")
+
+
+class OptionHistoricalBar(Base):
+    __tablename__ = "option_historical_bars"
+    __table_args__ = (UniqueConstraint("contract_id", "provider", "bar_date", name="uq_contract_history_bar"),)
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    contract_id: Mapped[int] = mapped_column(ForeignKey("option_contracts.id"), index=True)
+    provider: Mapped[str] = mapped_column(String(32))
+    bar_date: Mapped[date] = mapped_column(Date, index=True)
+    open: Mapped[float] = mapped_column(Float)
+    high: Mapped[float] = mapped_column(Float)
+    low: Mapped[float] = mapped_column(Float)
+    close: Mapped[float] = mapped_column(Float)
+    volume: Mapped[int | None] = mapped_column(Integer, nullable=True)
+
+    contract: Mapped[OptionContract] = relationship(back_populates="historical_bars")

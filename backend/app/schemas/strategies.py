@@ -1,0 +1,38 @@
+from datetime import date
+
+from pydantic import BaseModel, Field
+
+
+class GenerateCashSecuredPutRequest(BaseModel):
+    symbol: str = Field(min_length=1, max_length=32)
+
+
+class PayoffPointResponse(BaseModel):
+    underlying_price: float
+    profit_loss: float
+
+
+class StrategyCandidateResponse(BaseModel):
+    strategy: str
+    symbol: str
+    expiration_date: date
+    strike: float
+    credit: float
+    max_profit: float
+    max_loss: float
+    break_even: float
+    probability_of_profit: float | None
+    return_on_capital: float | None
+    score: float
+    implied_volatility: float | None
+    delta: float | None
+    open_interest: int | None
+    volume: int | None
+    payoff_points: list[PayoffPointResponse]
+
+
+class StrategyCandidatesResponse(BaseModel):
+    strategy: str
+    symbol: str
+    candidate_count: int
+    candidates: list[StrategyCandidateResponse]

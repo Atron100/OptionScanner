@@ -48,13 +48,50 @@ class OptionChainData:
     warnings: list[str] | None = None
 
 
+@dataclass(slots=True)
+class OptionContractReference:
+    symbol: str
+    expiration_date: date
+    right: str
+    strike: float
+    multiplier: int
+    ib_contract_id: int | None
+    exchange: str = "SMART"
+    currency: str = "USD"
+
+
+@dataclass(slots=True)
+class HistoricalBarData:
+    bar_date: date
+    open: float
+    high: float
+    low: float
+    close: float
+    volume: int | None
+
+
+@dataclass(slots=True)
+class OptionHistoryData:
+    provider: str
+    bars: list[HistoricalBarData]
+
+
 class MarketDataBroker(ABC):
     @abstractmethod
     def get_connection_status(self) -> BrokerStatus:
         raise NotImplementedError
 
     @abstractmethod
-    def fetch_option_chain(self, symbol: str) -> OptionChainData:
+    def fetch_option_chain(
+        self,
+        symbol: str,
+        strike: float | None = None,
+        expiration_count: int | None = None,
+    ) -> OptionChainData:
+        raise NotImplementedError
+
+    @abstractmethod
+    def fetch_option_history(self, contract: OptionContractReference, duration_months: int) -> OptionHistoryData:
         raise NotImplementedError
 
 

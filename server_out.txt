@@ -7,652 +7,112 @@ C:\Users\Alexey\Desktop>cd /d D:\Work\OptionScanner
 D:\Work\OptionScanner>powershell -NoExit -ExecutionPolicy Bypass -Command "& .\.venv\Scripts\Activate.ps1; uvicorn app.main:app --reload --app-dir backend"
 INFO:     Will watch for changes in these directories: ['D:\\Work\\OptionScanner']
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [21608] using WatchFiles
-INFO:     Started server process [3552]
+INFO:     Started reloader process [20712] using WatchFiles
+INFO:     Started server process [35900]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-2026-07-10 20:32:45,038 INFO ibapi.client sent startApi
-2026-07-10 20:32:45,039 INFO ibapi.client REQUEST startApi {}
-2026-07-10 20:32:45,039 INFO ibapi.client SENDING startApi b'\x00\x00\x00\x0871\x002\x001\x00\x00'
-2026-07-10 20:32:45,039 INFO ibapi.wrapper ANSWER connectAck {}
-2026-07-10 20:32:45,042 INFO ibapi.wrapper ANSWER managedAccounts {'accountsList': 'U11950029'}
-2026-07-10 20:32:45,043 INFO ibapi.client REQUEST reqContractDetails {'reqId': 1001, 'contract': 2208153410864: 0,AAPL,STK,,0.0,,,SMART,,USD,,,False,,combo:}
-2026-07-10 20:32:45,043 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00,9\x008\x001001\x000\x00AAPL\x00STK\x00\x000.0\x00\x00\x00SMART\x00\x00USD\x00\x00\x000\x00\x00\x00'
-2026-07-10 20:32:45,340 INFO ibapi.client REQUEST reqSecDefOptParams {'reqId': 1002, 'underlyingSymbol': 'AAPL', 'futFopExchange': '', 'underlyingSecType': 'STK', 'underlyingConId': 265598}
-2026-07-10 20:32:45,340 INFO ibapi.client SENDING reqSecDefOptParams b'\x00\x00\x00\x1978\x001002\x00AAPL\x00\x00STK\x00265598\x00'
-2026-07-10 20:32:45,507 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2000, 'contract': 2208153458384: 0,AAPL,OPT,20260710,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,507 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002000\x000\x00AAPL\x00OPT\x0020260710\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,543 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2001, 'contract': 2208153364352: 0,AAPL,OPT,20260710,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,544 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002001\x000\x00AAPL\x00OPT\x0020260710\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,588 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2002, 'contract': 2208153366480: 0,AAPL,OPT,20260710,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,589 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002002\x000\x00AAPL\x00OPT\x0020260710\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,633 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2003, 'contract': 2208154164336: 0,AAPL,OPT,20260710,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,633 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002003\x000\x00AAPL\x00OPT\x0020260710\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,679 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2004, 'contract': 2208153344192: 0,AAPL,OPT,20260710,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,680 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002004\x000\x00AAPL\x00OPT\x0020260710\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,720 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2005, 'contract': 2208153346368: 0,AAPL,OPT,20260710,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,720 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002005\x000\x00AAPL\x00OPT\x0020260710\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,756 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2006, 'contract': 2208153445456: 0,AAPL,OPT,20260710,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,756 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002006\x000\x00AAPL\x00OPT\x0020260710\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,802 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2007, 'contract': 2208153445712: 0,AAPL,OPT,20260710,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,802 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002007\x000\x00AAPL\x00OPT\x0020260710\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,837 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2008, 'contract': 2208153555968: 0,AAPL,OPT,20260713,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,837 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002008\x000\x00AAPL\x00OPT\x0020260713\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,885 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2009, 'contract': 2208153558368: 0,AAPL,OPT,20260713,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,885 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002009\x000\x00AAPL\x00OPT\x0020260713\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,931 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2010, 'contract': 2208153556688: 0,AAPL,OPT,20260713,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,932 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002010\x000\x00AAPL\x00OPT\x0020260713\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:45,968 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2011, 'contract': 2208153558608: 0,AAPL,OPT,20260713,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:45,969 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002011\x000\x00AAPL\x00OPT\x0020260713\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,003 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2012, 'contract': 2208153558848: 0,AAPL,OPT,20260713,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,003 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002012\x000\x00AAPL\x00OPT\x0020260713\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,040 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2013, 'contract': 2208153559088: 0,AAPL,OPT,20260713,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,040 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002013\x000\x00AAPL\x00OPT\x0020260713\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,077 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2014, 'contract': 2208153559328: 0,AAPL,OPT,20260713,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,077 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002014\x000\x00AAPL\x00OPT\x0020260713\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,118 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2015, 'contract': 2208153559568: 0,AAPL,OPT,20260713,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,118 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002015\x000\x00AAPL\x00OPT\x0020260713\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,154 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2016, 'contract': 2208153559808: 0,AAPL,OPT,20260715,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,154 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002016\x000\x00AAPL\x00OPT\x0020260715\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,200 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2017, 'contract': 2208153560048: 0,AAPL,OPT,20260715,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,200 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002017\x000\x00AAPL\x00OPT\x0020260715\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,246 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2018, 'contract': 2208153560288: 0,AAPL,OPT,20260715,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,246 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002018\x000\x00AAPL\x00OPT\x0020260715\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,283 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2019, 'contract': 2208153560528: 0,AAPL,OPT,20260715,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,284 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002019\x000\x00AAPL\x00OPT\x0020260715\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,320 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2020, 'contract': 2208153560768: 0,AAPL,OPT,20260715,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,320 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002020\x000\x00AAPL\x00OPT\x0020260715\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,366 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2021, 'contract': 2208153561008: 0,AAPL,OPT,20260715,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,366 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002021\x000\x00AAPL\x00OPT\x0020260715\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,411 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2022, 'contract': 2208153561248: 0,AAPL,OPT,20260715,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,412 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002022\x000\x00AAPL\x00OPT\x0020260715\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,455 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2023, 'contract': 2208153561488: 0,AAPL,OPT,20260715,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,455 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002023\x000\x00AAPL\x00OPT\x0020260715\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,492 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2024, 'contract': 2208153561728: 0,AAPL,OPT,20260717,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,493 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002024\x000\x00AAPL\x00OPT\x0020260717\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,533 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2025, 'contract': 2208153561968: 0,AAPL,OPT,20260717,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,534 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002025\x000\x00AAPL\x00OPT\x0020260717\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,582 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2026, 'contract': 2208153562208: 0,AAPL,OPT,20260717,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,583 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002026\x000\x00AAPL\x00OPT\x0020260717\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,619 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2027, 'contract': 2208153562448: 0,AAPL,OPT,20260717,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,619 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002027\x000\x00AAPL\x00OPT\x0020260717\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,669 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2028, 'contract': 2208153562688: 0,AAPL,OPT,20260717,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,670 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002028\x000\x00AAPL\x00OPT\x0020260717\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,705 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2029, 'contract': 2208153562928: 0,AAPL,OPT,20260717,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,706 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002029\x000\x00AAPL\x00OPT\x0020260717\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,751 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2030, 'contract': 2208153563168: 0,AAPL,OPT,20260717,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,751 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002030\x000\x00AAPL\x00OPT\x0020260717\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,800 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2031, 'contract': 2208153563408: 0,AAPL,OPT,20260717,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,801 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002031\x000\x00AAPL\x00OPT\x0020260717\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,837 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2032, 'contract': 2208153563648: 0,AAPL,OPT,20260720,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,837 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002032\x000\x00AAPL\x00OPT\x0020260720\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,885 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2033, 'contract': 2208153563888: 0,AAPL,OPT,20260720,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,886 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002033\x000\x00AAPL\x00OPT\x0020260720\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,932 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2034, 'contract': 2208153564128: 0,AAPL,OPT,20260720,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,933 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002034\x000\x00AAPL\x00OPT\x0020260720\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:46,968 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2035, 'contract': 2208153564368: 0,AAPL,OPT,20260720,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:46,968 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002035\x000\x00AAPL\x00OPT\x0020260720\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,006 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2036, 'contract': 2208153564608: 0,AAPL,OPT,20260720,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,006 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002036\x000\x00AAPL\x00OPT\x0020260720\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,052 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2037, 'contract': 2208153564848: 0,AAPL,OPT,20260720,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,053 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002037\x000\x00AAPL\x00OPT\x0020260720\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,097 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2038, 'contract': 2208153565088: 0,AAPL,OPT,20260720,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,098 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002038\x000\x00AAPL\x00OPT\x0020260720\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,133 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2039, 'contract': 2208153565328: 0,AAPL,OPT,20260720,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,134 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002039\x000\x00AAPL\x00OPT\x0020260720\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,170 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2040, 'contract': 2208153565568: 0,AAPL,OPT,20260722,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,170 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002040\x000\x00AAPL\x00OPT\x0020260722\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,205 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2041, 'contract': 2208153565808: 0,AAPL,OPT,20260722,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,205 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002041\x000\x00AAPL\x00OPT\x0020260722\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,252 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2042, 'contract': 2208153566048: 0,AAPL,OPT,20260722,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,252 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002042\x000\x00AAPL\x00OPT\x0020260722\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,301 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2043, 'contract': 2208153566288: 0,AAPL,OPT,20260722,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,302 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002043\x000\x00AAPL\x00OPT\x0020260722\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,351 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2044, 'contract': 2208153566528: 0,AAPL,OPT,20260722,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,351 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002044\x000\x00AAPL\x00OPT\x0020260722\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,387 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2045, 'contract': 2208153566768: 0,AAPL,OPT,20260722,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,387 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002045\x000\x00AAPL\x00OPT\x0020260722\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,436 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2046, 'contract': 2208153567008: 0,AAPL,OPT,20260722,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,437 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002046\x000\x00AAPL\x00OPT\x0020260722\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,483 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2047, 'contract': 2208154239056: 0,AAPL,OPT,20260722,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,484 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002047\x000\x00AAPL\x00OPT\x0020260722\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,520 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2048, 'contract': 2208154239296: 0,AAPL,OPT,20260724,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,520 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002048\x000\x00AAPL\x00OPT\x0020260724\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,556 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2049, 'contract': 2208154239536: 0,AAPL,OPT,20260724,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,556 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002049\x000\x00AAPL\x00OPT\x0020260724\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,602 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2050, 'contract': 2208154239776: 0,AAPL,OPT,20260724,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,603 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002050\x000\x00AAPL\x00OPT\x0020260724\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,640 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2051, 'contract': 2208154240016: 0,AAPL,OPT,20260724,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,640 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002051\x000\x00AAPL\x00OPT\x0020260724\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,685 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2052, 'contract': 2208154240256: 0,AAPL,OPT,20260724,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,685 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002052\x000\x00AAPL\x00OPT\x0020260724\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,733 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2053, 'contract': 2208154240496: 0,AAPL,OPT,20260724,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,734 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002053\x000\x00AAPL\x00OPT\x0020260724\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,768 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2054, 'contract': 2208154240736: 0,AAPL,OPT,20260724,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,768 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002054\x000\x00AAPL\x00OPT\x0020260724\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,804 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2055, 'contract': 2208154240976: 0,AAPL,OPT,20260724,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,805 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002055\x000\x00AAPL\x00OPT\x0020260724\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,839 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2056, 'contract': 2208154241216: 0,AAPL,OPT,20260731,277.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,839 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002056\x000\x00AAPL\x00OPT\x0020260731\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,885 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2057, 'contract': 2208154241456: 0,AAPL,OPT,20260731,280.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,885 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002057\x000\x00AAPL\x00OPT\x0020260731\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,921 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2058, 'contract': 2208154241696: 0,AAPL,OPT,20260731,282.5,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,921 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002058\x000\x00AAPL\x00OPT\x0020260731\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:47,956 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2059, 'contract': 2208154241936: 0,AAPL,OPT,20260731,285.0,C,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:47,956 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002059\x000\x00AAPL\x00OPT\x0020260731\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:48,005 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2060, 'contract': 2208154242176: 0,AAPL,OPT,20260731,277.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:48,005 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002060\x000\x00AAPL\x00OPT\x0020260731\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:48,050 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2061, 'contract': 2208154242416: 0,AAPL,OPT,20260731,280.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:48,050 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002061\x000\x00AAPL\x00OPT\x0020260731\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:48,085 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2062, 'contract': 2208154242656: 0,AAPL,OPT,20260731,282.5,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:48,085 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002062\x000\x00AAPL\x00OPT\x0020260731\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:48,119 INFO ibapi.client REQUEST reqContractDetails {'reqId': 2063, 'contract': 2208154242896: 0,AAPL,OPT,20260731,285.0,P,100,SMART,,USD,,AAPL,False,,combo:}
-2026-07-10 20:32:48,120 INFO ibapi.client SENDING reqContractDetails b'\x00\x00\x00>9\x008\x002063\x000\x00AAPL\x00OPT\x0020260731\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00\x00AAPL\x000\x00\x00\x00'
-2026-07-10 20:32:48,561 INFO ibapi.client REQUEST reqMktData {'reqId': 3000, 'contract': 2208154243376: 894355010,AAPL,OPT,20260710,277.5,C,100,SMART,,USD,AAPL  260710C00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,561 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003000\x00894355010\x00AAPL\x00OPT\x0020260710\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260710C00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,601 INFO ibapi.client REQUEST reqMktData {'reqId': 3001, 'contract': 2208154243616: 894355067,AAPL,OPT,20260710,282.5,C,100,SMART,,USD,AAPL  260710C00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,602 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003001\x00894355067\x00AAPL\x00OPT\x0020260710\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260710C00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,639 INFO ibapi.client REQUEST reqMktData {'reqId': 3002, 'contract': 2208154243856: 887307201,AAPL,OPT,20260710,285.0,C,100,SMART,,USD,AAPL  260710C00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,640 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003002\x00887307201\x00AAPL\x00OPT\x0020260710\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260710C00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,687 INFO ibapi.client REQUEST reqMktData {'reqId': 3003, 'contract': 2208154244096: 887307163,AAPL,OPT,20260710,280.0,C,100,SMART,,USD,AAPL  260710C00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,687 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003003\x00887307163\x00AAPL\x00OPT\x0020260710\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260710C00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,690 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3003, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:48,734 INFO ibapi.client REQUEST reqMktData {'reqId': 3004, 'contract': 2208154244336: 887308765,AAPL,OPT,20260710,280.0,P,100,SMART,,USD,AAPL  260710P00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,734 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003004\x00887308765\x00AAPL\x00OPT\x0020260710\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260710P00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,771 INFO ibapi.client REQUEST reqMktData {'reqId': 3005, 'contract': 2208154244576: 894355578,AAPL,OPT,20260710,277.5,P,100,SMART,,USD,AAPL  260710P00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,771 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003005\x00894355578\x00AAPL\x00OPT\x0020260710\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260710P00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,791 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3000, 'marketDataType': 1}
-2026-07-10 20:32:48,791 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3000, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:48,817 INFO ibapi.client REQUEST reqMktData {'reqId': 3006, 'contract': 2208154244816: 894355641,AAPL,OPT,20260710,282.5,P,100,SMART,,USD,AAPL  260710P00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,817 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003006\x00894355641\x00AAPL\x00OPT\x0020260710\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260710P00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,853 INFO ibapi.client REQUEST reqMktData {'reqId': 3007, 'contract': 2208154245056: 887308836,AAPL,OPT,20260710,285.0,P,100,SMART,,USD,AAPL  260710P00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,854 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003007\x00887308836\x00AAPL\x00OPT\x0020260710\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260710P00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,902 INFO ibapi.client REQUEST reqMktData {'reqId': 3008, 'contract': 2208154245296: 896783884,AAPL,OPT,20260713,280.0,C,100,SMART,,USD,AAPL  260713C00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,903 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003008\x00896783884\x00AAPL\x00OPT\x0020260713\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260713C00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,934 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3001, 'marketDataType': 1}
-2026-07-10 20:32:48,935 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3001, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:48,935 INFO ibapi.wrapper ANSWER tickString {'reqId': 3000, 'tickType': 45, 'value': '1783697341'}
-2026-07-10 20:32:48,937 INFO ibapi.wrapper ANSWER tickString {'reqId': 3000, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:48,937 INFO ibapi.wrapper ANSWER tickString {'reqId': 3000, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:48,938 INFO ibapi.client REQUEST reqMktData {'reqId': 3009, 'contract': 2208154245536: 897179771,AAPL,OPT,20260713,277.5,C,100,SMART,,USD,AAPL  260713C00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,938 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003009\x00897179771\x00AAPL\x00OPT\x0020260713\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260713C00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:48,938 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3002, 'marketDataType': 1}
-2026-07-10 20:32:48,939 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3002, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:48,940 INFO ibapi.wrapper ANSWER tickString {'reqId': 3002, 'tickType': 45, 'value': '1783700646'}
-2026-07-10 20:32:48,940 INFO ibapi.wrapper ANSWER tickString {'reqId': 3001, 'tickType': 45, 'value': '1783700433'}
-2026-07-10 20:32:48,944 INFO ibapi.wrapper ANSWER tickString {'reqId': 3002, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:48,944 INFO ibapi.wrapper ANSWER tickString {'reqId': 3002, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:48,944 INFO ibapi.wrapper ANSWER tickString {'reqId': 3001, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:48,945 INFO ibapi.wrapper ANSWER tickString {'reqId': 3001, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:48,945 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3003, 'marketDataType': 1}
-2026-07-10 20:32:48,946 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3004, 'marketDataType': 1}
-2026-07-10 20:32:48,946 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3004, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:48,947 INFO ibapi.wrapper ANSWER tickString {'reqId': 3004, 'tickType': 45, 'value': '1783704415'}
-2026-07-10 20:32:48,947 INFO ibapi.wrapper ANSWER tickString {'reqId': 3003, 'tickType': 45, 'value': '1783693338'}
-2026-07-10 20:32:48,948 INFO ibapi.wrapper ANSWER tickString {'reqId': 3004, 'tickType': 33, 'value': 'CNBQZWTMJPDUS'}
-2026-07-10 20:32:48,948 INFO ibapi.wrapper ANSWER tickString {'reqId': 3003, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:48,949 INFO ibapi.wrapper ANSWER tickString {'reqId': 3003, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:48,986 INFO ibapi.client REQUEST reqMktData {'reqId': 3010, 'contract': 2208154245776: 897179826,AAPL,OPT,20260713,282.5,C,100,SMART,,USD,AAPL  260713C00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:48,986 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003010\x00897179826\x00AAPL\x00OPT\x0020260713\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260713C00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,021 INFO ibapi.client REQUEST reqMktData {'reqId': 3011, 'contract': 2208154246016: 897180679,AAPL,OPT,20260713,277.5,P,100,SMART,,USD,AAPL  260713P00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,021 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003011\x00897180679\x00AAPL\x00OPT\x0020260713\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260713P00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,056 INFO ibapi.client REQUEST reqMktData {'reqId': 3012, 'contract': 2208154246256: 896784751,AAPL,OPT,20260713,280.0,P,100,SMART,,USD,AAPL  260713P00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,057 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003012\x00896784751\x00AAPL\x00OPT\x0020260713\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260713P00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,079 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3005, 'marketDataType': 1}
-2026-07-10 20:32:49,080 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3005, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,082 INFO ibapi.wrapper ANSWER tickString {'reqId': 3005, 'tickType': 33, 'value': 'NBQZWTPDUS'}
-2026-07-10 20:32:49,083 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3006, 'marketDataType': 1}
-2026-07-10 20:32:49,083 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3006, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,083 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3007, 'marketDataType': 1}
-2026-07-10 20:32:49,083 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3007, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,103 INFO ibapi.client REQUEST reqMktData {'reqId': 3013, 'contract': 2208154246496: 896783915,AAPL,OPT,20260713,285.0,C,100,SMART,,USD,AAPL  260713C00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,104 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003013\x00896783915\x00AAPL\x00OPT\x0020260713\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260713C00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,149 INFO ibapi.client REQUEST reqMktData {'reqId': 3014, 'contract': 2208154246736: 897180721,AAPL,OPT,20260713,282.5,P,100,SMART,,USD,AAPL  260713P00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,150 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003014\x00897180721\x00AAPL\x00OPT\x0020260713\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260713P00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,186 INFO ibapi.client REQUEST reqMktData {'reqId': 3015, 'contract': 2208154246976: 897577804,AAPL,OPT,20260715,277.5,C,100,SMART,,USD,AAPL  260715C00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,187 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003015\x00897577804\x00AAPL\x00OPT\x0020260715\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260715C00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,222 INFO ibapi.client REQUEST reqMktData {'reqId': 3016, 'contract': 2208154247216: 897181916,AAPL,OPT,20260715,280.0,C,100,SMART,,USD,AAPL  260715C00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,222 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003016\x00897181916\x00AAPL\x00OPT\x0020260715\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260715C00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,263 INFO ibapi.wrapper ANSWER tickString {'reqId': 3007, 'tickType': 45, 'value': '1783690700'}
-2026-07-10 20:32:49,264 INFO ibapi.wrapper ANSWER tickString {'reqId': 3006, 'tickType': 45, 'value': '1783691431'}
-2026-07-10 20:32:49,264 INFO ibapi.wrapper ANSWER tickString {'reqId': 3007, 'tickType': 33, 'value': 'CXNBQZWTMJPDUS'}
-2026-07-10 20:32:49,264 INFO ibapi.wrapper ANSWER tickString {'reqId': 3006, 'tickType': 33, 'value': 'NBQZWTPDUS'}
-2026-07-10 20:32:49,265 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3009, 'marketDataType': 1}
-2026-07-10 20:32:49,265 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3009, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,265 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3008, 'marketDataType': 1}
-2026-07-10 20:32:49,265 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3008, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,265 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3011, 'marketDataType': 1}
-2026-07-10 20:32:49,266 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3011, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,266 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3010, 'marketDataType': 1}
-2026-07-10 20:32:49,266 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3010, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,267 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3012, 'marketDataType': 1}
-2026-07-10 20:32:49,267 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3012, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,268 INFO ibapi.client REQUEST reqMktData {'reqId': 3017, 'contract': 2208154247456: 896784784,AAPL,OPT,20260713,285.0,P,100,SMART,,USD,AAPL  260713P00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,268 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003017\x00896784784\x00AAPL\x00OPT\x0020260713\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260713P00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,271 INFO ibapi.wrapper ANSWER tickString {'reqId': 3009, 'tickType': 32, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,271 INFO ibapi.wrapper ANSWER tickString {'reqId': 3009, 'tickType': 33, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,271 INFO ibapi.wrapper ANSWER tickString {'reqId': 3011, 'tickType': 33, 'value': 'N'}
-2026-07-10 20:32:49,272 INFO ibapi.wrapper ANSWER tickString {'reqId': 3008, 'tickType': 32, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,272 INFO ibapi.wrapper ANSWER tickString {'reqId': 3008, 'tickType': 33, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,272 INFO ibapi.wrapper ANSWER tickString {'reqId': 3010, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,272 INFO ibapi.wrapper ANSWER tickString {'reqId': 3010, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,306 INFO ibapi.client REQUEST reqMktData {'reqId': 3018, 'contract': 2208154247696: 897577815,AAPL,OPT,20260715,282.5,C,100,SMART,,USD,AAPL  260715C00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,306 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003018\x00897577815\x00AAPL\x00OPT\x0020260715\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260715C00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,354 INFO ibapi.client REQUEST reqMktData {'reqId': 3019, 'contract': 2208154247936: 897181969,AAPL,OPT,20260715,285.0,C,100,SMART,,USD,AAPL  260715C00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,355 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003019\x00897181969\x00AAPL\x00OPT\x0020260715\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260715C00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,389 INFO ibapi.client REQUEST reqMktData {'reqId': 3020, 'contract': 2208154248176: 897578092,AAPL,OPT,20260715,277.5,P,100,SMART,,USD,AAPL  260715P00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,390 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003020\x00897578092\x00AAPL\x00OPT\x0020260715\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260715P00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,413 INFO ibapi.wrapper ANSWER tickString {'reqId': 3012, 'tickType': 33, 'value': 'N'}
-2026-07-10 20:32:49,413 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3013, 'marketDataType': 1}
-2026-07-10 20:32:49,413 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3013, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,413 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3014, 'marketDataType': 1}
-2026-07-10 20:32:49,413 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3014, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,414 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3015, 'marketDataType': 1}
-2026-07-10 20:32:49,414 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3015, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,414 INFO ibapi.wrapper ANSWER tickString {'reqId': 3014, 'tickType': 45, 'value': '1783693218'}
-2026-07-10 20:32:49,415 INFO ibapi.wrapper ANSWER tickString {'reqId': 3014, 'tickType': 33, 'value': 'ACNBQZWTMHJPDUS'}
-2026-07-10 20:32:49,415 INFO ibapi.wrapper ANSWER tickString {'reqId': 3013, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,415 INFO ibapi.wrapper ANSWER tickString {'reqId': 3013, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,436 INFO ibapi.client REQUEST reqMktData {'reqId': 3021, 'contract': 2208154248416: 897183279,AAPL,OPT,20260715,280.0,P,100,SMART,,USD,AAPL  260715P00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,436 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003021\x00897183279\x00AAPL\x00OPT\x0020260715\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260715P00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,485 INFO ibapi.client REQUEST reqMktData {'reqId': 3022, 'contract': 2208154248656: 897578109,AAPL,OPT,20260715,282.5,P,100,SMART,,USD,AAPL  260715P00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,485 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003022\x00897578109\x00AAPL\x00OPT\x0020260715\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260715P00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,520 INFO ibapi.client REQUEST reqMktData {'reqId': 3023, 'contract': 2208154248896: 894356213,AAPL,OPT,20260717,277.5,C,100,SMART,,USD,AAPL  260717C00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,521 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003023\x00894356213\x00AAPL\x00OPT\x0020260717\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260717C00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,524 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3023, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,555 INFO ibapi.client REQUEST reqMktData {'reqId': 3024, 'contract': 2208154249136: 897183325,AAPL,OPT,20260715,285.0,P,100,SMART,,USD,AAPL  260715P00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,556 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3016, 'marketDataType': 1}
-2026-07-10 20:32:49,556 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003024\x00897183325\x00AAPL\x00OPT\x0020260715\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260715P00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,556 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3016, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,558 INFO ibapi.wrapper ANSWER tickString {'reqId': 3015, 'tickType': 32, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,558 INFO ibapi.wrapper ANSWER tickString {'reqId': 3015, 'tickType': 33, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,560 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3017, 'marketDataType': 1}
-2026-07-10 20:32:49,560 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3017, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,562 INFO ibapi.wrapper ANSWER tickString {'reqId': 3016, 'tickType': 32, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,562 INFO ibapi.wrapper ANSWER tickString {'reqId': 3016, 'tickType': 33, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,602 INFO ibapi.client REQUEST reqMktData {'reqId': 3025, 'contract': 2208154249376: 832609990,AAPL,OPT,20260717,280.0,C,100,SMART,,USD,AAPL  260717C00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,603 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003025\x00832609990\x00AAPL\x00OPT\x0020260717\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260717C00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,605 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3025, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,639 INFO ibapi.client REQUEST reqMktData {'reqId': 3026, 'contract': 2208154249616: 894356280,AAPL,OPT,20260717,282.5,C,100,SMART,,USD,AAPL  260717C00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,639 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003026\x00894356280\x00AAPL\x00OPT\x0020260717\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260717C00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,643 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3026, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,673 INFO ibapi.client REQUEST reqMktData {'reqId': 3027, 'contract': 2208154249856: 894356909,AAPL,OPT,20260717,277.5,P,100,SMART,,USD,AAPL  260717P00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,673 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003027\x00894356909\x00AAPL\x00OPT\x0020260717\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260717P00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,677 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3027, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,720 INFO ibapi.client REQUEST reqMktData {'reqId': 3028, 'contract': 2208154250096: 832610049,AAPL,OPT,20260717,285.0,C,100,SMART,,USD,AAPL  260717C00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,720 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003028\x00832610049\x00AAPL\x00OPT\x0020260717\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260717C00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,723 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3028, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,735 INFO ibapi.wrapper ANSWER tickString {'reqId': 3017, 'tickType': 45, 'value': '1783703874'}
-2026-07-10 20:32:49,736 INFO ibapi.wrapper ANSWER tickString {'reqId': 3017, 'tickType': 33, 'value': 'N'}
-2026-07-10 20:32:49,755 INFO ibapi.client REQUEST reqMktData {'reqId': 3029, 'contract': 2208154250336: 832613094,AAPL,OPT,20260717,280.0,P,100,SMART,,USD,AAPL  260717P00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,755 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003029\x00832613094\x00AAPL\x00OPT\x0020260717\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260717P00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,758 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3029, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,802 INFO ibapi.client REQUEST reqMktData {'reqId': 3030, 'contract': 2208154250576: 894356984,AAPL,OPT,20260717,282.5,P,100,SMART,,USD,AAPL  260717P00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,802 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003030\x00894356984\x00AAPL\x00OPT\x0020260717\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260717P00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,805 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3030, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,852 INFO ibapi.client REQUEST reqMktData {'reqId': 3031, 'contract': 2208154250816: 832613168,AAPL,OPT,20260717,285.0,P,100,SMART,,USD,AAPL  260717P00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,853 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003031\x00832613168\x00AAPL\x00OPT\x0020260717\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260717P00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,856 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3031, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,877 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3019, 'marketDataType': 1}
-2026-07-10 20:32:49,877 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3019, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,877 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3022, 'marketDataType': 1}
-2026-07-10 20:32:49,877 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3022, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,878 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3023, 'marketDataType': 1}
-2026-07-10 20:32:49,878 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3018, 'marketDataType': 1}
-2026-07-10 20:32:49,878 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3018, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,878 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3021, 'marketDataType': 1}
-2026-07-10 20:32:49,878 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3021, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,879 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3020, 'marketDataType': 1}
-2026-07-10 20:32:49,879 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3020, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,879 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3024, 'marketDataType': 1}
-2026-07-10 20:32:49,879 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3024, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:49,880 INFO ibapi.wrapper ANSWER tickString {'reqId': 3023, 'tickType': 45, 'value': '1783698690'}
-2026-07-10 20:32:49,881 INFO ibapi.wrapper ANSWER tickString {'reqId': 3020, 'tickType': 45, 'value': '1783693806'}
-2026-07-10 20:32:49,881 INFO ibapi.wrapper ANSWER tickString {'reqId': 3024, 'tickType': 45, 'value': '1783690945'}
-2026-07-10 20:32:49,882 INFO ibapi.wrapper ANSWER tickString {'reqId': 3018, 'tickType': 45, 'value': '1783692017'}
-2026-07-10 20:32:49,883 INFO ibapi.wrapper ANSWER tickString {'reqId': 3021, 'tickType': 45, 'value': '1783690502'}
-2026-07-10 20:32:49,884 INFO ibapi.wrapper ANSWER tickString {'reqId': 3022, 'tickType': 45, 'value': '1783690542'}
-2026-07-10 20:32:49,884 INFO ibapi.wrapper ANSWER tickString {'reqId': 3023, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,885 INFO ibapi.wrapper ANSWER tickString {'reqId': 3023, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,885 INFO ibapi.wrapper ANSWER tickString {'reqId': 3020, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,885 INFO ibapi.wrapper ANSWER tickString {'reqId': 3020, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,886 INFO ibapi.wrapper ANSWER tickString {'reqId': 3024, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,886 INFO ibapi.wrapper ANSWER tickString {'reqId': 3024, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,886 INFO ibapi.wrapper ANSWER tickString {'reqId': 3019, 'tickType': 32, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,887 INFO ibapi.wrapper ANSWER tickString {'reqId': 3019, 'tickType': 33, 'value': 'ACIXNBQZTMHEJDUS'}
-2026-07-10 20:32:49,887 INFO ibapi.client REQUEST reqMktData {'reqId': 3032, 'contract': 2208154251056: 899146460,AAPL,OPT,20260720,277.5,C,100,SMART,,USD,AAPL  260720C00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,887 INFO ibapi.wrapper ANSWER tickString {'reqId': 3022, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,887 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003032\x00899146460\x00AAPL\x00OPT\x0020260720\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260720C00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,887 INFO ibapi.wrapper ANSWER tickString {'reqId': 3022, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,888 INFO ibapi.wrapper ANSWER tickString {'reqId': 3021, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,888 INFO ibapi.wrapper ANSWER tickString {'reqId': 3021, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:49,889 INFO ibapi.wrapper ANSWER tickString {'reqId': 3018, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJDUS'}
-2026-07-10 20:32:49,889 INFO ibapi.wrapper ANSWER tickString {'reqId': 3018, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJDUS'}
-2026-07-10 20:32:49,890 INFO ibapi.wrapper ANSWER tickString {'reqId': 3008, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,890 INFO ibapi.wrapper ANSWER tickString {'reqId': 3008, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,890 INFO ibapi.wrapper ANSWER tickString {'reqId': 3009, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,890 INFO ibapi.wrapper ANSWER tickString {'reqId': 3009, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,891 INFO ibapi.wrapper ANSWER tickString {'reqId': 3019, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,891 INFO ibapi.wrapper ANSWER tickString {'reqId': 3019, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,891 INFO ibapi.wrapper ANSWER tickString {'reqId': 3015, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,891 INFO ibapi.wrapper ANSWER tickString {'reqId': 3015, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,891 INFO ibapi.wrapper ANSWER tickString {'reqId': 3016, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,892 INFO ibapi.wrapper ANSWER tickString {'reqId': 3016, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:49,932 INFO ibapi.client REQUEST reqMktData {'reqId': 3033, 'contract': 2208154251296: 898623684,AAPL,OPT,20260720,280.0,C,100,SMART,,USD,AAPL  260720C00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,932 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003033\x00898623684\x00AAPL\x00OPT\x0020260720\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260720C00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:49,971 INFO ibapi.client REQUEST reqMktData {'reqId': 3034, 'contract': 2208154251536: 898623750,AAPL,OPT,20260720,285.0,C,100,SMART,,USD,AAPL  260720C00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:49,972 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003034\x00898623750\x00AAPL\x00OPT\x0020260720\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260720C00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,021 INFO ibapi.client REQUEST reqMktData {'reqId': 3035, 'contract': 2208154251776: 899146511,AAPL,OPT,20260720,282.5,C,100,SMART,,USD,AAPL  260720C00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,021 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003035\x00899146511\x00AAPL\x00OPT\x0020260720\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260720C00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,024 INFO ibapi.wrapper ANSWER tickString {'reqId': 3018, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,024 INFO ibapi.wrapper ANSWER tickString {'reqId': 3018, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,056 INFO ibapi.client REQUEST reqMktData {'reqId': 3036, 'contract': 2208154252016: 899147489,AAPL,OPT,20260720,277.5,P,100,SMART,,USD,AAPL  260720P00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,056 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003036\x00899147489\x00AAPL\x00OPT\x0020260720\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260720P00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,102 INFO ibapi.client REQUEST reqMktData {'reqId': 3037, 'contract': 2208154252256: 898625657,AAPL,OPT,20260720,280.0,P,100,SMART,,USD,AAPL  260720P00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,102 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003037\x00898625657\x00AAPL\x00OPT\x0020260720\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260720P00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,137 INFO ibapi.client REQUEST reqMktData {'reqId': 3038, 'contract': 2208154252496: 898625735,AAPL,OPT,20260720,285.0,P,100,SMART,,USD,AAPL  260720P00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,138 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003038\x00898625735\x00AAPL\x00OPT\x0020260720\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260720P00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,184 INFO ibapi.client REQUEST reqMktData {'reqId': 3039, 'contract': 2208154252736: 899147534,AAPL,OPT,20260720,282.5,P,100,SMART,,USD,AAPL  260720P00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,184 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003039\x00899147534\x00AAPL\x00OPT\x0020260720\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260720P00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,221 INFO ibapi.client REQUEST reqMktData {'reqId': 3040, 'contract': 2208154252976: 899449303,AAPL,OPT,20260722,282.5,C,100,SMART,,USD,AAPL  260722C00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,221 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003040\x00899449303\x00AAPL\x00OPT\x0020260722\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260722C00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,256 INFO ibapi.client REQUEST reqMktData {'reqId': 3041, 'contract': 2208154253216: 899148514,AAPL,OPT,20260722,280.0,C,100,SMART,,USD,AAPL  260722C00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,257 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003041\x00899148514\x00AAPL\x00OPT\x0020260722\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260722C00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,303 INFO ibapi.client REQUEST reqMktData {'reqId': 3042, 'contract': 2208154253456: 899148546,AAPL,OPT,20260722,285.0,C,100,SMART,,USD,AAPL  260722C00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,303 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003042\x00899148546\x00AAPL\x00OPT\x0020260722\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260722C00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,315 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3030, 'marketDataType': 1}
-2026-07-10 20:32:50,315 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3026, 'marketDataType': 1}
-2026-07-10 20:32:50,315 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3025, 'marketDataType': 1}
-2026-07-10 20:32:50,315 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3029, 'marketDataType': 1}
-2026-07-10 20:32:50,316 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3031, 'marketDataType': 1}
-2026-07-10 20:32:50,316 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3028, 'marketDataType': 1}
-2026-07-10 20:32:50,316 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3027, 'marketDataType': 1}
-2026-07-10 20:32:50,316 INFO ibapi.wrapper ANSWER tickString {'reqId': 3031, 'tickType': 45, 'value': '1783703750'}
-2026-07-10 20:32:50,317 INFO ibapi.wrapper ANSWER tickString {'reqId': 3031, 'tickType': 32, 'value': 'ACXNBQZWTHEJPDUS'}
-2026-07-10 20:32:50,317 INFO ibapi.wrapper ANSWER tickString {'reqId': 3031, 'tickType': 33, 'value': 'NBQZWTHPDU'}
-2026-07-10 20:32:50,317 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3035, 'marketDataType': 1}
-2026-07-10 20:32:50,317 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3035, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,318 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3034, 'marketDataType': 1}
-2026-07-10 20:32:50,318 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3034, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,318 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3032, 'marketDataType': 1}
-2026-07-10 20:32:50,318 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3032, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,319 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3033, 'marketDataType': 1}
-2026-07-10 20:32:50,319 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3033, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,319 INFO ibapi.wrapper ANSWER tickString {'reqId': 3029, 'tickType': 45, 'value': '1783703912'}
-2026-07-10 20:32:50,320 INFO ibapi.wrapper ANSWER tickString {'reqId': 3027, 'tickType': 45, 'value': '1783702491'}
-2026-07-10 20:32:50,320 INFO ibapi.wrapper ANSWER tickString {'reqId': 3028, 'tickType': 45, 'value': '1783695209'}
-2026-07-10 20:32:50,321 INFO ibapi.wrapper ANSWER tickString {'reqId': 3025, 'tickType': 45, 'value': '1783703583'}
-2026-07-10 20:32:50,321 INFO ibapi.wrapper ANSWER tickString {'reqId': 3030, 'tickType': 45, 'value': '1783704644'}
-2026-07-10 20:32:50,322 INFO ibapi.wrapper ANSWER tickString {'reqId': 3026, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,322 INFO ibapi.wrapper ANSWER tickString {'reqId': 3026, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,323 INFO ibapi.wrapper ANSWER tickString {'reqId': 3029, 'tickType': 32, 'value': 'ANBQZWTHEPDUS'}
-2026-07-10 20:32:50,323 INFO ibapi.wrapper ANSWER tickString {'reqId': 3029, 'tickType': 33, 'value': 'NBQZWTPDU'}
-2026-07-10 20:32:50,324 INFO ibapi.wrapper ANSWER tickString {'reqId': 3027, 'tickType': 32, 'value': 'ACNBQZWTHEJPDUS'}
-2026-07-10 20:32:50,325 INFO ibapi.wrapper ANSWER tickString {'reqId': 3027, 'tickType': 33, 'value': 'XNBQZWTHPDUS'}
-2026-07-10 20:32:50,325 INFO ibapi.wrapper ANSWER tickString {'reqId': 3028, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,326 INFO ibapi.wrapper ANSWER tickString {'reqId': 3028, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,326 INFO ibapi.wrapper ANSWER tickString {'reqId': 3030, 'tickType': 32, 'value': 'ACNBQZWTMHEPDUS'}
-2026-07-10 20:32:50,326 INFO ibapi.wrapper ANSWER tickString {'reqId': 3030, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,327 INFO ibapi.wrapper ANSWER tickString {'reqId': 3025, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,327 INFO ibapi.wrapper ANSWER tickString {'reqId': 3025, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,331 INFO ibapi.wrapper ANSWER tickString {'reqId': 3032, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,332 INFO ibapi.wrapper ANSWER tickString {'reqId': 3032, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,332 INFO ibapi.wrapper ANSWER tickString {'reqId': 3034, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,333 INFO ibapi.wrapper ANSWER tickString {'reqId': 3034, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,333 INFO ibapi.wrapper ANSWER tickString {'reqId': 3033, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,333 INFO ibapi.wrapper ANSWER tickString {'reqId': 3033, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,334 INFO ibapi.wrapper ANSWER tickString {'reqId': 3035, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,334 INFO ibapi.wrapper ANSWER tickString {'reqId': 3035, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,334 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3036, 'marketDataType': 1}
-2026-07-10 20:32:50,334 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3036, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,334 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3037, 'marketDataType': 1}
-2026-07-10 20:32:50,334 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3037, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,337 INFO ibapi.client REQUEST reqMktData {'reqId': 3043, 'contract': 2208154253696: 899449890,AAPL,OPT,20260722,282.5,P,100,SMART,,USD,AAPL  260722P00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,338 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003043\x00899449890\x00AAPL\x00OPT\x0020260722\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260722P00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,385 INFO ibapi.client REQUEST reqMktData {'reqId': 3044, 'contract': 2208154253936: 899149424,AAPL,OPT,20260722,280.0,P,100,SMART,,USD,AAPL  260722P00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,385 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003044\x00899149424\x00AAPL\x00OPT\x0020260722\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260722P00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,420 INFO ibapi.client REQUEST reqMktData {'reqId': 3045, 'contract': 2208154254176: 899149455,AAPL,OPT,20260722,285.0,P,100,SMART,,USD,AAPL  260722P00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,421 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003045\x00899149455\x00AAPL\x00OPT\x0020260722\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260722P00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,467 INFO ibapi.client REQUEST reqMktData {'reqId': 3046, 'contract': 2208154254416: 900260080,AAPL,OPT,20260724,277.5,C,100,SMART,,USD,AAPL  260724C00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,467 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003046\x00900260080\x00AAPL\x00OPT\x0020260724\x00277.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260724C00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,500 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3038, 'marketDataType': 1}
-2026-07-10 20:32:50,500 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3038, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,503 INFO ibapi.client REQUEST reqMktData {'reqId': 3047, 'contract': 2208154254656: 889356201,AAPL,OPT,20260724,280.0,C,100,SMART,,USD,AAPL  260724C00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,504 INFO ibapi.wrapper ANSWER tickString {'reqId': 3036, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,504 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003047\x00889356201\x00AAPL\x00OPT\x0020260724\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260724C00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,505 INFO ibapi.wrapper ANSWER tickString {'reqId': 3036, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,505 INFO ibapi.wrapper ANSWER tickString {'reqId': 3037, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,506 INFO ibapi.wrapper ANSWER tickString {'reqId': 3037, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,506 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3039, 'marketDataType': 1}
-2026-07-10 20:32:50,507 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3039, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,510 INFO ibapi.wrapper ANSWER tickString {'reqId': 3038, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,511 INFO ibapi.wrapper ANSWER tickString {'reqId': 3038, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,511 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3040, 'marketDataType': 1}
-2026-07-10 20:32:50,512 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3040, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,514 INFO ibapi.wrapper ANSWER tickString {'reqId': 3039, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,514 INFO ibapi.wrapper ANSWER tickString {'reqId': 3039, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,553 INFO ibapi.client REQUEST reqMktData {'reqId': 3048, 'contract': 2208154254896: 898627007,AAPL,OPT,20260724,282.5,C,100,SMART,,USD,AAPL  260724C00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,553 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003048\x00898627007\x00AAPL\x00OPT\x0020260724\x00282.5\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260724C00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,601 INFO ibapi.client REQUEST reqMktData {'reqId': 3049, 'contract': 2208154255136: 889357919,AAPL,OPT,20260724,280.0,P,100,SMART,,USD,AAPL  260724P00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,602 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003049\x00889357919\x00AAPL\x00OPT\x0020260724\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260724P00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,638 INFO ibapi.client REQUEST reqMktData {'reqId': 3050, 'contract': 2208154386512: 900260131,AAPL,OPT,20260724,277.5,P,100,SMART,,USD,AAPL  260724P00277500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,638 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003050\x00900260131\x00AAPL\x00OPT\x0020260724\x00277.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260724P00277500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,686 INFO ibapi.client REQUEST reqMktData {'reqId': 3051, 'contract': 2208154386752: 889356234,AAPL,OPT,20260724,285.0,C,100,SMART,,USD,AAPL  260724C00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,686 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003051\x00889356234\x00AAPL\x00OPT\x0020260724\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260724C00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,698 INFO ibapi.wrapper ANSWER tickString {'reqId': 3040, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,698 INFO ibapi.wrapper ANSWER tickString {'reqId': 3040, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,732 INFO ibapi.client REQUEST reqMktData {'reqId': 3052, 'contract': 2208154386992: 891121826,AAPL,OPT,20260731,280.0,C,100,SMART,,USD,AAPL  260731C00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,732 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003052\x00891121826\x00AAPL\x00OPT\x0020260731\x00280.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260731C00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,769 INFO ibapi.client REQUEST reqMktData {'reqId': 3053, 'contract': 2208154387232: 889357989,AAPL,OPT,20260724,285.0,P,100,SMART,,USD,AAPL  260724P00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,769 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003053\x00889357989\x00AAPL\x00OPT\x0020260724\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260724P00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,806 INFO ibapi.client REQUEST reqMktData {'reqId': 3054, 'contract': 2208154387472: 898627620,AAPL,OPT,20260724,282.5,P,100,SMART,,USD,AAPL  260724P00282500,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,806 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003054\x00898627620\x00AAPL\x00OPT\x0020260724\x00282.5\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260724P00282500\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,844 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3046, 'marketDataType': 1}
-2026-07-10 20:32:50,844 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3046, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,844 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3045, 'marketDataType': 1}
-2026-07-10 20:32:50,844 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3045, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,844 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3041, 'marketDataType': 1}
-2026-07-10 20:32:50,845 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3041, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,845 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3049, 'marketDataType': 1}
-2026-07-10 20:32:50,845 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3049, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,845 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3044, 'marketDataType': 1}
-2026-07-10 20:32:50,845 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3044, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,845 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3048, 'marketDataType': 1}
-2026-07-10 20:32:50,846 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3048, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,846 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3042, 'marketDataType': 1}
-2026-07-10 20:32:50,846 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3042, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,846 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3043, 'marketDataType': 1}
-2026-07-10 20:32:50,846 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3043, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,846 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3047, 'marketDataType': 1}
-2026-07-10 20:32:50,846 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3047, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:50,852 INFO ibapi.client REQUEST reqMktData {'reqId': 3055, 'contract': 2208154243136: 891121877,AAPL,OPT,20260731,285.0,C,100,SMART,,USD,AAPL  260731C00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,852 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003055\x00891121877\x00AAPL\x00OPT\x0020260731\x00285.0\x00C\x00100\x00SMART\x00\x00USD\x00AAPL  260731C00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,888 INFO ibapi.client REQUEST reqMktData {'reqId': 3056, 'contract': 2208154387712: 891123631,AAPL,OPT,20260731,280.0,P,100,SMART,,USD,AAPL  260731P00280000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,889 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003056\x00891123631\x00AAPL\x00OPT\x0020260731\x00280.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260731P00280000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,934 INFO ibapi.client REQUEST reqMktData {'reqId': 3057, 'contract': 2208154387952: 891123691,AAPL,OPT,20260731,285.0,P,100,SMART,,USD,AAPL  260731P00285000,AAPL,False,,combo:, 'genericTickList': '100,101', 'snapshot': False, 'regulatorySnapshot': False, 'mktDataOptions': []}
-2026-07-10 20:32:50,934 INFO ibapi.client SENDING reqMktData b'\x00\x00\x00g1\x0011\x003057\x00891123691\x00AAPL\x00OPT\x0020260731\x00285.0\x00P\x00100\x00SMART\x00\x00USD\x00AAPL  260731P00285000\x00AAPL\x000\x00100,101\x000\x000\x00\x00'
-2026-07-10 20:32:50,994 INFO ibapi.wrapper ANSWER tickString {'reqId': 3049, 'tickType': 45, 'value': '1783704614'}
-2026-07-10 20:32:50,994 INFO ibapi.wrapper ANSWER tickString {'reqId': 3044, 'tickType': 45, 'value': '1783694504'}
-2026-07-10 20:32:50,996 INFO ibapi.wrapper ANSWER tickString {'reqId': 3047, 'tickType': 45, 'value': '1783690617'}
-2026-07-10 20:32:50,997 INFO ibapi.wrapper ANSWER tickString {'reqId': 3049, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,997 INFO ibapi.wrapper ANSWER tickString {'reqId': 3049, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,997 INFO ibapi.wrapper ANSWER tickString {'reqId': 3045, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,998 INFO ibapi.wrapper ANSWER tickString {'reqId': 3045, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,998 INFO ibapi.wrapper ANSWER tickString {'reqId': 3041, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,998 INFO ibapi.wrapper ANSWER tickString {'reqId': 3041, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,998 INFO ibapi.wrapper ANSWER tickString {'reqId': 3044, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,998 INFO ibapi.wrapper ANSWER tickString {'reqId': 3044, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:50,999 INFO ibapi.wrapper ANSWER tickString {'reqId': 3046, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,999 INFO ibapi.wrapper ANSWER tickString {'reqId': 3046, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,999 INFO ibapi.wrapper ANSWER tickString {'reqId': 3042, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:50,999 INFO ibapi.wrapper ANSWER tickString {'reqId': 3042, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:51,000 INFO ibapi.wrapper ANSWER tickString {'reqId': 3043, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,000 INFO ibapi.wrapper ANSWER tickString {'reqId': 3043, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,000 INFO ibapi.wrapper ANSWER tickString {'reqId': 3047, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,000 INFO ibapi.wrapper ANSWER tickString {'reqId': 3047, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,001 INFO ibapi.wrapper ANSWER tickString {'reqId': 3048, 'tickType': 32, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:51,001 INFO ibapi.wrapper ANSWER tickString {'reqId': 3048, 'tickType': 33, 'value': 'ACIXNBQZTMHEJPDUS'}
-2026-07-10 20:32:51,195 INFO ibapi.wrapper ANSWER tickString {'reqId': 3028, 'tickType': 32, 'value': 'NZPU'}
-2026-07-10 20:32:51,337 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3053, 'marketDataType': 1}
-2026-07-10 20:32:51,338 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3053, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:51,338 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3051, 'marketDataType': 1}
-2026-07-10 20:32:51,338 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3051, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:51,338 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3055, 'marketDataType': 1}
-2026-07-10 20:32:51,338 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3055, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:51,338 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3054, 'marketDataType': 1}
-2026-07-10 20:32:51,339 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3054, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:51,339 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3052, 'marketDataType': 1}
-2026-07-10 20:32:51,339 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3052, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:51,339 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3057, 'marketDataType': 1}
-2026-07-10 20:32:51,340 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3057, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:51,340 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3050, 'marketDataType': 1}
-2026-07-10 20:32:51,340 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3050, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:51,340 INFO ibapi.wrapper ANSWER marketDataType {'reqId': 3056, 'marketDataType': 1}
-2026-07-10 20:32:51,340 INFO ibapi.wrapper ANSWER tickReqParams {'tickerId': 3056, 'minTick': 0.01, 'bboExchange': 'c70003', 'snapshotPermissions': 3}
-2026-07-10 20:32:51,341 INFO ibapi.wrapper ANSWER tickString {'reqId': 3053, 'tickType': 45, 'value': '1783702005'}
-2026-07-10 20:32:51,341 INFO ibapi.wrapper ANSWER tickString {'reqId': 3051, 'tickType': 45, 'value': '1783695307'}
-2026-07-10 20:32:51,341 INFO ibapi.wrapper ANSWER tickString {'reqId': 3053, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,342 INFO ibapi.wrapper ANSWER tickString {'reqId': 3053, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,342 INFO ibapi.wrapper ANSWER tickString {'reqId': 3051, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,342 INFO ibapi.wrapper ANSWER tickString {'reqId': 3051, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,483 INFO ibapi.wrapper ANSWER tickString {'reqId': 3056, 'tickType': 45, 'value': '1783702383'}
-2026-07-10 20:32:51,484 INFO ibapi.wrapper ANSWER tickString {'reqId': 3057, 'tickType': 45, 'value': '1783702951'}
-2026-07-10 20:32:51,485 INFO ibapi.wrapper ANSWER tickString {'reqId': 3054, 'tickType': 45, 'value': '1783699880'}
-2026-07-10 20:32:51,486 INFO ibapi.wrapper ANSWER tickString {'reqId': 3052, 'tickType': 45, 'value': '1783693448'}
-2026-07-10 20:32:51,487 INFO ibapi.wrapper ANSWER tickString {'reqId': 3056, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,488 INFO ibapi.wrapper ANSWER tickString {'reqId': 3056, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,488 INFO ibapi.wrapper ANSWER tickString {'reqId': 3055, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,488 INFO ibapi.wrapper ANSWER tickString {'reqId': 3055, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,488 INFO ibapi.wrapper ANSWER tickString {'reqId': 3050, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,489 INFO ibapi.wrapper ANSWER tickString {'reqId': 3050, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,489 INFO ibapi.wrapper ANSWER tickString {'reqId': 3057, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,489 INFO ibapi.wrapper ANSWER tickString {'reqId': 3057, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,489 INFO ibapi.wrapper ANSWER tickString {'reqId': 3054, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,489 INFO ibapi.wrapper ANSWER tickString {'reqId': 3054, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,490 INFO ibapi.wrapper ANSWER tickString {'reqId': 3052, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:51,490 INFO ibapi.wrapper ANSWER tickString {'reqId': 3052, 'tickType': 33, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:52,202 INFO ibapi.wrapper ANSWER tickString {'reqId': 3028, 'tickType': 32, 'value': 'ACIXNBQZWTMHEJPDUS'}
-2026-07-10 20:32:53,680 INFO ibapi.wrapper ANSWER tickString {'reqId': 3030, 'tickType': 32, 'value': 'ACNBQZWTMHEJPDUS'}
-2026-07-10 20:32:54,733 INFO ibapi.wrapper ANSWER tickString {'reqId': 3005, 'tickType': 33, 'value': 'NBQZWTPUS'}
-2026-07-10 20:32:54,734 INFO ibapi.wrapper ANSWER tickString {'reqId': 3006, 'tickType': 33, 'value': 'NBQZWTPUS'}
-2026-07-10 20:32:54,935 INFO ibapi.client REQUEST cancelMktData {'reqId': 3000}
-2026-07-10 20:32:54,936 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003000\x00'
-2026-07-10 20:32:54,936 INFO ibapi.client REQUEST cancelMktData {'reqId': 3001}
-2026-07-10 20:32:54,936 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003001\x00'
-2026-07-10 20:32:54,937 INFO ibapi.client REQUEST cancelMktData {'reqId': 3002}
-2026-07-10 20:32:54,937 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003002\x00'
-2026-07-10 20:32:54,937 INFO ibapi.client REQUEST cancelMktData {'reqId': 3003}
-2026-07-10 20:32:54,938 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003003\x00'
-2026-07-10 20:32:54,938 INFO ibapi.client REQUEST cancelMktData {'reqId': 3004}
-2026-07-10 20:32:54,938 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003004\x00'
-2026-07-10 20:32:54,938 INFO ibapi.client REQUEST cancelMktData {'reqId': 3005}
-2026-07-10 20:32:54,938 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003005\x00'
-2026-07-10 20:32:54,939 INFO ibapi.client REQUEST cancelMktData {'reqId': 3006}
-2026-07-10 20:32:54,939 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003006\x00'
-2026-07-10 20:32:54,939 INFO ibapi.client REQUEST cancelMktData {'reqId': 3007}
-2026-07-10 20:32:54,939 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003007\x00'
-2026-07-10 20:32:54,939 INFO ibapi.client REQUEST cancelMktData {'reqId': 3008}
-2026-07-10 20:32:54,940 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003008\x00'
-2026-07-10 20:32:54,940 INFO ibapi.client REQUEST cancelMktData {'reqId': 3009}
-2026-07-10 20:32:54,940 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003009\x00'
-2026-07-10 20:32:54,940 INFO ibapi.client REQUEST cancelMktData {'reqId': 3010}
-2026-07-10 20:32:54,941 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003010\x00'
-2026-07-10 20:32:54,941 INFO ibapi.client REQUEST cancelMktData {'reqId': 3011}
-2026-07-10 20:32:54,941 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003011\x00'
-2026-07-10 20:32:54,941 INFO ibapi.client REQUEST cancelMktData {'reqId': 3012}
-2026-07-10 20:32:54,942 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003012\x00'
-2026-07-10 20:32:54,942 INFO ibapi.client REQUEST cancelMktData {'reqId': 3013}
-2026-07-10 20:32:54,942 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003013\x00'
-2026-07-10 20:32:54,943 INFO ibapi.client REQUEST cancelMktData {'reqId': 3014}
-2026-07-10 20:32:54,943 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003014\x00'
-2026-07-10 20:32:54,943 INFO ibapi.client REQUEST cancelMktData {'reqId': 3015}
-2026-07-10 20:32:54,943 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003015\x00'
-2026-07-10 20:32:54,943 INFO ibapi.client REQUEST cancelMktData {'reqId': 3016}
-2026-07-10 20:32:54,944 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003016\x00'
-2026-07-10 20:32:54,944 INFO ibapi.client REQUEST cancelMktData {'reqId': 3017}
-2026-07-10 20:32:54,944 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003017\x00'
-2026-07-10 20:32:54,944 INFO ibapi.client REQUEST cancelMktData {'reqId': 3018}
-2026-07-10 20:32:54,944 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003018\x00'
-2026-07-10 20:32:54,945 INFO ibapi.client REQUEST cancelMktData {'reqId': 3019}
-2026-07-10 20:32:54,945 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003019\x00'
-2026-07-10 20:32:54,945 INFO ibapi.client REQUEST cancelMktData {'reqId': 3020}
-2026-07-10 20:32:54,945 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003020\x00'
-2026-07-10 20:32:54,945 INFO ibapi.client REQUEST cancelMktData {'reqId': 3021}
-2026-07-10 20:32:54,946 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003021\x00'
-2026-07-10 20:32:54,946 INFO ibapi.client REQUEST cancelMktData {'reqId': 3022}
-2026-07-10 20:32:54,946 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003022\x00'
-2026-07-10 20:32:54,946 INFO ibapi.client REQUEST cancelMktData {'reqId': 3023}
-2026-07-10 20:32:54,946 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003023\x00'
-2026-07-10 20:32:54,946 INFO ibapi.client REQUEST cancelMktData {'reqId': 3024}
-2026-07-10 20:32:54,947 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003024\x00'
-2026-07-10 20:32:54,947 INFO ibapi.client REQUEST cancelMktData {'reqId': 3025}
-2026-07-10 20:32:54,947 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003025\x00'
-2026-07-10 20:32:54,947 INFO ibapi.client REQUEST cancelMktData {'reqId': 3026}
-2026-07-10 20:32:54,947 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003026\x00'
-2026-07-10 20:32:54,948 INFO ibapi.client REQUEST cancelMktData {'reqId': 3027}
-2026-07-10 20:32:54,948 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003027\x00'
-2026-07-10 20:32:54,948 INFO ibapi.client REQUEST cancelMktData {'reqId': 3028}
-2026-07-10 20:32:54,948 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003028\x00'
-2026-07-10 20:32:54,948 INFO ibapi.client REQUEST cancelMktData {'reqId': 3029}
-2026-07-10 20:32:54,949 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003029\x00'
-2026-07-10 20:32:54,949 INFO ibapi.client REQUEST cancelMktData {'reqId': 3030}
-2026-07-10 20:32:54,949 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003030\x00'
-2026-07-10 20:32:54,949 INFO ibapi.client REQUEST cancelMktData {'reqId': 3031}
-2026-07-10 20:32:54,949 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003031\x00'
-2026-07-10 20:32:54,950 INFO ibapi.client REQUEST cancelMktData {'reqId': 3032}
-2026-07-10 20:32:54,950 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003032\x00'
-2026-07-10 20:32:54,950 INFO ibapi.client REQUEST cancelMktData {'reqId': 3033}
-2026-07-10 20:32:54,950 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003033\x00'
-2026-07-10 20:32:54,950 INFO ibapi.client REQUEST cancelMktData {'reqId': 3034}
-2026-07-10 20:32:54,950 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003034\x00'
-2026-07-10 20:32:54,951 INFO ibapi.client REQUEST cancelMktData {'reqId': 3035}
-2026-07-10 20:32:54,951 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003035\x00'
-2026-07-10 20:32:54,951 INFO ibapi.client REQUEST cancelMktData {'reqId': 3036}
-2026-07-10 20:32:54,951 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003036\x00'
-2026-07-10 20:32:54,951 INFO ibapi.client REQUEST cancelMktData {'reqId': 3037}
-2026-07-10 20:32:54,952 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003037\x00'
-2026-07-10 20:32:54,952 INFO ibapi.client REQUEST cancelMktData {'reqId': 3038}
-2026-07-10 20:32:54,952 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003038\x00'
-2026-07-10 20:32:54,952 INFO ibapi.client REQUEST cancelMktData {'reqId': 3039}
-2026-07-10 20:32:54,952 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003039\x00'
-2026-07-10 20:32:54,952 INFO ibapi.client REQUEST cancelMktData {'reqId': 3040}
-2026-07-10 20:32:54,953 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003040\x00'
-2026-07-10 20:32:54,953 INFO ibapi.client REQUEST cancelMktData {'reqId': 3041}
-2026-07-10 20:32:54,953 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003041\x00'
-2026-07-10 20:32:54,953 INFO ibapi.client REQUEST cancelMktData {'reqId': 3042}
-2026-07-10 20:32:54,953 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003042\x00'
-2026-07-10 20:32:54,953 INFO ibapi.client REQUEST cancelMktData {'reqId': 3043}
-2026-07-10 20:32:54,954 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003043\x00'
-2026-07-10 20:32:54,954 INFO ibapi.client REQUEST cancelMktData {'reqId': 3044}
-2026-07-10 20:32:54,954 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003044\x00'
-2026-07-10 20:32:54,954 INFO ibapi.client REQUEST cancelMktData {'reqId': 3045}
-2026-07-10 20:32:54,954 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003045\x00'
-2026-07-10 20:32:54,954 INFO ibapi.client REQUEST cancelMktData {'reqId': 3046}
-2026-07-10 20:32:54,955 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003046\x00'
-2026-07-10 20:32:54,955 INFO ibapi.client REQUEST cancelMktData {'reqId': 3047}
-2026-07-10 20:32:54,955 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003047\x00'
-2026-07-10 20:32:54,955 INFO ibapi.client REQUEST cancelMktData {'reqId': 3048}
-2026-07-10 20:32:54,955 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003048\x00'
-2026-07-10 20:32:54,955 INFO ibapi.client REQUEST cancelMktData {'reqId': 3049}
-2026-07-10 20:32:54,955 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003049\x00'
-2026-07-10 20:32:54,956 INFO ibapi.client REQUEST cancelMktData {'reqId': 3050}
-2026-07-10 20:32:54,956 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003050\x00'
-2026-07-10 20:32:54,956 INFO ibapi.client REQUEST cancelMktData {'reqId': 3051}
-2026-07-10 20:32:54,956 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003051\x00'
-2026-07-10 20:32:54,956 INFO ibapi.client REQUEST cancelMktData {'reqId': 3052}
-2026-07-10 20:32:54,956 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003052\x00'
-2026-07-10 20:32:54,956 INFO ibapi.client REQUEST cancelMktData {'reqId': 3053}
-2026-07-10 20:32:54,957 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003053\x00'
-2026-07-10 20:32:54,957 INFO ibapi.client REQUEST cancelMktData {'reqId': 3054}
-2026-07-10 20:32:54,957 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003054\x00'
-2026-07-10 20:32:54,957 INFO ibapi.client REQUEST cancelMktData {'reqId': 3055}
-2026-07-10 20:32:54,957 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003055\x00'
-2026-07-10 20:32:54,957 INFO ibapi.client REQUEST cancelMktData {'reqId': 3056}
-2026-07-10 20:32:54,957 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003056\x00'
-2026-07-10 20:32:54,958 INFO ibapi.client REQUEST cancelMktData {'reqId': 3057}
-2026-07-10 20:32:54,958 INFO ibapi.client SENDING cancelMktData b'\x00\x00\x00\t2\x002\x003057\x00'
-2026-07-10 20:32:54,958 INFO ibapi.client disconnecting
-2026-07-10 20:32:54,959 INFO ibapi.wrapper ANSWER connectionClosed {}
-INFO:     127.0.0.1:65221 - "POST /api/v1/market-data/ingest HTTP/1.1" 200 OK
-INFO:     127.0.0.1:65224 - "GET /api/v1/market-data/underlyings/AAPL/latest-chain HTTP/1.1" 200 OK
-INFO:     127.0.0.1:65225 - "GET /api/v1/market-data/underlyings/AAPL/latest-chain HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60252 - "POST /api/v1/market-data/historical/ingest HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 422, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 2683, in app
+    await route.handle(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 1753, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 2738, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 1764, in _handle_selected
+    await route.handle(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 1753, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 2738, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 1773, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 1264, in handle
+    await app(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2596, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\Work\OptionScanner\backend\app\api\routes\market_data.py", line 59, in ingest_historical_bars
+    result = service.ingest_history(
+        payload.symbol,
+    ...<3 lines>...
+        payload.duration_months,
+    )
+  File "D:\Work\OptionScanner\backend\app\services\market_data.py", line 142, in ingest_history
+    contract = self.repository.get_contract(symbol, expiration_date, right, strike)
+  File "D:\Work\OptionScanner\backend\app\repositories\market_data.py", line 162, in get_contract
+    return self.db.execute(statement).scalar_one_or_none()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 1541, in scalar_one_or_none
+    return self._only_one_row(
+           ~~~~~~~~~~~~~~~~~~^
+        raise_for_second_row=True, raise_for_none=False, scalar=True
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Work\OptionScanner\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 852, in _only_one_row
+    raise exc.MultipleResultsFound(
+    ...<4 lines>...
+    )
+sqlalchemy.exc.MultipleResultsFound: Multiple rows were found when one or none was required
