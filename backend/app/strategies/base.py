@@ -1,8 +1,17 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date
 
 from app.schemas.market_data import ChainSnapshotResponse
+
+
+@dataclass(slots=True)
+class StrategyLeg:
+    action: str
+    right: str
+    strike: float
+    price: float
+    delta: float | None
 
 
 @dataclass(slots=True)
@@ -23,6 +32,8 @@ class StrategyCandidate:
     open_interest: int | None
     volume: int | None
     payoff_points: list[tuple[float, float]]
+    upper_break_even: float | None = None
+    legs: list[StrategyLeg] = field(default_factory=list)
 
 
 class Strategy(ABC):

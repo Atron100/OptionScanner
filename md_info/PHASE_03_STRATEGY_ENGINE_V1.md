@@ -46,3 +46,14 @@ Introduce the reusable strategy architecture and implement the first production-
 - Generate candidates for a known sample chain
 - Compare strategy outputs against expected fixtures
 - Confirm invalid combinations are rejected cleanly
+
+## Verified Checkpoint
+
+- Reusable `Strategy` interface and shared analytics helpers added.
+- Cash Secured Put generation is implemented against the latest stored chain.
+- Covered Call generation is implemented with required share count and per-share cost basis inputs.
+- Iron Condor generation is implemented as a four-leg credit spread with validated leg ordering, conservative bid/ask execution, bounded loss, and dual break-evens.
+- Each candidate returns credit, maximum profit/loss, break-even, POP estimate, ROC, liquidity inputs, score, and chart-ready payoff points.
+- Mocked unit and API tests cover all three strategies; local CSP and Covered Call responses were also verified against stored chains.
+- Expired contracts are excluded from new CSP candidates.
+- Remaining Phase 3 work: define and test the planned strategy `adjust()` and `exit()` lifecycle hooks before closing the phase.

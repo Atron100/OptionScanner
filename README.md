@@ -9,6 +9,9 @@ Local-first options research platform built with FastAPI and React.
 - IBKR read-only integration for bounded live option chains, bid/ask/last, Greeks, volume, and open interest
 - Targeted live ingestion by exact strike and expiration count
 - Historical option-bars endpoint with mocked coverage; live IBKR availability is contract- and data-feed-dependent
+- Cash Secured Put candidate generation with payoff, POP estimate, ROC, and liquidity-aware scoring
+- Covered Call candidate generation from share count and cost basis, with capped-profit payoff and scoring
+- Iron Condor four-leg candidate generation with conservative executable credit, bounded risk, dual break-evens, payoff, and scoring
 
 ## Project Layout
 
@@ -52,3 +55,9 @@ Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/v1/market-data/hi
 ```
 
 IBKR does not provide end-of-day historical data for options. The endpoint requests intraday bars and aggregates them locally by day, but IBKR may still decline a specific option contract when its historical data is unavailable. Confirm the same option has a chart in TWS before relying on an API history request.
+
+Generate Iron Condor candidates from the latest stored chain:
+
+```powershell
+Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/v1/strategies/iron-condor/generate" -ContentType "application/json" -Body '{"symbol":"OPEN"}' | ConvertTo-Json -Depth 8
+```

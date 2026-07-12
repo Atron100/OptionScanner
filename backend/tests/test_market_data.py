@@ -1,7 +1,9 @@
+from datetime import date, datetime, timezone
+
 from fastapi.testclient import TestClient
 
 from app.api.dependencies import get_market_data_broker
-from app.brokers.base import MarketDataBroker
+from app.brokers.base import MarketDataBroker, OptionChainData, OptionQuoteData
 from app.brokers.mock import MockMarketDataBroker
 from app.main import app
 
@@ -113,6 +115,85 @@ def test_cash_secured_put_endpoint_generates_candidates_from_latest_chain() -> N
     assert payload["candidate_count"] == 2
     assert payload["candidates"][0]["strategy"] == "cash_secured_put"
     assert payload["candidates"][0]["payoff_points"]
+
+
+def test_covered_call_endpoint_generates_candidates_from_latest_chain() -> None:
+    ingest_response = client.post("/api/v1/market-data/ingest", json={"symbol": "AAPL"})
+    assert ingest_response.status_code == 200
+
+    response = client.post(
+        "/api/v1/strategies/covered-call/generate",
+        json={"symbol": "AAPL", "shares": 100, "cost_basis_per_share": 200},
+    )
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["strategy"] == "covered_call"
+    assert payload["candidate_count"] == 2
+    assert payload["candidates"][0]["strategy"] == "covered_call"
+    assert payload["candidates"][0]["payoff_points"]
+
+
+def test_iron_condor_endpoint_generates_four_leg_candidate() -> None:
+    class IronCondorBroker(MockMarketDataBroker):
+        def fetch_option_chain(self, symbol: str, strike: float | None = None, expiration_count: int | None = None):
+            def quote(right: str, strike: float, bid: float, ask: float, delta: float) -> OptionQuoteData:
+                return OptionQuoteData(
+                    expiration_date=date(2026, 8, 21),
+                    right=right,
+                    strike=strike,
+                    bid=bid,
+                    ask=ask,
+                    last=(bid + ask) / 2,
+                    mark=(bid + ask) / 2,
+                    implied_volatility=0.25,
+                    delta=delta,
+                    gamma=0.02,
+                    theta=-0.05,
+                    vega=0.1,
+                    open_interest=1000,
+                    volume=200,
+                )
+
+            return OptionChainData(
+                provider="mock",
+                symbol=symbol.upper(),
+                name="Iron Condor Test",
+                exchange="SMART",
+                currency="USD",
+                as_of=datetime.now(timezone.utc),
+                quotes=[
+                    quote("P", 90, 0.9, 1.0, -0.1),
+                    quote("P", 95, 2.5, 2.6, -0.2),
+                    quote("C", 105, 2.5, 2.6, 0.2),
+                    quote("C", 110, 0.9, 1.0, 0.1),
+                ],
+            )
+
+    app.dependency_overrides[get_market_data_broker] = lambda: IronCondorBroker()
+    try:
+        ingest_response = client.post("/api/v1/market-data/ingest", json={"symbol": "CONDOR"})
+    finally:
+        app.dependency_overrides.pop(get_market_data_broker, None)
+
+    assert ingest_response.status_code == 200
+    response = client.post("/api/v1/strategies/iron-condor/generate", json={"symbol": "CONDOR"})
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["strategy"] == "iron_condor"
+    assert payload["candidate_count"] == 1
+    candidate = payload["candidates"][0]
+    assert candidate["max_profit"] == 3
+    assert candidate["max_loss"] == 2
+    assert candidate["break_even"] == 92
+    assert candidate["upper_break_even"] == 108
+    assert [(leg["action"], leg["right"], leg["strike"]) for leg in candidate["legs"]] == [
+        ("BUY", "P", 90),
+        ("SELL", "P", 95),
+        ("SELL", "C", 105),
+        ("BUY", "C", 110),
+    ]
 
 
 def test_ingest_chain_with_live_provider_override_uses_bound_broker_interface() -> None:

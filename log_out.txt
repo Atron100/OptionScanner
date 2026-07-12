@@ -5,11 +5,1343 @@ Install the latest PowerShell for new features and improvements! https://aka.ms/
 
 PS C:\Users\Alexey> Invoke-RestMethod `
 >>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/strategies/cash-secured-put/generate" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"AAPL"}' |
+>>   ConvertTo-Json -Depth 6
+{
+    "strategy":  "cash_secured_put",
+    "symbol":  "AAPL",
+    "candidate_count":  5,
+    "candidates":  [
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-17",
+                           "strike":  315.0,
+                           "credit":  4.0,
+                           "max_profit":  4.0,
+                           "max_loss":  311.0,
+                           "break_even":  311.0,
+                           "probability_of_profit":  0.4918,
+                           "return_on_capital":  0.012862,
+                           "score":  33.36,
+                           "implied_volatility":  0.22173822878349778,
+                           "delta":  -0.5082456715840652,
+                           "open_interest":  2561,
+                           "volume":  1692,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -311.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.4375,
+                                                     "profit_loss":  -291.5625
+                                                 },
+                                                 {
+                                                     "underlying_price":  38.875,
+                                                     "profit_loss":  -272.125
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.3125,
+                                                     "profit_loss":  -252.6875
+                                                 },
+                                                 {
+                                                     "underlying_price":  77.75,
+                                                     "profit_loss":  -233.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  97.1875,
+                                                     "profit_loss":  -213.8125
+                                                 },
+                                                 {
+                                                     "underlying_price":  116.625,
+                                                     "profit_loss":  -194.375
+                                                 },
+                                                 {
+                                                     "underlying_price":  136.0625,
+                                                     "profit_loss":  -174.9375
+                                                 },
+                                                 {
+                                                     "underlying_price":  155.5,
+                                                     "profit_loss":  -155.5
+                                                 },
+                                                 {
+                                                     "underlying_price":  174.9375,
+                                                     "profit_loss":  -136.0625
+                                                 },
+                                                 {
+                                                     "underlying_price":  194.375,
+                                                     "profit_loss":  -116.625
+                                                 },
+                                                 {
+                                                     "underlying_price":  213.8125,
+                                                     "profit_loss":  -97.1875
+                                                 },
+                                                 {
+                                                     "underlying_price":  233.25,
+                                                     "profit_loss":  -77.75
+                                                 },
+                                                 {
+                                                     "underlying_price":  252.6875,
+                                                     "profit_loss":  -58.3125
+                                                 },
+                                                 {
+                                                     "underlying_price":  272.125,
+                                                     "profit_loss":  -38.875
+                                                 },
+                                                 {
+                                                     "underlying_price":  291.5625,
+                                                     "profit_loss":  -19.4375
+                                                 },
+                                                 {
+                                                     "underlying_price":  311.0,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  330.4375,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  349.875,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  369.3125,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  388.75,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  408.1875,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  427.625,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  447.0625,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  466.5,
+                                                     "profit_loss":  4.0
+                                                 }
+                                             ]
+                       },
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-20",
+                           "strike":  315.0,
+                           "credit":  4.45,
+                           "max_profit":  4.45,
+                           "max_loss":  310.55,
+                           "break_even":  310.55,
+                           "probability_of_profit":  0.4969,
+                           "return_on_capital":  0.014329,
+                           "score":  31.37,
+                           "implied_volatility":  0.21233141193721763,
+                           "delta":  -0.5031292548233859,
+                           "open_interest":  121,
+                           "volume":  155,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -310.55
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.4094,
+                                                     "profit_loss":  -291.1406
+                                                 },
+                                                 {
+                                                     "underlying_price":  38.8188,
+                                                     "profit_loss":  -271.7312
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.2281,
+                                                     "profit_loss":  -252.3219
+                                                 },
+                                                 {
+                                                     "underlying_price":  77.6375,
+                                                     "profit_loss":  -232.9125
+                                                 },
+                                                 {
+                                                     "underlying_price":  97.0469,
+                                                     "profit_loss":  -213.5031
+                                                 },
+                                                 {
+                                                     "underlying_price":  116.4563,
+                                                     "profit_loss":  -194.0938
+                                                 },
+                                                 {
+                                                     "underlying_price":  135.8656,
+                                                     "profit_loss":  -174.6844
+                                                 },
+                                                 {
+                                                     "underlying_price":  155.275,
+                                                     "profit_loss":  -155.275
+                                                 },
+                                                 {
+                                                     "underlying_price":  174.6844,
+                                                     "profit_loss":  -135.8656
+                                                 },
+                                                 {
+                                                     "underlying_price":  194.0938,
+                                                     "profit_loss":  -116.4562
+                                                 },
+                                                 {
+                                                     "underlying_price":  213.5031,
+                                                     "profit_loss":  -97.0469
+                                                 },
+                                                 {
+                                                     "underlying_price":  232.9125,
+                                                     "profit_loss":  -77.6375
+                                                 },
+                                                 {
+                                                     "underlying_price":  252.3219,
+                                                     "profit_loss":  -58.2281
+                                                 },
+                                                 {
+                                                     "underlying_price":  271.7312,
+                                                     "profit_loss":  -38.8188
+                                                 },
+                                                 {
+                                                     "underlying_price":  291.1406,
+                                                     "profit_loss":  -19.4094
+                                                 },
+                                                 {
+                                                     "underlying_price":  310.55,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  329.9594,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  349.3688,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  368.7781,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  388.1875,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  407.5969,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  427.0063,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  446.4156,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  465.825,
+                                                     "profit_loss":  4.45
+                                                 }
+                                             ]
+                       },
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-15",
+                           "strike":  315.0,
+                           "credit":  3.25,
+                           "max_profit":  3.25,
+                           "max_loss":  311.75,
+                           "break_even":  311.75,
+                           "probability_of_profit":  0.4836,
+                           "return_on_capital":  0.010425,
+                           "score":  30.46,
+                           "implied_volatility":  0.20572902518487968,
+                           "delta":  -0.5164380567682747,
+                           "open_interest":  405,
+                           "volume":  294,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -311.75
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.4844,
+                                                     "profit_loss":  -292.2656
+                                                 },
+                                                 {
+                                                     "underlying_price":  38.9688,
+                                                     "profit_loss":  -272.7812
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.4531,
+                                                     "profit_loss":  -253.2969
+                                                 },
+                                                 {
+                                                     "underlying_price":  77.9375,
+                                                     "profit_loss":  -233.8125
+                                                 },
+                                                 {
+                                                     "underlying_price":  97.4219,
+                                                     "profit_loss":  -214.3281
+                                                 },
+                                                 {
+                                                     "underlying_price":  116.9062,
+                                                     "profit_loss":  -194.8438
+                                                 },
+                                                 {
+                                                     "underlying_price":  136.3906,
+                                                     "profit_loss":  -175.3594
+                                                 },
+                                                 {
+                                                     "underlying_price":  155.875,
+                                                     "profit_loss":  -155.875
+                                                 },
+                                                 {
+                                                     "underlying_price":  175.3594,
+                                                     "profit_loss":  -136.3906
+                                                 },
+                                                 {
+                                                     "underlying_price":  194.8438,
+                                                     "profit_loss":  -116.9062
+                                                 },
+                                                 {
+                                                     "underlying_price":  214.3281,
+                                                     "profit_loss":  -97.4219
+                                                 },
+                                                 {
+                                                     "underlying_price":  233.8125,
+                                                     "profit_loss":  -77.9375
+                                                 },
+                                                 {
+                                                     "underlying_price":  253.2969,
+                                                     "profit_loss":  -58.4531
+                                                 },
+                                                 {
+                                                     "underlying_price":  272.7812,
+                                                     "profit_loss":  -38.9688
+                                                 },
+                                                 {
+                                                     "underlying_price":  292.2656,
+                                                     "profit_loss":  -19.4844
+                                                 },
+                                                 {
+                                                     "underlying_price":  311.75,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  331.2344,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  350.7188,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  370.2031,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  389.6875,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  409.1719,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  428.6562,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  448.1406,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  467.625,
+                                                     "profit_loss":  3.25
+                                                 }
+                                             ]
+                       },
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-13",
+                           "strike":  315.0,
+                           "credit":  2.02,
+                           "max_profit":  2.02,
+                           "max_loss":  312.98,
+                           "break_even":  312.98,
+                           "probability_of_profit":  0.4654,
+                           "return_on_capital":  0.006454,
+                           "score":  30.32,
+                           "implied_volatility":  0.16451868053157823,
+                           "delta":  -0.5345537556039279,
+                           "open_interest":  1748,
+                           "volume":  3402,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -312.98
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.5613,
+                                                     "profit_loss":  -293.4188
+                                                 },
+                                                 {
+                                                     "underlying_price":  39.1225,
+                                                     "profit_loss":  -273.8575
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.6838,
+                                                     "profit_loss":  -254.2962
+                                                 },
+                                                 {
+                                                     "underlying_price":  78.245,
+                                                     "profit_loss":  -234.735
+                                                 },
+                                                 {
+                                                     "underlying_price":  97.8063,
+                                                     "profit_loss":  -215.1737
+                                                 },
+                                                 {
+                                                     "underlying_price":  117.3675,
+                                                     "profit_loss":  -195.6125
+                                                 },
+                                                 {
+                                                     "underlying_price":  136.9288,
+                                                     "profit_loss":  -176.0512
+                                                 },
+                                                 {
+                                                     "underlying_price":  156.49,
+                                                     "profit_loss":  -156.49
+                                                 },
+                                                 {
+                                                     "underlying_price":  176.0513,
+                                                     "profit_loss":  -136.9287
+                                                 },
+                                                 {
+                                                     "underlying_price":  195.6125,
+                                                     "profit_loss":  -117.3675
+                                                 },
+                                                 {
+                                                     "underlying_price":  215.1738,
+                                                     "profit_loss":  -97.8062
+                                                 },
+                                                 {
+                                                     "underlying_price":  234.735,
+                                                     "profit_loss":  -78.245
+                                                 },
+                                                 {
+                                                     "underlying_price":  254.2963,
+                                                     "profit_loss":  -58.6837
+                                                 },
+                                                 {
+                                                     "underlying_price":  273.8575,
+                                                     "profit_loss":  -39.1225
+                                                 },
+                                                 {
+                                                     "underlying_price":  293.4188,
+                                                     "profit_loss":  -19.5612
+                                                 },
+                                                 {
+                                                     "underlying_price":  312.98,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  332.5412,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  352.1025,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  371.6638,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  391.225,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  410.7862,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  430.3475,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  449.9088,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  469.47,
+                                                     "profit_loss":  2.02
+                                                 }
+                                             ]
+                       },
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-10",
+                           "strike":  315.0,
+                           "credit":  0.74,
+                           "max_profit":  0.74,
+                           "max_loss":  314.26,
+                           "break_even":  314.26,
+                           "probability_of_profit":  0.316,
+                           "return_on_capital":  0.002355,
+                           "score":  25.19,
+                           "implied_volatility":  0.25069926398492737,
+                           "delta":  -0.6840279468931002,
+                           "open_interest":  5995,
+                           "volume":  28478,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -314.26
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.6412,
+                                                     "profit_loss":  -294.6187
+                                                 },
+                                                 {
+                                                     "underlying_price":  39.2825,
+                                                     "profit_loss":  -274.9775
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.9237,
+                                                     "profit_loss":  -255.3363
+                                                 },
+                                                 {
+                                                     "underlying_price":  78.565,
+                                                     "profit_loss":  -235.695
+                                                 },
+                                                 {
+                                                     "underlying_price":  98.2062,
+                                                     "profit_loss":  -216.0537
+                                                 },
+                                                 {
+                                                     "underlying_price":  117.8475,
+                                                     "profit_loss":  -196.4125
+                                                 },
+                                                 {
+                                                     "underlying_price":  137.4887,
+                                                     "profit_loss":  -176.7713
+                                                 },
+                                                 {
+                                                     "underlying_price":  157.13,
+                                                     "profit_loss":  -157.13
+                                                 },
+                                                 {
+                                                     "underlying_price":  176.7713,
+                                                     "profit_loss":  -137.4887
+                                                 },
+                                                 {
+                                                     "underlying_price":  196.4125,
+                                                     "profit_loss":  -117.8475
+                                                 },
+                                                 {
+                                                     "underlying_price":  216.0537,
+                                                     "profit_loss":  -98.2063
+                                                 },
+                                                 {
+                                                     "underlying_price":  235.695,
+                                                     "profit_loss":  -78.565
+                                                 },
+                                                 {
+                                                     "underlying_price":  255.3363,
+                                                     "profit_loss":  -58.9237
+                                                 },
+                                                 {
+                                                     "underlying_price":  274.9775,
+                                                     "profit_loss":  -39.2825
+                                                 },
+                                                 {
+                                                     "underlying_price":  294.6187,
+                                                     "profit_loss":  -19.6413
+                                                 },
+                                                 {
+                                                     "underlying_price":  314.26,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  333.9013,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  353.5425,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  373.1837,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  392.825,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  412.4663,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  432.1075,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  451.7487,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  471.39,
+                                                     "profit_loss":  0.74
+                                                 }
+                                             ]
+                       }
+                   ]
+}
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/market-data/historical/ingest" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"AAPL","expiration_date":"2026-07-17","right":"C","strike":315,"duration_months":1}' |
+>>   ConvertTo-Json -Depth 5
+Invoke-RestMethod : {"detail":"IBKR error 200: No security definition has been found for the request"}
+At line:1 char:1
++ Invoke-RestMethod `
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
 >>   -Uri "http://localhost:8000/api/v1/market-data/historical/ingest" `
 >>   -ContentType "application/json" `
 >>   -Body '{"symbol":"AAPL","expiration_date":"2026-07-10","right":"C","strike":315,"duration_months":1}' |
 >>   ConvertTo-Json -Depth 5
-Invoke-RestMethod : Internal Server Error
+Invoke-RestMethod : {"detail":"IBKR error 200: No security definition has been found for the request"}
+At line:1 char:1
++ Invoke-RestMethod `
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/strategies/cash-secured-put/generate" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"AAPL"}' |
+>>   ConvertTo-Json -Depth 6
+{
+    "strategy":  "cash_secured_put",
+    "symbol":  "AAPL",
+    "candidate_count":  5,
+    "candidates":  [
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-17",
+                           "strike":  315.0,
+                           "credit":  4.0,
+                           "max_profit":  4.0,
+                           "max_loss":  311.0,
+                           "break_even":  311.0,
+                           "probability_of_profit":  0.4918,
+                           "return_on_capital":  0.012862,
+                           "score":  33.36,
+                           "implied_volatility":  0.22173822878349778,
+                           "delta":  -0.5082456715840652,
+                           "open_interest":  2561,
+                           "volume":  1692,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -311.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.4375,
+                                                     "profit_loss":  -291.5625
+                                                 },
+                                                 {
+                                                     "underlying_price":  38.875,
+                                                     "profit_loss":  -272.125
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.3125,
+                                                     "profit_loss":  -252.6875
+                                                 },
+                                                 {
+                                                     "underlying_price":  77.75,
+                                                     "profit_loss":  -233.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  97.1875,
+                                                     "profit_loss":  -213.8125
+                                                 },
+                                                 {
+                                                     "underlying_price":  116.625,
+                                                     "profit_loss":  -194.375
+                                                 },
+                                                 {
+                                                     "underlying_price":  136.0625,
+                                                     "profit_loss":  -174.9375
+                                                 },
+                                                 {
+                                                     "underlying_price":  155.5,
+                                                     "profit_loss":  -155.5
+                                                 },
+                                                 {
+                                                     "underlying_price":  174.9375,
+                                                     "profit_loss":  -136.0625
+                                                 },
+                                                 {
+                                                     "underlying_price":  194.375,
+                                                     "profit_loss":  -116.625
+                                                 },
+                                                 {
+                                                     "underlying_price":  213.8125,
+                                                     "profit_loss":  -97.1875
+                                                 },
+                                                 {
+                                                     "underlying_price":  233.25,
+                                                     "profit_loss":  -77.75
+                                                 },
+                                                 {
+                                                     "underlying_price":  252.6875,
+                                                     "profit_loss":  -58.3125
+                                                 },
+                                                 {
+                                                     "underlying_price":  272.125,
+                                                     "profit_loss":  -38.875
+                                                 },
+                                                 {
+                                                     "underlying_price":  291.5625,
+                                                     "profit_loss":  -19.4375
+                                                 },
+                                                 {
+                                                     "underlying_price":  311.0,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  330.4375,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  349.875,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  369.3125,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  388.75,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  408.1875,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  427.625,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  447.0625,
+                                                     "profit_loss":  4.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  466.5,
+                                                     "profit_loss":  4.0
+                                                 }
+                                             ]
+                       },
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-20",
+                           "strike":  315.0,
+                           "credit":  4.45,
+                           "max_profit":  4.45,
+                           "max_loss":  310.55,
+                           "break_even":  310.55,
+                           "probability_of_profit":  0.4969,
+                           "return_on_capital":  0.014329,
+                           "score":  31.37,
+                           "implied_volatility":  0.21233141193721763,
+                           "delta":  -0.5031292548233859,
+                           "open_interest":  121,
+                           "volume":  155,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -310.55
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.4094,
+                                                     "profit_loss":  -291.1406
+                                                 },
+                                                 {
+                                                     "underlying_price":  38.8188,
+                                                     "profit_loss":  -271.7312
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.2281,
+                                                     "profit_loss":  -252.3219
+                                                 },
+                                                 {
+                                                     "underlying_price":  77.6375,
+                                                     "profit_loss":  -232.9125
+                                                 },
+                                                 {
+                                                     "underlying_price":  97.0469,
+                                                     "profit_loss":  -213.5031
+                                                 },
+                                                 {
+                                                     "underlying_price":  116.4563,
+                                                     "profit_loss":  -194.0938
+                                                 },
+                                                 {
+                                                     "underlying_price":  135.8656,
+                                                     "profit_loss":  -174.6844
+                                                 },
+                                                 {
+                                                     "underlying_price":  155.275,
+                                                     "profit_loss":  -155.275
+                                                 },
+                                                 {
+                                                     "underlying_price":  174.6844,
+                                                     "profit_loss":  -135.8656
+                                                 },
+                                                 {
+                                                     "underlying_price":  194.0938,
+                                                     "profit_loss":  -116.4562
+                                                 },
+                                                 {
+                                                     "underlying_price":  213.5031,
+                                                     "profit_loss":  -97.0469
+                                                 },
+                                                 {
+                                                     "underlying_price":  232.9125,
+                                                     "profit_loss":  -77.6375
+                                                 },
+                                                 {
+                                                     "underlying_price":  252.3219,
+                                                     "profit_loss":  -58.2281
+                                                 },
+                                                 {
+                                                     "underlying_price":  271.7312,
+                                                     "profit_loss":  -38.8188
+                                                 },
+                                                 {
+                                                     "underlying_price":  291.1406,
+                                                     "profit_loss":  -19.4094
+                                                 },
+                                                 {
+                                                     "underlying_price":  310.55,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  329.9594,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  349.3688,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  368.7781,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  388.1875,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  407.5969,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  427.0063,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  446.4156,
+                                                     "profit_loss":  4.45
+                                                 },
+                                                 {
+                                                     "underlying_price":  465.825,
+                                                     "profit_loss":  4.45
+                                                 }
+                                             ]
+                       },
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-15",
+                           "strike":  315.0,
+                           "credit":  3.25,
+                           "max_profit":  3.25,
+                           "max_loss":  311.75,
+                           "break_even":  311.75,
+                           "probability_of_profit":  0.4836,
+                           "return_on_capital":  0.010425,
+                           "score":  30.46,
+                           "implied_volatility":  0.20572902518487968,
+                           "delta":  -0.5164380567682747,
+                           "open_interest":  405,
+                           "volume":  294,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -311.75
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.4844,
+                                                     "profit_loss":  -292.2656
+                                                 },
+                                                 {
+                                                     "underlying_price":  38.9688,
+                                                     "profit_loss":  -272.7812
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.4531,
+                                                     "profit_loss":  -253.2969
+                                                 },
+                                                 {
+                                                     "underlying_price":  77.9375,
+                                                     "profit_loss":  -233.8125
+                                                 },
+                                                 {
+                                                     "underlying_price":  97.4219,
+                                                     "profit_loss":  -214.3281
+                                                 },
+                                                 {
+                                                     "underlying_price":  116.9062,
+                                                     "profit_loss":  -194.8438
+                                                 },
+                                                 {
+                                                     "underlying_price":  136.3906,
+                                                     "profit_loss":  -175.3594
+                                                 },
+                                                 {
+                                                     "underlying_price":  155.875,
+                                                     "profit_loss":  -155.875
+                                                 },
+                                                 {
+                                                     "underlying_price":  175.3594,
+                                                     "profit_loss":  -136.3906
+                                                 },
+                                                 {
+                                                     "underlying_price":  194.8438,
+                                                     "profit_loss":  -116.9062
+                                                 },
+                                                 {
+                                                     "underlying_price":  214.3281,
+                                                     "profit_loss":  -97.4219
+                                                 },
+                                                 {
+                                                     "underlying_price":  233.8125,
+                                                     "profit_loss":  -77.9375
+                                                 },
+                                                 {
+                                                     "underlying_price":  253.2969,
+                                                     "profit_loss":  -58.4531
+                                                 },
+                                                 {
+                                                     "underlying_price":  272.7812,
+                                                     "profit_loss":  -38.9688
+                                                 },
+                                                 {
+                                                     "underlying_price":  292.2656,
+                                                     "profit_loss":  -19.4844
+                                                 },
+                                                 {
+                                                     "underlying_price":  311.75,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  331.2344,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  350.7188,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  370.2031,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  389.6875,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  409.1719,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  428.6562,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  448.1406,
+                                                     "profit_loss":  3.25
+                                                 },
+                                                 {
+                                                     "underlying_price":  467.625,
+                                                     "profit_loss":  3.25
+                                                 }
+                                             ]
+                       },
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-13",
+                           "strike":  315.0,
+                           "credit":  2.02,
+                           "max_profit":  2.02,
+                           "max_loss":  312.98,
+                           "break_even":  312.98,
+                           "probability_of_profit":  0.4654,
+                           "return_on_capital":  0.006454,
+                           "score":  30.32,
+                           "implied_volatility":  0.16451868053157823,
+                           "delta":  -0.5345537556039279,
+                           "open_interest":  1748,
+                           "volume":  3402,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -312.98
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.5613,
+                                                     "profit_loss":  -293.4188
+                                                 },
+                                                 {
+                                                     "underlying_price":  39.1225,
+                                                     "profit_loss":  -273.8575
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.6838,
+                                                     "profit_loss":  -254.2962
+                                                 },
+                                                 {
+                                                     "underlying_price":  78.245,
+                                                     "profit_loss":  -234.735
+                                                 },
+                                                 {
+                                                     "underlying_price":  97.8063,
+                                                     "profit_loss":  -215.1737
+                                                 },
+                                                 {
+                                                     "underlying_price":  117.3675,
+                                                     "profit_loss":  -195.6125
+                                                 },
+                                                 {
+                                                     "underlying_price":  136.9288,
+                                                     "profit_loss":  -176.0512
+                                                 },
+                                                 {
+                                                     "underlying_price":  156.49,
+                                                     "profit_loss":  -156.49
+                                                 },
+                                                 {
+                                                     "underlying_price":  176.0513,
+                                                     "profit_loss":  -136.9287
+                                                 },
+                                                 {
+                                                     "underlying_price":  195.6125,
+                                                     "profit_loss":  -117.3675
+                                                 },
+                                                 {
+                                                     "underlying_price":  215.1738,
+                                                     "profit_loss":  -97.8062
+                                                 },
+                                                 {
+                                                     "underlying_price":  234.735,
+                                                     "profit_loss":  -78.245
+                                                 },
+                                                 {
+                                                     "underlying_price":  254.2963,
+                                                     "profit_loss":  -58.6837
+                                                 },
+                                                 {
+                                                     "underlying_price":  273.8575,
+                                                     "profit_loss":  -39.1225
+                                                 },
+                                                 {
+                                                     "underlying_price":  293.4188,
+                                                     "profit_loss":  -19.5612
+                                                 },
+                                                 {
+                                                     "underlying_price":  312.98,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  332.5412,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  352.1025,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  371.6638,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  391.225,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  410.7862,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  430.3475,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  449.9088,
+                                                     "profit_loss":  2.02
+                                                 },
+                                                 {
+                                                     "underlying_price":  469.47,
+                                                     "profit_loss":  2.02
+                                                 }
+                                             ]
+                       },
+                       {
+                           "strategy":  "cash_secured_put",
+                           "symbol":  "AAPL",
+                           "expiration_date":  "2026-07-10",
+                           "strike":  315.0,
+                           "credit":  0.74,
+                           "max_profit":  0.74,
+                           "max_loss":  314.26,
+                           "break_even":  314.26,
+                           "probability_of_profit":  0.316,
+                           "return_on_capital":  0.002355,
+                           "score":  25.19,
+                           "implied_volatility":  0.25069926398492737,
+                           "delta":  -0.6840279468931002,
+                           "open_interest":  5995,
+                           "volume":  28478,
+                           "payoff_points":  [
+                                                 {
+                                                     "underlying_price":  0.0,
+                                                     "profit_loss":  -314.26
+                                                 },
+                                                 {
+                                                     "underlying_price":  19.6412,
+                                                     "profit_loss":  -294.6187
+                                                 },
+                                                 {
+                                                     "underlying_price":  39.2825,
+                                                     "profit_loss":  -274.9775
+                                                 },
+                                                 {
+                                                     "underlying_price":  58.9237,
+                                                     "profit_loss":  -255.3363
+                                                 },
+                                                 {
+                                                     "underlying_price":  78.565,
+                                                     "profit_loss":  -235.695
+                                                 },
+                                                 {
+                                                     "underlying_price":  98.2062,
+                                                     "profit_loss":  -216.0537
+                                                 },
+                                                 {
+                                                     "underlying_price":  117.8475,
+                                                     "profit_loss":  -196.4125
+                                                 },
+                                                 {
+                                                     "underlying_price":  137.4887,
+                                                     "profit_loss":  -176.7713
+                                                 },
+                                                 {
+                                                     "underlying_price":  157.13,
+                                                     "profit_loss":  -157.13
+                                                 },
+                                                 {
+                                                     "underlying_price":  176.7713,
+                                                     "profit_loss":  -137.4887
+                                                 },
+                                                 {
+                                                     "underlying_price":  196.4125,
+                                                     "profit_loss":  -117.8475
+                                                 },
+                                                 {
+                                                     "underlying_price":  216.0537,
+                                                     "profit_loss":  -98.2063
+                                                 },
+                                                 {
+                                                     "underlying_price":  235.695,
+                                                     "profit_loss":  -78.565
+                                                 },
+                                                 {
+                                                     "underlying_price":  255.3363,
+                                                     "profit_loss":  -58.9237
+                                                 },
+                                                 {
+                                                     "underlying_price":  274.9775,
+                                                     "profit_loss":  -39.2825
+                                                 },
+                                                 {
+                                                     "underlying_price":  294.6187,
+                                                     "profit_loss":  -19.6413
+                                                 },
+                                                 {
+                                                     "underlying_price":  314.26,
+                                                     "profit_loss":  0.0
+                                                 },
+                                                 {
+                                                     "underlying_price":  333.9013,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  353.5425,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  373.1837,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  392.825,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  412.4663,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  432.1075,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  451.7487,
+                                                     "profit_loss":  0.74
+                                                 },
+                                                 {
+                                                     "underlying_price":  471.39,
+                                                     "profit_loss":  0.74
+                                                 }
+                                             ]
+                       }
+                   ]
+}
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/strategies/covered-call/generate" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"OPEN","shares":100,"cost_basis_per_share":300}' |
+>>   ConvertTo-Json -Depth 6
+Invoke-RestMethod : {"detail":"No chain snapshot found for symbol 'OPEN'"}
+At line:1 char:1
++ Invoke-RestMethod `
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/strategies/covered-call/generate" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"OPEN","shares":100,"cost_basis_per_share":5.5}' |
+>>   ConvertTo-Json -Depth 6
+{
+    "strategy":  "covered_call",
+    "symbol":  "OPEN",
+    "candidate_count":  0,
+    "candidates":  [
+
+                   ]
+}
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/strategies/covered-call/generate" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"OPEN","shares":100,"cost_basis_per_share":4.5}' |
+>>   ConvertTo-Json -Depth 6
+{
+    "strategy":  "covered_call",
+    "symbol":  "OPEN",
+    "candidate_count":  0,
+    "candidates":  [
+
+                   ]
+}
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"OPEN","expiration_count":5}'
+
+
+symbol         : OPEN
+provider       : ibkr
+snapshot_id    : 5
+contract_count : 24
+quote_count    : 24
+expirations    : {2026-07-17, 2026-07-24, 2026-07-31}
+as_of          : 2026-07-12T16:33:42Z
+warnings       : {}
+
+
+
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/strategies/iron-condor/generate" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"OPEN"}' |
+>>   ConvertTo-Json -Depth 8
+Invoke-RestMethod : {"detail":"Not Found"}
+At line:1 char:1
++ Invoke-RestMethod `
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/market-data/ingest" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"OPEN","expiration_count":5}'
+
+
+symbol         : OPEN
+provider       : ibkr
+snapshot_id    : 6
+contract_count : 24
+quote_count    : 24
+expirations    : {2026-07-17, 2026-07-24, 2026-07-31}
+as_of          : 2026-07-12T16:35:54Z
+warnings       : {}
+
+
+
+PS C:\Users\Alexey> Invoke-RestMethod `
+>>   -Method Post `
+>>   -Uri "http://localhost:8000/api/v1/strategies/iron-condor/generate" `
+>>   -ContentType "application/json" `
+>>   -Body '{"symbol":"OPEN"}' |
+>>   ConvertTo-Json -Depth 8
+Invoke-RestMethod : {"detail":"Not Found"}
 At line:1 char:1
 + Invoke-RestMethod `
 + ~~~~~~~~~~~~~~~~~~~
