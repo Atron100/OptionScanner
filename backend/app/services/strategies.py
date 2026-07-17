@@ -1,4 +1,10 @@
-from app.schemas.strategies import PayoffPointResponse, StrategyCandidateResponse, StrategyCandidatesResponse, StrategyLegResponse
+from app.schemas.strategies import (
+    PayoffPointResponse,
+    StrategyCandidateResponse,
+    StrategyCandidatesResponse,
+    StrategyLegResponse,
+    StrategyManagementRuleResponse,
+)
 from app.services.market_data import MarketDataQueryService
 from app.strategies.cash_secured_put import CashSecuredPutStrategy
 from app.strategies.covered_call import CoveredCallStrategy
@@ -41,39 +47,56 @@ class StrategyService:
             strategy=strategy.name,
             symbol=chain.symbol,
             candidate_count=len(candidates),
-            candidates=[
-                StrategyCandidateResponse(
-                    strategy=candidate.strategy,
-                    symbol=candidate.symbol,
-                    expiration_date=candidate.expiration_date,
-                    strike=candidate.strike,
-                    credit=candidate.credit,
-                    max_profit=candidate.max_profit,
-                    max_loss=candidate.max_loss,
-                    break_even=candidate.break_even,
-                    upper_break_even=candidate.upper_break_even,
-                    probability_of_profit=candidate.probability_of_profit,
-                    return_on_capital=candidate.return_on_capital,
-                    score=candidate.score,
-                    implied_volatility=candidate.implied_volatility,
-                    delta=candidate.delta,
-                    open_interest=candidate.open_interest,
-                    volume=candidate.volume,
-                    payoff_points=[
-                        PayoffPointResponse(underlying_price=price, profit_loss=profit_loss)
-                        for price, profit_loss in candidate.payoff_points
-                    ],
-                    legs=[
-                        StrategyLegResponse(
-                            action=leg.action,
-                            right=leg.right,
-                            strike=leg.strike,
-                            price=leg.price,
-                            delta=leg.delta,
-                        )
-                        for leg in candidate.legs
-                    ],
+            candidates=[StrategyService.candidate_to_response(candidate) for candidate in candidates],
+        )
+
+    @staticmethod
+    def candidate_to_response(candidate) -> StrategyCandidateResponse:
+        return StrategyCandidateResponse(
+            strategy=candidate.strategy,
+            symbol=candidate.symbol,
+            expiration_date=candidate.expiration_date,
+            strike=candidate.strike,
+            credit=candidate.credit,
+            max_profit=candidate.max_profit,
+            max_loss=candidate.max_loss,
+            break_even=candidate.break_even,
+            upper_break_even=candidate.upper_break_even,
+            probability_of_profit=candidate.probability_of_profit,
+            return_on_capital=candidate.return_on_capital,
+            score=candidate.score,
+            implied_volatility=candidate.implied_volatility,
+            delta=candidate.delta,
+            open_interest=candidate.open_interest,
+            volume=candidate.volume,
+            payoff_points=[
+                PayoffPointResponse(underlying_price=price, profit_loss=profit_loss)
+                for price, profit_loss in candidate.payoff_points
+            ],
+            legs=[
+                StrategyLegResponse(
+                    action=leg.action,
+                    right=leg.right,
+                    strike=leg.strike,
+                    price=leg.price,
+                    delta=leg.delta,
                 )
-                for candidate in candidates
+                for leg in candidate.legs
+            ],
+            adjustment_rules=[
+                StrategyManagementRuleResponse(
+                    trigger=rule.trigger,
+                    action=rule.action,
+                    rationale=rule.rationale,
+                )
+                for rule in candidate.adjustment_rules
+            ],
+            exit_rules=[
+                StrategyManagementRuleResponse(
+                    trigger=rule.trigger,
+                    action=rule.action,
+                    rationale=rule.rationale,
+                )
+                for rule in candidate.exit_rules
             ],
         )

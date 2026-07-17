@@ -5,6 +5,9 @@ from datetime import date
 from app.schemas.market_data import ChainSnapshotResponse
 
 
+CONTRACT_MULTIPLIER = 100
+
+
 @dataclass(slots=True)
 class StrategyLeg:
     action: str
@@ -12,6 +15,13 @@ class StrategyLeg:
     strike: float
     price: float
     delta: float | None
+
+
+@dataclass(slots=True)
+class StrategyManagementRule:
+    trigger: str
+    action: str
+    rationale: str
 
 
 @dataclass(slots=True)
@@ -34,6 +44,8 @@ class StrategyCandidate:
     payoff_points: list[tuple[float, float]]
     upper_break_even: float | None = None
     legs: list[StrategyLeg] = field(default_factory=list)
+    adjustment_rules: list[StrategyManagementRule] = field(default_factory=list)
+    exit_rules: list[StrategyManagementRule] = field(default_factory=list)
 
 
 class Strategy(ABC):
@@ -47,4 +59,12 @@ class Strategy(ABC):
 
     @abstractmethod
     def payoff(self, candidate: StrategyCandidate) -> list[tuple[float, float]]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def adjust(self, candidate: StrategyCandidate) -> list[StrategyManagementRule]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def exit(self, candidate: StrategyCandidate) -> list[StrategyManagementRule]:
         raise NotImplementedError

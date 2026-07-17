@@ -53,28 +53,11 @@ export function BackendStatusCard() {
   }, []);
 
   return (
-    <section className="status-card">
-      <h2>Backend Status</h2>
-      <p>
-        API health: <strong>{health}</strong>
-      </p>
-      {systemInfo ? (
-        <dl className="status-grid">
-          <div>
-            <dt>App</dt>
-            <dd>{systemInfo.app_name}</dd>
-          </div>
-          <div>
-            <dt>Environment</dt>
-            <dd>{systemInfo.environment}</dd>
-          </div>
-          <div>
-            <dt>Database</dt>
-            <dd>{systemInfo.database_exists ? "ready" : "missing"}</dd>
-          </div>
-        </dl>
-      ) : null}
-      {error ? <p className="error-text">{error}</p> : null}
+    <section className="status-card" aria-label="Backend status" title={error ?? undefined}>
+      <span className={`status-dot status-${health}`} aria-hidden="true" />
+      <div><span>Local API</span><strong>{health}</strong></div>
+      {systemInfo ? <div><span>Database</span><strong>{systemInfo.database_exists ? "ready" : "missing"}</strong></div> : null}
+      {error ? <span className="sr-only">{error}</span> : null}
     </section>
   );
 }

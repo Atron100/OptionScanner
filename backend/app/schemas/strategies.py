@@ -30,6 +30,12 @@ class StrategyLegResponse(BaseModel):
     delta: float | None
 
 
+class StrategyManagementRuleResponse(BaseModel):
+    trigger: str
+    action: str
+    rationale: str
+
+
 class StrategyCandidateResponse(BaseModel):
     strategy: str
     symbol: str
@@ -49,6 +55,8 @@ class StrategyCandidateResponse(BaseModel):
     volume: int | None
     payoff_points: list[PayoffPointResponse]
     legs: list[StrategyLegResponse] = Field(default_factory=list)
+    adjustment_rules: list[StrategyManagementRuleResponse] = Field(default_factory=list)
+    exit_rules: list[StrategyManagementRuleResponse] = Field(default_factory=list)
 
 
 class StrategyCandidatesResponse(BaseModel):

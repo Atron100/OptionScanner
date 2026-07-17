@@ -7,6 +7,8 @@ from app.schemas.market_data import (
     HistoricalBarResponse,
     HistoricalBarsResponse,
     IngestChainResponse,
+    TrackedUnderlyingsResponse,
+    UnderlyingSummaryResponse,
 )
 
 
@@ -34,6 +36,7 @@ class MarketDataIngestionService:
             provider=chain.provider,
             requested_symbol=symbol.upper(),
             as_of=chain.as_of,
+            underlying_price=chain.underlying_price,
         )
 
         expiration_dates: set = set()
@@ -76,6 +79,7 @@ class MarketDataIngestionService:
             quote_count=len(chain.quotes),
             expirations=sorted(expiration_dates),
             as_of=chain.as_of,
+            underlying_price=chain.underlying_price,
             warnings=chain.warnings or [],
         )
 
@@ -120,9 +124,24 @@ class MarketDataQueryService:
             symbol=snapshot.underlying.symbol,
             provider=snapshot.provider,
             as_of=snapshot.as_of,
+            underlying_price=snapshot.underlying_price,
             quote_count=len(contracts),
             contracts=contracts,
         )
+
+    def get_tracked_underlyings(self) -> TrackedUnderlyingsResponse:
+        underlyings = [
+            UnderlyingSummaryResponse(
+                symbol=snapshot.underlying.symbol,
+                name=snapshot.underlying.name,
+                provider=snapshot.provider,
+                underlying_price=snapshot.underlying_price,
+                as_of=snapshot.as_of,
+                quote_count=len(snapshot.quote_snapshots),
+            )
+            for snapshot in self.repository.get_latest_chains()
+        ]
+        return TrackedUnderlyingsResponse(count=len(underlyings), underlyings=underlyings)
 
 
 class HistoricalOptionDataService:

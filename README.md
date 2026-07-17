@@ -11,7 +11,14 @@ Local-first options research platform built with FastAPI and React.
 - Historical option-bars endpoint with mocked coverage; live IBKR availability is contract- and data-feed-dependent
 - Cash Secured Put candidate generation with payoff, POP estimate, ROC, and liquidity-aware scoring
 - Covered Call candidate generation from share count and cost basis, with capped-profit payoff and scoring
-- Iron Condor four-leg candidate generation with conservative executable credit, bounded risk, dual break-evens, payoff, and scoring
+- Iron Condor four-leg candidate generation with spot-aware OTM short-leg validation, conservative executable credit, bounded risk, dual break-evens, payoff, and scoring
+- Structured adjustment and exit review rules for every generated strategy candidate; no automatic trade execution
+- Multi-symbol scanner API with deterministic ranking and POP, ROC, score, EV, and maximum-loss filters
+- Responsive React scanner dashboard with quality controls, ranked results, backend status, and mobile support
+- Selectable strategy detail panel with responsive payoff chart, leg structure, risk metrics, and lifecycle review rules
+- Strategy profit, loss, payoff, and EV values expressed in dollars per standard 100-share option contract; option credit remains quoted per share
+- Tracked-stocks panel showing each locally stored symbol's latest price, provider, quote count, and snapshot time, with one-click scanner selection and live Add/Refresh
+- Persistent local scan history with recent-run summaries and exact stored result restoration
 
 ## Project Layout
 
@@ -60,4 +67,10 @@ Generate Iron Condor candidates from the latest stored chain:
 
 ```powershell
 Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/v1/strategies/iron-condor/generate" -ContentType "application/json" -Body '{"symbol":"OPEN"}' | ConvertTo-Json -Depth 8
+```
+
+Scan stored chains and return ranked candidates:
+
+```powershell
+Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/v1/scanner/scan" -ContentType "application/json" -Body '{"symbols":["OPEN","AAPL"],"strategies":["cash_secured_put","iron_condor"],"minimum_probability_of_profit":0.5,"minimum_days_to_expiration":1,"minimum_credit":0.05,"minimum_open_interest":1,"maximum_loss":500,"limit":20}' | ConvertTo-Json -Depth 10
 ```

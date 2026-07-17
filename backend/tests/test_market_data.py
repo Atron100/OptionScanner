@@ -21,6 +21,7 @@ def test_ingest_chain_persists_and_returns_latest_snapshot() -> None:
     assert ingest_payload["quote_count"] == 4
     assert ingest_payload["contract_count"] == 4
     assert ingest_payload["expirations"] == ["2026-08-21", "2026-09-18"]
+    assert ingest_payload["underlying_price"] == 210
     assert ingest_payload["warnings"] == []
 
     latest_response = client.get("/api/v1/market-data/underlyings/AAPL/latest-chain")
@@ -30,6 +31,7 @@ def test_ingest_chain_persists_and_returns_latest_snapshot() -> None:
     assert latest_payload["symbol"] == "AAPL"
     assert latest_payload["provider"] == "mock"
     assert latest_payload["quote_count"] == 4
+    assert latest_payload["underlying_price"] == 210
     assert len(latest_payload["contracts"]) == 4
     assert latest_payload["contracts"][0]["expiration_date"] == "2026-08-21"
 
@@ -46,6 +48,23 @@ def test_reingest_creates_new_snapshot_without_duplicate_contract_definitions() 
     latest_payload = latest_response.json()
     assert latest_payload["symbol"] == "SPY"
     assert latest_payload["quote_count"] == 4
+
+
+def test_tracked_underlyings_returns_latest_snapshot_for_each_symbol() -> None:
+    first_aapl = client.post("/api/v1/market-data/ingest", json={"symbol": "AAPL"})
+    spy = client.post("/api/v1/market-data/ingest", json={"symbol": "SPY"})
+    latest_aapl = client.post("/api/v1/market-data/ingest", json={"symbol": "AAPL"})
+
+    response = client.get("/api/v1/market-data/underlyings")
+
+    assert first_aapl.status_code == spy.status_code == latest_aapl.status_code == 200
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["count"] == 2
+    assert [item["symbol"] for item in payload["underlyings"]] == ["AAPL", "SPY"]
+    assert payload["underlyings"][0]["provider"] == "mock"
+    assert payload["underlyings"][0]["underlying_price"] == 210
+    assert payload["underlyings"][0]["quote_count"] == 4
 
 
 def test_targeted_ingest_passes_strike_and_expiration_count_to_broker() -> None:
@@ -115,6 +134,8 @@ def test_cash_secured_put_endpoint_generates_candidates_from_latest_chain() -> N
     assert payload["candidate_count"] == 2
     assert payload["candidates"][0]["strategy"] == "cash_secured_put"
     assert payload["candidates"][0]["payoff_points"]
+    assert payload["candidates"][0]["adjustment_rules"]
+    assert payload["candidates"][0]["exit_rules"]
 
 
 def test_covered_call_endpoint_generates_candidates_from_latest_chain() -> None:
@@ -162,6 +183,7 @@ def test_iron_condor_endpoint_generates_four_leg_candidate() -> None:
                 exchange="SMART",
                 currency="USD",
                 as_of=datetime.now(timezone.utc),
+                underlying_price=100,
                 quotes=[
                     quote("P", 90, 0.9, 1.0, -0.1),
                     quote("P", 95, 2.5, 2.6, -0.2),
@@ -184,10 +206,12 @@ def test_iron_condor_endpoint_generates_four_leg_candidate() -> None:
     assert payload["strategy"] == "iron_condor"
     assert payload["candidate_count"] == 1
     candidate = payload["candidates"][0]
-    assert candidate["max_profit"] == 3
-    assert candidate["max_loss"] == 2
+    assert candidate["max_profit"] == 300
+    assert candidate["max_loss"] == 200
     assert candidate["break_even"] == 92
     assert candidate["upper_break_even"] == 108
+    assert candidate["adjustment_rules"][0]["action"] == "review_challenged_side"
+    assert candidate["exit_rules"][0]["action"] == "review_close_for_profit"
     assert [(leg["action"], leg["right"], leg["strike"]) for leg in candidate["legs"]] == [
         ("BUY", "P", 90),
         ("SELL", "P", 95),

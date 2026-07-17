@@ -56,6 +56,7 @@ class _IBKRDiscoverySession(EWrapper):
         self._contract_details: list[Any] = []
         self._pending_contract_request_ids: set[int] = set()
         self._option_quotes: dict[int, OptionQuoteData] = {}
+        self._underlying_price: float | None = None
         self._pending_quote_request_ids: set[int] = set()
         self._quote_warnings: list[str] = []
         self._discovery_warnings: list[str] = []
@@ -167,6 +168,11 @@ class _IBKRDiscoverySession(EWrapper):
         self._response_event.set()
 
     def tickPrice(self, reqId: int, tickType: int, price: float, attrib: Any) -> None:  # noqa: N802
+        if self._request_mode == "underlying-quote" and reqId == 1500:
+            value = self._normalise_non_negative_number(price)
+            if value is not None and value > 0 and tickType in {1, 2, 4, 37}:
+                self._underlying_price = value
+            return
         quote = self._option_quotes.get(reqId)
         if quote is None:
             return
@@ -260,8 +266,11 @@ class _IBKRDiscoverySession(EWrapper):
         expiration_count: int | None = None,
     ) -> OptionChainData:
         underlying = self._resolve_underlying(symbol)
+        underlying_price = self._fetch_underlying_price(underlying)
         chain_params = self._resolve_chain_parameters(symbol, underlying)
-        option_contracts = self._resolve_option_contracts(symbol, chain_params, strike, expiration_count)
+        option_contracts = self._resolve_option_contracts(
+            symbol, chain_params, strike, expiration_count, underlying_price
+        )
 
         if not option_contracts:
             raise MarketDataUnavailableError(
@@ -278,8 +287,28 @@ class _IBKRDiscoverySession(EWrapper):
             currency=underlying.currency,
             as_of=datetime.now(timezone.utc).replace(microsecond=0),
             quotes=quotes,
+            underlying_price=underlying_price,
             warnings=self._discovery_warnings + self._quote_warnings,
         )
+
+    def _fetch_underlying_price(self, underlying: _UnderlyingContract) -> float:
+        self._request_mode = "underlying-quote"
+        self._underlying_price = None
+
+        contract = Contract()
+        contract.conId = underlying.con_id
+        contract.symbol = underlying.symbol
+        contract.secType = "STK"
+        contract.exchange = self._settings.ibkr_exchange
+        contract.currency = underlying.currency
+        self.client.reqMktData(1500, contract, "", False, False, [])
+        threading.Event().wait(timeout=min(self._settings.ibkr_quote_collection_seconds, 3))
+        self.client.cancelMktData(1500)
+        if self._underlying_price is None:
+            raise MarketDataUnavailableError(
+                f"IBKR returned no usable underlying price for '{underlying.symbol.upper()}'."
+            )
+        return self._underlying_price
 
     def _resolve_underlying(self, symbol: str) -> _UnderlyingContract:
         self._request_mode = "underlying"
@@ -360,6 +389,7 @@ class _IBKRDiscoverySession(EWrapper):
         chain_params: dict[str, Any],
         strike: float | None = None,
         expiration_count: int | None = None,
+        underlying_price: float | None = None,
     ) -> list[Any]:
         expirations = self._select_expirations(chain_params["expirations"], expiration_count)
         if not expirations:
@@ -376,9 +406,8 @@ class _IBKRDiscoverySession(EWrapper):
                 )
             selected_strikes = [strike]
         else:
-            middle_index = len(strikes) // 2
             width = max(self._settings.ibkr_strikes_per_side, 1)
-            selected_strikes = strikes[max(0, middle_index - width) : middle_index + width]
+            selected_strikes = self._select_strikes_around_price(strikes, underlying_price, width)
 
         self._request_mode = "options"
         self._contract_details = []
@@ -414,6 +443,12 @@ class _IBKRDiscoverySession(EWrapper):
         for details in self._contract_details:
             deduped[details.contract.conId] = details
         return list(deduped.values())
+
+    @staticmethod
+    def _select_strikes_around_price(strikes: list[float], underlying_price: float, width: int) -> list[float]:
+        lower = [strike for strike in strikes if strike <= underlying_price]
+        upper = [strike for strike in strikes if strike > underlying_price]
+        return lower[-width:] + upper[:width]
 
     def _fetch_option_quotes(self, option_contracts: list[Any], chain_params: dict[str, Any]) -> list[OptionQuoteData]:
         self._request_mode = "quotes"

@@ -2,7 +2,7 @@ from datetime import date
 
 from app.schemas.market_data import ChainSnapshotResponse, ContractQuoteResponse
 from app.strategies.analytics import covered_call_probability_of_profit, covered_call_return_on_capital, score_covered_call
-from app.strategies.base import Strategy, StrategyCandidate
+from app.strategies.base import CONTRACT_MULTIPLIER, Strategy, StrategyCandidate, StrategyManagementRule
 
 
 class CoveredCallStrategy(Strategy):
@@ -39,27 +39,51 @@ class CoveredCallStrategy(Strategy):
             (
                 round(price, 4),
                 round(
-                    price - self.cost_basis_per_share + candidate.credit - max(price - candidate.strike, 0),
-                    4,
+                    (price - self.cost_basis_per_share + candidate.credit - max(price - candidate.strike, 0))
+                    * CONTRACT_MULTIPLIER,
+                    2,
                 ),
             )
             for price in (step * index for index in range(25))
         ]
 
+    def adjust(self, candidate: StrategyCandidate) -> list[StrategyManagementRule]:
+        return [
+            StrategyManagementRule(
+                trigger=f"underlying_price >= {candidate.strike:g}",
+                action="review_assignment_or_roll",
+                rationale="The covered call is challenged; compare assignment with a roll before changing the cap.",
+            )
+        ]
+
+    def exit(self, candidate: StrategyCandidate) -> list[StrategyManagementRule]:
+        return [
+            StrategyManagementRule(
+                trigger=f"remaining_option_value <= {candidate.credit * 0.5:.4f}",
+                action="review_close_for_profit",
+                rationale="Half of the entry credit has been captured; reassess remaining reward versus risk.",
+            ),
+            StrategyManagementRule(
+                trigger="share_sale_at_strike_is_no_longer_acceptable",
+                action="review_close_or_roll",
+                rationale="A covered call should remain consistent with the intended share exit price.",
+            ),
+        ]
+
     def _build_candidate(self, symbol: str, quote: ContractQuoteResponse, credit: float) -> StrategyCandidate:
-        max_profit = round(quote.strike - self.cost_basis_per_share + credit, 4)
-        downside = round(self.cost_basis_per_share - credit, 4)
+        max_profit_per_share = round(quote.strike - self.cost_basis_per_share + credit, 4)
+        downside_per_share = round(self.cost_basis_per_share - credit, 4)
         candidate = StrategyCandidate(
             strategy=self.name,
             symbol=symbol,
             expiration_date=quote.expiration_date,
             strike=quote.strike,
             credit=credit,
-            max_profit=max_profit,
-            max_loss=downside,
-            break_even=downside,
+            max_profit=round(max_profit_per_share * CONTRACT_MULTIPLIER, 2),
+            max_loss=round(downside_per_share * CONTRACT_MULTIPLIER, 2),
+            break_even=downside_per_share,
             probability_of_profit=covered_call_probability_of_profit(quote.delta),
-            return_on_capital=covered_call_return_on_capital(max_profit, self.cost_basis_per_share),
+            return_on_capital=covered_call_return_on_capital(max_profit_per_share, self.cost_basis_per_share),
             score=0,
             implied_volatility=quote.implied_volatility,
             delta=quote.delta,
@@ -68,4 +92,6 @@ class CoveredCallStrategy(Strategy):
             payoff_points=[],
         )
         candidate.payoff_points = self.payoff(candidate)
+        candidate.adjustment_rules = self.adjust(candidate)
+        candidate.exit_rules = self.exit(candidate)
         return candidate

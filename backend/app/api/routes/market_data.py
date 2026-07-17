@@ -15,6 +15,7 @@ from app.schemas.market_data import (
     IngestChainResponse,
     HistoricalBarsResponse,
     IngestHistoricalBarsRequest,
+    TrackedUnderlyingsResponse,
 )
 from app.services.market_data import HistoricalOptionDataService, MarketDataIngestionService, MarketDataQueryService
 
@@ -37,6 +38,12 @@ def ingest_chain(
     except MarketDataBrokerError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     return IngestChainResponse.model_validate(result)
+
+
+@router.get("/underlyings", response_model=TrackedUnderlyingsResponse)
+def tracked_underlyings(db: Session = Depends(get_db)) -> TrackedUnderlyingsResponse:
+    result = MarketDataQueryService(db).get_tracked_underlyings()
+    return TrackedUnderlyingsResponse.model_validate(result)
 
 
 @router.get("/underlyings/{symbol}/latest-chain", response_model=ChainSnapshotResponse)

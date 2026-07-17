@@ -50,6 +50,7 @@ class MockMarketDataBroker(MarketDataBroker):
             currency="USD",
             as_of=as_of,
             quotes=quotes,
+            underlying_price={"AAPL": 210.0, "SPY": 635.0}.get(normalized_symbol, 98.0),
         )
 
     def fetch_option_history(self, contract: OptionContractReference, duration_months: int) -> OptionHistoryData:

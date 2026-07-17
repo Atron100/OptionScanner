@@ -45,6 +45,7 @@ class OptionChainData:
     currency: str
     as_of: datetime
     quotes: list[OptionQuoteData]
+    underlying_price: float | None = None
     warnings: list[str] | None = None
 
 

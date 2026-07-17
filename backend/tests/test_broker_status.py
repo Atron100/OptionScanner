@@ -42,6 +42,26 @@ def test_ibkr_selects_all_expirations_within_configured_horizon() -> None:
     assert selected == ["20260710", "20260713", "20260717", "20260724", "20260731"]
 
 
+def test_ibkr_selects_strikes_around_underlying_price() -> None:
+    selected = _IBKRDiscoverySession._select_strikes_around_price(
+        [3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0],
+        underlying_price=4.62,
+        width=2,
+    )
+
+    assert selected == [4.0, 4.5, 5.0, 5.5]
+
+
+def test_ibkr_underlying_quote_callback_captures_live_price() -> None:
+    session = object.__new__(_IBKRDiscoverySession)
+    session._request_mode = "underlying-quote"
+    session._underlying_price = None
+
+    session.tickPrice(1500, 4, 4.62, None)
+
+    assert session._underlying_price == 4.62
+
+
 def test_ibkr_contract_lookup_error_keeps_other_batch_requests_running() -> None:
     session = object.__new__(_IBKRDiscoverySession)
     session._request_mode = "options"

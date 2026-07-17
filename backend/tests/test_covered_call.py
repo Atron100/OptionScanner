@@ -35,13 +35,16 @@ def test_covered_call_calculates_capped_profit_downside_and_payoff() -> None:
     candidate = CoveredCallStrategy(shares=100, cost_basis_per_share=190).generate(chain)[0]
 
     assert candidate.credit == 4
-    assert candidate.max_profit == 14
-    assert candidate.max_loss == 186
+    assert candidate.max_profit == 1400
+    assert candidate.max_loss == 18600
     assert candidate.break_even == 186
     assert candidate.probability_of_profit == 0.7
     assert candidate.return_on_capital == pytest.approx(14 / 190, abs=1e-6)
-    assert candidate.payoff_points[0][1] == -186
-    assert candidate.payoff_points[-1][1] == 14
+    assert candidate.payoff_points[0][1] == -18600
+    assert candidate.payoff_points[-1][1] == 1400
+    assert candidate.adjustment_rules[0].action == "review_assignment_or_roll"
+    assert candidate.adjustment_rules[0].trigger == "underlying_price >= 200"
+    assert candidate.exit_rules[0].trigger == "remaining_option_value <= 2.0000"
 
 
 def test_covered_call_requires_one_hundred_shares() -> None:

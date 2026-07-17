@@ -17,6 +17,7 @@ class IngestChainResponse(BaseModel):
     quote_count: int
     expirations: list[date]
     as_of: datetime
+    underlying_price: float | None = None
     warnings: list[str] = Field(default_factory=list)
 
 
@@ -41,8 +42,23 @@ class ChainSnapshotResponse(BaseModel):
     symbol: str
     provider: str
     as_of: datetime
+    underlying_price: float | None = None
     quote_count: int
     contracts: list[ContractQuoteResponse]
+
+
+class UnderlyingSummaryResponse(BaseModel):
+    symbol: str
+    name: str | None
+    provider: str
+    underlying_price: float | None
+    as_of: datetime
+    quote_count: int
+
+
+class TrackedUnderlyingsResponse(BaseModel):
+    count: int
+    underlyings: list[UnderlyingSummaryResponse]
 
 
 class IngestHistoricalBarsRequest(BaseModel):

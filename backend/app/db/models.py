@@ -1,6 +1,6 @@
 from datetime import date, datetime
 
-from sqlalchemy import Date, DateTime, Float, ForeignKey, Integer, String, UniqueConstraint
+from sqlalchemy import Date, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
@@ -11,6 +11,19 @@ class AppState(Base):
 
     key: Mapped[str] = mapped_column(String(100), primary_key=True)
     value: Mapped[str] = mapped_column(String(500), nullable=False)
+
+
+class ScanRun(Base):
+    __tablename__ = "scan_runs"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    generated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    symbols: Mapped[str] = mapped_column(String(1000))
+    strategies: Mapped[str] = mapped_column(String(255))
+    total_candidates: Mapped[int] = mapped_column(Integer)
+    result_count: Mapped[int] = mapped_column(Integer)
+    request_json: Mapped[str] = mapped_column(Text)
+    response_json: Mapped[str] = mapped_column(Text)
 
 
 class Underlying(Base):
@@ -73,6 +86,7 @@ class OptionChainSnapshot(Base):
     provider: Mapped[str] = mapped_column(String(32))
     requested_symbol: Mapped[str] = mapped_column(String(32), index=True)
     as_of: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    underlying_price: Mapped[float | None] = mapped_column(Float, nullable=True)
 
     underlying: Mapped[Underlying] = relationship(back_populates="snapshots")
     quote_snapshots: Mapped[list["OptionQuoteSnapshot"]] = relationship(back_populates="chain_snapshot")

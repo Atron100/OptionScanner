@@ -35,14 +35,17 @@ def test_cash_secured_put_calculates_risk_profit_and_payoff() -> None:
     candidate = CashSecuredPutStrategy().generate(chain)[0]
 
     assert candidate.credit == 4
-    assert candidate.max_profit == 4
-    assert candidate.max_loss == 196
+    assert candidate.max_profit == 400
+    assert candidate.max_loss == 19600
     assert candidate.break_even == 196
     assert candidate.probability_of_profit == 0.7
     assert candidate.return_on_capital == pytest.approx(4 / 196, abs=1e-6)
     assert candidate.score > 0
-    assert candidate.payoff_points[0][1] == -196
-    assert candidate.payoff_points[-1][1] == 4
+    assert candidate.payoff_points[0][1] == -19600
+    assert candidate.payoff_points[-1][1] == 400
+    assert candidate.adjustment_rules[0].action == "review_roll_or_assignment"
+    assert candidate.adjustment_rules[0].trigger == "underlying_price <= 200"
+    assert candidate.exit_rules[0].trigger == "remaining_option_value <= 2.0000"
 
 
 def test_cash_secured_put_excludes_expired_contracts() -> None:

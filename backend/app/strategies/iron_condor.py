@@ -3,13 +3,15 @@ from itertools import combinations
 
 from app.schemas.market_data import ChainSnapshotResponse, ContractQuoteResponse
 from app.strategies.analytics import iron_condor_probability_of_profit, iron_condor_return_on_capital, score_iron_condor
-from app.strategies.base import Strategy, StrategyCandidate, StrategyLeg
+from app.strategies.base import CONTRACT_MULTIPLIER, Strategy, StrategyCandidate, StrategyLeg, StrategyManagementRule
 
 
 class IronCondorStrategy(Strategy):
     name = "iron_condor"
 
     def generate(self, chain: ChainSnapshotResponse) -> list[StrategyCandidate]:
+        if chain.underlying_price is None or chain.underlying_price <= 0:
+            return []
         by_expiration: dict[date, list[ContractQuoteResponse]] = {}
         for quote in chain.contracts:
             if quote.expiration_date >= date.today():
@@ -22,6 +24,8 @@ class IronCondorStrategy(Strategy):
             for long_put, short_put in combinations(puts, 2):
                 for short_call, long_call in combinations(calls, 2):
                     if short_put.strike >= short_call.strike:
+                        continue
+                    if short_put.strike >= chain.underlying_price or short_call.strike <= chain.underlying_price:
                         continue
                     candidate = self._build_candidate(chain.symbol, expiration, long_put, short_put, short_call, long_call)
                     if candidate is not None:
@@ -41,8 +45,33 @@ class IronCondorStrategy(Strategy):
             for leg in candidate.legs:
                 intrinsic = max(leg.strike - price, 0) if leg.right == "P" else max(price - leg.strike, 0)
                 profit_loss += intrinsic if leg.action == "BUY" else -intrinsic
-            points.append((round(price, 4), round(profit_loss, 4)))
+            points.append((round(price, 4), round(profit_loss * CONTRACT_MULTIPLIER, 2)))
         return points
+
+    def adjust(self, candidate: StrategyCandidate) -> list[StrategyManagementRule]:
+        short_put = next(leg for leg in candidate.legs if leg.action == "SELL" and leg.right == "P")
+        short_call = next(leg for leg in candidate.legs if leg.action == "SELL" and leg.right == "C")
+        return [
+            StrategyManagementRule(
+                trigger=f"underlying_price <= {short_put.strike:g} or underlying_price >= {short_call.strike:g}",
+                action="review_challenged_side",
+                rationale="A short strike is challenged; reassess the full spread before increasing or moving risk.",
+            )
+        ]
+
+    def exit(self, candidate: StrategyCandidate) -> list[StrategyManagementRule]:
+        return [
+            StrategyManagementRule(
+                trigger=f"remaining_spread_value <= {candidate.credit * 0.5:.4f}",
+                action="review_close_for_profit",
+                rationale="Half of the entry credit has been captured; reassess remaining reward versus tail risk.",
+            ),
+            StrategyManagementRule(
+                trigger=f"unrealized_loss >= {candidate.credit:.4f}",
+                action="review_close_for_risk",
+                rationale="The loss has reached the original credit; apply the configured account risk limit.",
+            ),
+        ]
 
     def _build_candidate(
         self,
@@ -64,8 +93,8 @@ class IronCondorStrategy(Strategy):
 
         put_width = short_put.strike - long_put.strike
         call_width = long_call.strike - short_call.strike
-        max_loss = round(max(put_width, call_width) - credit, 4)
-        if max_loss <= 0:
+        max_loss_per_share = round(max(put_width, call_width) - credit, 4)
+        if max_loss_per_share <= 0:
             return None
 
         legs = [
@@ -88,12 +117,12 @@ class IronCondorStrategy(Strategy):
             expiration_date=expiration,
             strike=short_put.strike,
             credit=credit,
-            max_profit=credit,
-            max_loss=max_loss,
+            max_profit=round(credit * CONTRACT_MULTIPLIER, 2),
+            max_loss=round(max_loss_per_share * CONTRACT_MULTIPLIER, 2),
             break_even=round(short_put.strike - credit, 4),
             upper_break_even=round(short_call.strike + credit, 4),
             probability_of_profit=iron_condor_probability_of_profit(short_put.delta, short_call.delta),
-            return_on_capital=iron_condor_return_on_capital(credit, max_loss),
+            return_on_capital=iron_condor_return_on_capital(credit, max_loss_per_share),
             score=0,
             implied_volatility=round(sum(short_ivs) / len(short_ivs), 6) if short_ivs else None,
             delta=net_delta,
@@ -103,4 +132,6 @@ class IronCondorStrategy(Strategy):
             legs=legs,
         )
         candidate.payoff_points = self.payoff(candidate)
+        candidate.adjustment_rules = self.adjust(candidate)
+        candidate.exit_rules = self.exit(candidate)
         return candidate

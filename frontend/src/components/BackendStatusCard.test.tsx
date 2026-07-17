@@ -31,9 +31,9 @@ describe("BackendStatusCard", () => {
     render(<BackendStatusCard />);
 
     await waitFor(() => {
-      expect(screen.getByText(/API health:/)).toBeInTheDocument();
+      expect(screen.getByText("Local API")).toBeInTheDocument();
       expect(screen.getByText("ok")).toBeInTheDocument();
-      expect(screen.getByText("OptionScanner API")).toBeInTheDocument();
+      expect(screen.getByText("ready")).toBeInTheDocument();
     });
   });
 });

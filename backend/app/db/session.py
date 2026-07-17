@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.core.settings import get_settings
@@ -18,6 +18,11 @@ def initialize_database() -> None:
         database_path = Path(database_url.replace("sqlite:///", "", 1))
         database_path.parent.mkdir(parents=True, exist_ok=True)
     Base.metadata.create_all(bind=engine)
+    if database_url.startswith("sqlite:///"):
+        columns = {column["name"] for column in inspect(engine).get_columns("option_chain_snapshots")}
+        if "underlying_price" not in columns:
+            with engine.begin() as connection:
+                connection.exec_driver_sql("ALTER TABLE option_chain_snapshots ADD COLUMN underlying_price FLOAT")
 
 
 def get_db() -> Session:

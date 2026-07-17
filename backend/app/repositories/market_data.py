@@ -85,12 +85,20 @@ class MarketDataRepository:
         self.db.flush()
         return contract
 
-    def create_snapshot(self, underlying_id: int, provider: str, requested_symbol: str, as_of) -> OptionChainSnapshot:
+    def create_snapshot(
+        self,
+        underlying_id: int,
+        provider: str,
+        requested_symbol: str,
+        as_of,
+        underlying_price: float | None,
+    ) -> OptionChainSnapshot:
         snapshot = OptionChainSnapshot(
             underlying_id=underlying_id,
             provider=provider,
             requested_symbol=requested_symbol,
             as_of=as_of,
+            underlying_price=underlying_price,
         )
         self.db.add(snapshot)
         self.db.flush()
@@ -145,6 +153,20 @@ class MarketDataRepository:
             .order_by(OptionChainSnapshot.as_of.desc(), OptionChainSnapshot.id.desc())
         )
         return self.db.execute(statement).scalars().first()
+
+    def get_latest_chains(self) -> list[OptionChainSnapshot]:
+        statement = (
+            select(OptionChainSnapshot)
+            .options(
+                selectinload(OptionChainSnapshot.underlying),
+                selectinload(OptionChainSnapshot.quote_snapshots),
+            )
+            .order_by(OptionChainSnapshot.as_of.desc(), OptionChainSnapshot.id.desc())
+        )
+        latest_by_underlying: dict[int, OptionChainSnapshot] = {}
+        for snapshot in self.db.execute(statement).scalars():
+            latest_by_underlying.setdefault(snapshot.underlying_id, snapshot)
+        return sorted(latest_by_underlying.values(), key=lambda snapshot: snapshot.underlying.symbol)
 
     def get_contract(self, symbol: str, expiration_date: date, right: str, strike: float) -> OptionContract | None:
         statement = (
